@@ -5,11 +5,10 @@
 import argparse, os
 
 images = [
-  ["services/accounts", "microservices/services/accounts"],
-  ["services/iot", "microservices/services/iot"],
-  ["client", "microservices/client"]
+  ["services/accounts", "microservices/accounts"],
+  ["services/iot", "microservices/iot"],
+  ["client", "smartthings/client"]
 ]
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--tag', help='Docker Image Tag', required=True)

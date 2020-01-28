@@ -8,11 +8,11 @@ FROM node:12-slim
 # WORKDIR /home/node/app
 
 RUN npm install -g nodemon
-ADD ./services/iot /app
-ADD ./services/core /app/core
-WORKDIR /app
+ADD ./services/iot /iot
+ADD ./services/core /iot/core
+WORKDIR /iot
 RUN npm ci
-RUN npm link /app/core
+RUN npm link /iot/core
 RUN npm run build
 
 # Bind to all network interfaces so that it can be mapped to the host OS

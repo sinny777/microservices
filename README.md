@@ -26,10 +26,34 @@ Under the hood, there are two components to this app:
 * Front-end (Angular based), which is simply static assets (HTML, CSS and JS etc.)
 * Other component is the nodejs (Loopback framework) based server side logic
 
+## BUILD LOCALLY
+
+### USING DOCKER 
+
+These builds can be scripted. When scripting the builds, consideration should be given to the chosen tags so that historical versions are preserved.
+
+A sample scripted build is provided at `/build_services.py` 
+
+An example execution of this script is included below:
+
+```
+// local docker daemon build
+python3 build_services.py -t localtag
+
+// repo docker daemon build
+python3 build_services.py -t localtag -r myrepo
+```
 
 ## RUN LOCALLY
 
+### Run Accounts API as Docker container 
+
+```
+docker run -it -p 3000:3000 --name accounts --hostname accounts.local --env-file .env microservices/accounts:localtag
+```
+
 ### Getting Started
+
 1. If you don't already have an IBM Cloud account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
 > First of all create a Cloudfoundry applicaiton on IBM Cloud.  Create a Node JS starter application (Catalog -> Cloud Foundry apps -> SDK for Node JS), and bind following services to it:
   - CloudantNoSQL DB

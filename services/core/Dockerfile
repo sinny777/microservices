@@ -1,9 +1,9 @@
 
 FROM node:12-slim
 RUN npm install -g nodemon
-ADD ./app/core /app
+ADD ./services/core /services
 # ADD ./app/common /app/common
-WORKDIR /app
+WORKDIR /services
 RUN npm ci
-RUN npm link /app/core
+RUN npm link /services/core
 CMD ["node", "."]

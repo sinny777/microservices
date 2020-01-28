@@ -8,11 +8,11 @@ FROM node:12-slim
 # WORKDIR /home/node/app
 
 RUN npm install -g nodemon
-ADD ./services/accounts /app
-ADD ./services/core /app/core
-WORKDIR /app
+ADD ./services/accounts /accounts
+ADD ./services/core /accounts/core
+WORKDIR /accounts
 RUN npm ci
-RUN npm link /app/core
+RUN npm link /accounts/core
 RUN npm run build
 
 # Bind to all network interfaces so that it can be mapped to the host OS
