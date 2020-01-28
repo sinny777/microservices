@@ -1,0 +1,10 @@
+// https://www.ibm.com/support/knowledgecenter/SSFS6T/com.ibm.apic.toolkit.doc/rapim_context_var.html
+
+    var miscinfo = apim.getvariable('oauth.miscinfo');
+    if(miscinfo){
+        var token = miscinfo.split(":");
+        apim.setvariable('message.headers.authorization', token[1]);
+    }
+    
+
+ 

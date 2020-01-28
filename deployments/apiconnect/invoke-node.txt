@@ -1,0 +1,3 @@
+URL=$(server-url)$(request.path)$(request.search)
+TLS Profile=client:Loopback-client
+HTTP Method=Keep

@@ -1,0 +1,46 @@
+<div class="kt-widget1 no_padding">
+	<ng-container >
+		<!-- <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{item: data}"></ng-container> -->
+		<div #gmap class="gmap"></div>
+	</ng-container>
+</div>
+
+<!-- <ng-template #itemTemplate let-item="item">
+	 <div #gmap class="gmap"></div>
+</ng-template> -->
+
+<!-- <div class="kt-widget1 no_padding">
+	<ng-container >
+		<div #gmap style="height:600px"></div>
+	</ng-container>
+</div> -->
+
+
+<!-- <ng-template #itemTemplate let-item="item">
+	<agm-map [latitude]="item.lat" [longitude]="item.lng"
+      [mapTypeId]="item.mapTypeId" [zoom]="item.zoom" [disableDefaultUI]="false"
+			[rotateControl]="item.rotateControl"
+			[panControl]="item.panControl"
+			mapTypeControl="item.mapTypeControl"
+			(mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+			(mapReady)="changeTilt($event)">
+
+			<agm-marker
+        *ngFor="let marker of markers"
+        [latitude]="marker.lat"
+        [longitude]="marker.lng"
+        [opacity]="marker.alpha"
+        [markerDraggable]="false"
+				[iconUrl]="marker.iconUrl"
+		   	(markerClick)="selectMarker($event)">
+
+
+			<agm-info-window [disableAutoPan]="true">
+      	<strong>{{marker.label}}</strong>
+    	</agm-info-window>
+
+      </agm-marker>
+
+    </agm-map>
+
+</ng-template> -->

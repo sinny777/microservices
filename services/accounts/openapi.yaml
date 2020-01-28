@@ -1,0 +1,757 @@
+openapi: 3.0.0
+info:
+  title: accounts
+  version: 1.0.0
+paths:
+  /api/accounts/auth/basic:
+    get:
+      x-controller-name: AuthController
+      x-operation-name: basicAuth
+      tags:
+        - AuthController
+      responses:
+        '200':
+          description: Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+      operationId: AuthController.basicAuth
+  /api/accounts/auth/login:
+    post:
+      x-controller-name: AuthController
+      x-operation-name: login
+      tags:
+        - AuthController
+      responses:
+        '200':
+          description: Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        description: LoginRequest
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      operationId: AuthController.login
+  '/api/accounts/auth/{token}':
+    get:
+      x-controller-name: AuthController
+      x-operation-name: getUser
+      tags:
+        - AuthController
+      responses:
+        responses:
+          '200':
+            description: Token
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    userProfile: {}
+      parameters:
+        - name: token
+          in: path
+          schema:
+            type: string
+          required: true
+      operationId: AuthController.getUser
+  /api/accounts/tenants/count:
+    get:
+      x-controller-name: TenantController
+      x-operation-name: count
+      tags:
+        - TenantController
+      responses:
+        '200':
+          description: Tenant model count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+      parameters:
+        - name: where
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            additionalProperties: true
+      operationId: TenantController.count
+  '/api/accounts/tenants/{id}':
+    put:
+      x-controller-name: TenantController
+      x-operation-name: replaceById
+      tags:
+        - TenantController
+      responses:
+        '204':
+          description: Tenant PUT success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tenant'
+        x-parameter-index: 1
+      operationId: TenantController.replaceById
+    patch:
+      x-controller-name: TenantController
+      x-operation-name: updateById
+      tags:
+        - TenantController
+      responses:
+        '204':
+          description: Tenant PATCH success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantPartial'
+        x-parameter-index: 1
+      operationId: TenantController.updateById
+    get:
+      x-controller-name: TenantController
+      x-operation-name: findById
+      tags:
+        - TenantController
+      responses:
+        '200':
+          description: Tenant model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      operationId: TenantController.findById
+    delete:
+      x-controller-name: TenantController
+      x-operation-name: deleteById
+      tags:
+        - TenantController
+      responses:
+        '204':
+          description: Tenant DELETE success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      operationId: TenantController.deleteById
+  /api/accounts/tenants:
+    post:
+      x-controller-name: TenantController
+      x-operation-name: create
+      tags:
+        - TenantController
+      responses:
+        '200':
+          description: Tenant model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantExcluding_id_'
+      operationId: TenantController.create
+    patch:
+      x-controller-name: TenantController
+      x-operation-name: updateAll
+      tags:
+        - TenantController
+      responses:
+        '200':
+          description: Tenant PATCH success count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+      parameters:
+        - name: where
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            additionalProperties: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantPartial'
+      operationId: TenantController.updateAll
+    get:
+      x-controller-name: TenantController
+      x-operation-name: find
+      tags:
+        - TenantController
+      responses:
+        '200':
+          description: Array of Tenant model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+      parameters:
+        - name: filter
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            properties:
+              where:
+                type: object
+                additionalProperties: true
+              fields:
+                type: object
+                properties:
+                  createdOn:
+                    type: boolean
+                  modifiedOn:
+                    type: boolean
+                  createdBy:
+                    type: boolean
+                  modifiedBy:
+                    type: boolean
+                  id:
+                    type: boolean
+                  type:
+                    type: boolean
+                  title:
+                    type: boolean
+                  address1:
+                    type: boolean
+                  address2:
+                    type: boolean
+                  address3:
+                    type: boolean
+                  address4:
+                    type: boolean
+                  city:
+                    type: boolean
+                  state:
+                    type: boolean
+                  zip:
+                    type: boolean
+                  country:
+                    type: boolean
+                  region:
+                    type: boolean
+                  status:
+                    type: boolean
+                  moreInfo:
+                    type: boolean
+                additionalProperties: true
+              offset:
+                type: integer
+                minimum: 0
+              limit:
+                type: integer
+                minimum: 1
+                example: 100
+              skip:
+                type: integer
+                minimum: 0
+              order:
+                type: array
+                items:
+                  type: string
+              include:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    relation:
+                      type: string
+                    scope:
+                      properties:
+                        where:
+                          type: object
+                          additionalProperties: true
+                        fields:
+                          type: object
+                          properties: {}
+                          additionalProperties: true
+                        offset:
+                          type: integer
+                          minimum: 0
+                        limit:
+                          type: integer
+                          minimum: 1
+                          example: 100
+                        skip:
+                          type: integer
+                          minimum: 0
+                        order:
+                          type: array
+                          items:
+                            type: string
+                      additionalProperties: false
+            additionalProperties: false
+      operationId: TenantController.find
+  /api/accounts/users/count:
+    get:
+      x-controller-name: UserController
+      x-operation-name: count
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: User model count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+      parameters:
+        - name: where
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            additionalProperties: true
+      operationId: UserController.count
+  /api/accounts/users/me:
+    get:
+      x-controller-name: UserController
+      x-operation-name: fetchCurrentUser
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: The current user profile
+          content: {}
+      operationId: UserController.fetchCurrentUser
+  '/api/accounts/users/{id}':
+    put:
+      x-controller-name: UserController
+      x-operation-name: replaceById
+      tags:
+        - UserController
+      responses:
+        '204':
+          description: User PUT success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        x-parameter-index: 1
+      operationId: UserController.replaceById
+    patch:
+      x-controller-name: UserController
+      x-operation-name: updateById
+      tags:
+        - UserController
+      responses:
+        '204':
+          description: User PATCH success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        x-parameter-index: 1
+      operationId: UserController.updateById
+    get:
+      x-controller-name: UserController
+      x-operation-name: findById
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: User model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      operationId: UserController.findById
+  /api/accounts/users:
+    post:
+      x-controller-name: UserController
+      x-operation-name: create
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: User model instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      operationId: UserController.create
+    patch:
+      x-controller-name: UserController
+      x-operation-name: updateAll
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: User PATCH success count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+      parameters:
+        - name: where
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            additionalProperties: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      operationId: UserController.updateAll
+    get:
+      x-controller-name: UserController
+      x-operation-name: find
+      tags:
+        - UserController
+      responses:
+        '200':
+          description: Array of User model instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      parameters:
+        - name: filter
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            properties:
+              where:
+                type: object
+                additionalProperties: true
+              fields:
+                type: object
+                properties:
+                  createdOn:
+                    type: boolean
+                  modifiedOn:
+                    type: boolean
+                  createdBy:
+                    type: boolean
+                  modifiedBy:
+                    type: boolean
+                  id:
+                    type: boolean
+                  email:
+                    type: boolean
+                  username:
+                    type: boolean
+                  defaultTenant:
+                    type: boolean
+                  firstName:
+                    type: boolean
+                  lastName:
+                    type: boolean
+                  lastLogin:
+                    type: boolean
+                additionalProperties: false
+              offset:
+                type: integer
+                minimum: 0
+              limit:
+                type: integer
+                minimum: 1
+                example: 100
+              skip:
+                type: integer
+                minimum: 0
+              order:
+                type: array
+                items:
+                  type: string
+              include:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    relation:
+                      type: string
+                    scope:
+                      properties:
+                        where:
+                          type: object
+                          additionalProperties: true
+                        fields:
+                          type: object
+                          properties: {}
+                          additionalProperties: true
+                        offset:
+                          type: integer
+                          minimum: 0
+                        limit:
+                          type: integer
+                          minimum: 1
+                          example: 100
+                        skip:
+                          type: integer
+                          minimum: 0
+                        order:
+                          type: array
+                          items:
+                            type: string
+                      additionalProperties: false
+            additionalProperties: false
+      operationId: UserController.find
+servers:
+  - url: 'https://accounts-smartthings-api.mybluemix.net'
+components:
+  schemas:
+    Tenant:
+      title: Tenant
+      properties:
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modifiedBy:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        address4:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        status:
+          type: string
+        moreInfo:
+          type: string
+      required:
+        - id
+        - type
+        - title
+      additionalProperties: true
+    TenantExcluding_id_:
+      title: TenantExcluding_id_
+      description: '(Schema options: { exclude: [ ''id'' ] })'
+      properties:
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modifiedBy:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        address4:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        status:
+          type: string
+        moreInfo:
+          type: string
+      required:
+        - type
+        - title
+      additionalProperties: true
+    TenantPartial:
+      title: TenantPartial
+      description: '(Schema options: { partial: true })'
+      properties:
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modifiedBy:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        address3:
+          type: string
+        address4:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        status:
+          type: string
+        moreInfo:
+          type: string
+      additionalProperties: true
+    User:
+      title: User
+      properties:
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        modifiedBy:
+          type: string
+        id:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        defaultTenant:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        lastLogin:
+          type: string
+          format: date-time
+      required:
+        - username
+      additionalProperties: false
+    LoginRequest:
+      title: LoginRequest
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        tenantId:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+      additionalProperties: false

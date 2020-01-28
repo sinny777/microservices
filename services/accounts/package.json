@@ -1,0 +1,106 @@
+{
+  "name": "accounts",
+  "version": "1.0.0",
+  "description": "accounts authentication and authorization service",
+  "keywords": [
+    "accounts",
+    "authentication",
+    "authorization"
+  ],
+  "main": "index.js",
+  "homepage": "https://microservices-accounts-api.mybluemix.net/",
+  "author": "Gurvinder Singh",
+  "contributors": [
+    "Gurvinder Singh <gurvsin3@in.ibm.com> (http://www.gurvinder.info)"
+  ],
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": "6.13.0"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "scripts": {
+    "build": "lb-tsc",
+    "build:watch": "lb-tsc --watch",
+    "clean": "lb-clean dist *.tsbuildinfo",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run clean && npm run build",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "posttest": "npm run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "docker:build": "docker build -t accounts .",
+    "docker:run": "docker run -p 3000:3000 -d accounts",
+    "migrate": "node ./dist/migrate",
+    "start": "node -r source-map-support/register .",
+    "prepublishOnly": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.ng.bluemix.net/gurvsin3/micro-services"
+  },
+  "bugs": {
+    "url": "https://git.ng.bluemix.net/gurvsin3/micro-services/issues"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "README.md",
+    "index.js",
+    "index.d.ts",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "dependencies": {
+    "@loopback/authentication": "^3.2.4",
+    "@loopback/authentication-passport": "^0.1.0",
+    "@loopback/boot": "^1.5.5",
+    "@loopback/context": "^1.22.1",
+    "@loopback/core": "^1.10.1",
+    "@loopback/openapi-v3": "^1.10.2",
+    "@loopback/repository": "^1.13.1",
+    "@loopback/rest": "^1.18.1",
+    "@loopback/rest-explorer": "^1.3.6",
+    "@loopback/service-proxy": "^1.3.5",
+    "@types/bcrypt": "^3.0.0",
+    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.1.0",
+    "isemail": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "loopback-connector-cloudant": "^2.3.2",
+    "loopback-connector-mysql": "^5.4.2",
+    "loopback-connector-postgresql": "^3.7.0",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^2.0.10",
+    "@loopback/eslint-config": "^4.0.2",
+    "@loopback/testlab": "^1.8.0",
+    "@types/lodash": "^4.14.138",
+    "@types/node": "^10.14.17",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^6.1.1",
+    "@types/uuid": "^3.4.5",
+    "@types/passport": "^1.0.1",
+    "@types/passport-http": "^0.3.8",
+    "@types/passport-jwt": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-eslint-plugin": "^2.1.0",
+    "eslint-plugin-mocha": "^6.1.0",
+    "source-map-support": "^0.5.13",
+    "typescript": "~3.6.2"
+  }
+}

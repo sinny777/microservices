@@ -1,0 +1,32 @@
+{
+    "clients": [
+        {
+            "clientId": "smartthings", 
+            "clientSecret": "#1WaheguruJi", 
+            "secret": "#1WaheguruJi"
+        }
+    ],
+    "tenants": [
+        {
+            "type": "application",
+            "title": "SmartThings Dashboard",
+            "address1": "DB Block",
+            "address2": "Hari Nagar",
+            "city": "New Delhi",
+            "state": "Delhi",
+            "zip": "110064",
+            "country": "India",
+            "region": "APAC",
+            "status": "Active",
+            "moreInfo": "Application Tenant"
+        }
+    ],
+    "users": [
+        { 
+            "email": "gurvinder.singh@in.ibm.com", 
+            "username": "gurvinder.singh", 
+            "firstName": "Gurvinder",
+            "lastName": "Singh"
+        }
+    ]
+}
