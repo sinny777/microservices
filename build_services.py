@@ -1,7 +1,5 @@
 ##
-## Copyright 2018 IBM Corporation
-##
-## This code is licensed only for use with IBM Watson Services
+## Copyright 2020 
 ##
 
 import argparse, os
