@@ -6,13 +6,16 @@ import {UserProfile, securityId} from '@loopback/security';
 import {TokenServiceBindings} from '../../../../keys';
 
 export class JWTAuthenticationStrategy implements AuthenticationStrategy {
+
+  name: string = 'jwt';
+  //    name1 = this.getStrategy
+
+  // @inject(BasicAuthenticationStrategyBindings.DEFAULT_OPTIONS)
+  // options: AuthenticationStrategyOptions;
   
   constructor(
     @inject(TokenServiceBindings.TOKEN_SERVICE) public tokenService: TokenService
    ) {}
-
-   name = 'jwt';
-//    name1 = this.getStrategy
 
   async authenticate(request: Request): Promise<UserProfile | undefined> {
     const token: string = this.extractCredentials(request);

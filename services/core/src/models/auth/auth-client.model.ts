@@ -15,6 +15,11 @@ export class AuthClient extends BaseEntity {
 
   @property({
     type: 'string',
+  })
+  _rev?: string;
+
+  @property({
+    type: 'string',
     required: true,
     name: 'client_id',
   })

@@ -11,6 +11,7 @@ import {
   api,
   RestBindings,
   param,
+  RedirectRoute,
 } from '@loopback/rest';
 
 import { LoginRequest } from '../models/login-request.dto';
@@ -21,6 +22,8 @@ import { TokenService, UserService } from '@loopback/authentication';
 import { Credentials } from 'microservices-core/dist/models/types';
 import { UserProfile } from '@loopback/security';
 import { AuthUser } from 'microservices-core/dist/models';
+
+// import { Passport} from 'passport';
 
 @api({
     basePath: '/api/accounts',
@@ -114,7 +117,7 @@ export class AuthController {
     }
   }
 
-  @get('/auth/{token}', {
+  @get('/auth/token/{token}', {
     responses: {responses: {
       '200': {
         description: 'Token',
@@ -153,6 +156,45 @@ export class AuthController {
       );
     }
   }
+
+  @get('/auth/google')
+  googleOAuth() {
+    console.log('IN AuthController, googleOAuth: >>> ');
+    try {
+      // let passport = new Passport();
+      // passport.authenticate('google', { scope: ['profile'] });
+    } catch (error) {
+      throw new HttpErrors.InternalServerError(
+        // AuthErrorKeys.InvalidCredentials,
+        'Invalid Credentials !'
+      );
+    }
+  }
+
+  @get('/auth/google/callback', {
+    responses: {
+      '200': {
+        description: 'Google Authentication callback'        
+      },
+    },
+  })
+  async googleOAuthCallback(): Promise<void> {
+    console.log('IN AuthController, googleOAuthCallback: >>> ', this.request.headers);
+    try {
+      // let passport = new Passport();
+      // passport.authenticate('google', { failureRedirect: '/login' }),
+      //   function(req: any, res: any) {
+      //     console.log('<<<<<<<<<<<<< GOOGLE AUTHENTICATED >>>>>>>>>>>>');
+      //     res.redirect('/');
+      //   };        
+    } catch (error) {
+      throw new HttpErrors.InternalServerError(
+        // AuthErrorKeys.InvalidCredentials,
+        'Invalid Credentials !'
+      );
+    }
+  }
+
 
   extractCredentials(request: Request): Credentials {
     if (!request.headers.authorization) {

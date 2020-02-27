@@ -1,0 +1,40 @@
+# Copyright 2020 IBM. This code is licensed only for use with IBM Watson Services
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cloudant-developer
+  labels:
+    set: cloudant-developer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cloudant-developer
+        set: cloudant-developer
+    spec:
+      containers:
+      - name: cloudant-developer
+        image: ibmcom/cloudant-developer:latest
+        volumeMounts:
+        - mountPath: /srv
+          name: cloudant-volume          
+        envFrom:
+         - configMapRef:
+             name: env-config
+        env:
+        - name: PORT
+          value: "80"        
+        ports:
+        - containerPort: 8888
+      volumes:
+        - name: cloudant-volume
+          hostPath:
+            # directory location on host
+            path: /Users/gurvindersingh/Documents/Development/data
+            # this field is optional
+            type: Directory
+      restartPolicy: Always

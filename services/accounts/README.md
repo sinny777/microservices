@@ -33,6 +33,10 @@ brew services start postgresql
 
 docker run --detach --volume cloudant:/srv --name cloudant-developer --publish 8888:80 --hostname cloudant.dev ibmcom/cloudant-developer
 
+# Backend Database (CouchDB)
+
+docker run -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -d --name couchdb -p 5984:5984 couchdb
+
 # Run Locally
 
 ```
