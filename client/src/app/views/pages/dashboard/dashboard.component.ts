@@ -40,16 +40,8 @@ export class DashboardComponent implements OnInit {
 
 	async ngOnInit() {
 
-		// this.store.dispatch(new IsLoggedInCheck());
-		// this.store.select(selectAuthModel)
-		//   .pipe(takeWhile(_ => this.alive))
-		//   .filter(model => model.isLoggedIn)
-		//   .subscribe(_ => this.router.navigate(['lazy']));
-
 		let userModel = await this.store.select(selectAuthModel);
 		console.log(userModel);
-		  
-
 
 		this.chartOptions1 = {
 			data: [10, 14, 18, 11, 9, 12, 14, 17, 18, 14],

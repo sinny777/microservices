@@ -1,7 +1,7 @@
 // Angular
 import { Component, OnInit, Input } from '@angular/core';
 // RxJS
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 // NGRX
 import { select, Store } from '@ngrx/store';
 // State
@@ -41,12 +41,12 @@ export class UserProfileComponent implements OnInit {
 		console.log('In UserProfileComponent.ngOnInit >>>>>>.... ');
 		if (await this.keycloakService.isLoggedIn()) {
 			console.log('In UserProfileComponent.ngOnInit, user is LoggedIn.... ');
-			// this.user$ = await this.keycloakService.loadUserProfile();
-			let userProfile: Keycloak.KeycloakProfile  = await this.keycloakService.loadUserProfile();
-			let token  = await this.keycloakService.getToken();
+			this.user$ = from(this.keycloakService.loadUserProfile());
+			// let userProfile: Keycloak.KeycloakProfile  = await this.keycloakService.loadUserProfile();
+			// let token  = await this.keycloakService.getToken();
 			// this.user$ = userDetails;
-			console.log('IN DashboardComponent, userProfile: >>>> ', userProfile);
-			console.log('IN DashboardComponent, token: >>>> ', token);
+			console.log('IN UserProfileComponent, userProfile: >>>> ', this.user$);
+			// console.log('IN UserProfileComponent, token: >>>> ', token);
 		}
 	}
 
