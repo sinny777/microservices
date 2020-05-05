@@ -1,11 +1,11 @@
-// Angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+// import { AppAuthGuard } from './app.authguard';
 
 const routes: Routes = [
-   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
-   {path: '', loadChildren: () => import('./views/main/main.module').then(m => m.MainModule)},
-	 {path: '**', redirectTo: 'main/error/403', pathMatch: 'full'}
+	// {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
+	{path: '', loadChildren: () => import('./views/main/main.module').then(m => m.MainModule)},
+	{path: '**', redirectTo: 'main/error/403', pathMatch: 'full'}
    // {path: '**', redirectTo: 'error/403', pathMatch: 'full'},
 ];
 

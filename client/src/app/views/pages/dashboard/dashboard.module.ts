@@ -17,7 +17,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 		CoreModule,
 		NgbModule,
 		AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA_xN3mG2LL27jctSXHC4eiroRvOI454SE'
+      	apiKey: 'AIzaSyA_xN3mG2LL27jctSXHC4eiroRvOI454SE'
     }),
 		RouterModule.forChild([
 			{

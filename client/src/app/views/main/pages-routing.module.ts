@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './base/base.component';
 import { ErrorPageComponent } from './content/error-page/error-page.component';
 // Auth
-import { AuthGuard, ModuleGuard } from '../../core/auth';
+// import { AuthGuard, ModuleGuard } from '../../core/auth';
+import { AppAuthGuard } from '../../app.authguard';
 
 const routes: Routes = [
 	{
@@ -16,21 +17,12 @@ const routes: Routes = [
 		children: [
 			{
 				path: 'dashboard', loadChildren: () => import('../pages/dashboard/dashboard.module').then(m => m.DashboardModule),
-				canActivate: [AuthGuard]
+				canActivate: [AppAuthGuard],
+				data: { roles: ['admin','manager','operator', 'view-profile'] }
 			},
 			{
 				path: 'builder', loadChildren: () => import('./content/builder/builder.module').then(m => m.BuilderModule),
-				canActivate: [AuthGuard]
-			},
-			{
-				path: 'user-management', loadChildren: () => import('../pages/user-management/user-management.module').then(m => m.UserManagementModule)
-				// canActivate: [NgxPermissionsGuard],
-				// data: {
-				// 	permissions: {
-				// 		only: ['accessToECommerceModule'],
-				// 		redirectTo: 'error/403'
-				// 	}
-				// }
+				canActivate: [AppAuthGuard]
 			},
 			{path: 'error/:type/:code', component: ErrorPageComponent},
 			{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -41,7 +33,8 @@ const routes: Routes = [
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule]
+	exports: [RouterModule],
+	providers: [AppAuthGuard]
 })
 export class PagesRoutingModule {
 }

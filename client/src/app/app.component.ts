@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		// enable/disable loader
 		this.loader = this.layoutConfigService.getConfig('loader.enabled');
-
+		console.log('IN APP COMPONENT: >>>>> ');
 		const routerSubscription = this.router.events.subscribe(event => {
 			if (event instanceof NavigationEnd) {
 				// hide splash screen

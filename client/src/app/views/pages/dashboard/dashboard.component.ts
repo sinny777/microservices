@@ -7,6 +7,15 @@ import { LayoutConfigService } from '../../../core/_base/layout';
 // Widgets model
 import { SparklineChartOptions } from '../../../core/_base/layout';
 import { Widget4Data } from '../../partials/content/widgets/widget4/widget4.component';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { selectAuthModel } from '../../../core/auth/auth.reducer';
+import { IsLoggedInCheck } from '../../../core/auth/auth.actions';
+
+import { AppState } from '../../../core/reducers';
+import { Login } from '../../../core/auth/auth.actions';
+import { takeWhile } from 'rxjs/operators';
 
 // const userManagementPermissionId: string = "115b565bc29bf5bb0c545ad280f8a3dc";
 
@@ -17,13 +26,30 @@ import { Widget4Data } from '../../partials/content/widgets/widget4/widget4.comp
 })
 export class DashboardComponent implements OnInit {
 
+	private alive = true;
 	chartOptions1: SparklineChartOptions;
 	widget4_1: Widget4Data;
 
-	constructor(private layoutConfigService: LayoutConfigService) {
+	constructor(
+		private layoutConfigService: LayoutConfigService,
+		protected router: Router,
+		private store: Store<AppState>,
+	    private route: ActivatedRoute
+		) {
 	}
 
-	ngOnInit(): void {
+	async ngOnInit() {
+
+		// this.store.dispatch(new IsLoggedInCheck());
+		// this.store.select(selectAuthModel)
+		//   .pipe(takeWhile(_ => this.alive))
+		//   .filter(model => model.isLoggedIn)
+		//   .subscribe(_ => this.router.navigate(['lazy']));
+
+		let userModel = await this.store.select(selectAuthModel);
+		console.log(userModel);
+		  
+
 
 		this.chartOptions1 = {
 			data: [10, 14, 18, 11, 9, 12, 14, 17, 18, 14],

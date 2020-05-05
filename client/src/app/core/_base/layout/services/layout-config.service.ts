@@ -25,13 +25,13 @@ export class LayoutConfigService {
 
 	 refreshHeaders(){
 			const userToken = localStorage.getItem(environment.authTokenKey);
-			console.log("userToken: >>> ", userToken);
+			console.log('userToken: >>> ', userToken);
 			this.httpHeaders = new HttpHeaders({
-				"Content-Type": "application/json; charset=UTF-8",
-				"Accept": "application/json",
-				"X-IBM-Client-Id": "default",
-				"X-IBM-Client-Secret": "SECRET",
-				"Authorization": userToken ? userToken: ""
+				'Content-Type': 'application/json; charset=UTF-8',
+				'Accept': 'application/json',
+				'X-IBM-Client-Id': 'default',
+				'X-IBM-Client-Secret': 'SECRET',
+				'Authorization': userToken ? userToken: ''
 			});
 			return this.httpHeaders;
 	}
@@ -46,7 +46,7 @@ export class LayoutConfigService {
 	}
 
 	initConfig(){
-		this.findConfig({"filter": {"where": {"key": "APP_CONFIG_SMART_CAMPUS"}}, "sortField": "", "sortOrder": "", "pageNumber": 0, "pageSize": 10})
+		this.findConfig({'filter': {'where': {'key': 'APP_CONFIG_SMART_CAMPUS'}}, 'sortField': '', 'sortOrder': '', 'pageNumber': 0, 'pageSize': 10})
 			.pipe(
 				tap(response => {
 					let appConfig: {key: string, output: {LAYOUT_CONFIG: LayoutConfigModel}};
@@ -58,7 +58,7 @@ export class LayoutConfigService {
 						this.layoutConfig = appConfig.output.LAYOUT_CONFIG;
 						this.saveConfig(this.layoutConfig);
 						this.layoutConfig = this.reloadConfigs();
-						console.log("<<<<<<<<<<< IN LayoutConfig Service, initConfig loaded from DB : >>>>>>>>>>>>>");
+						console.log('<<<<<<<<<<< IN LayoutConfig Service, initConfig loaded from DB : >>>>>>>>>>>>>');
 						console.log(this.layoutConfig);
 					}
 				},
@@ -74,10 +74,10 @@ export class LayoutConfigService {
 		if(!this.httpHeaders){
 			this.refreshHeaders();
 		}
-			const filter = {"where": queryParams.filter.where,"limit": queryParams.pageSize, "skip": queryParams.pageNumber}
+			const filter = {'where': queryParams.filter.where,'limit': queryParams.pageSize, 'skip': queryParams.pageNumber}
 			const httpParams: HttpParams  = new HttpParams()
 				.set('filter', JSON.stringify(filter));
-		return this.http.get<QueryResultsModel>(environment.API_BASE_URL+"/Mappings", { headers: this.httpHeaders, params: httpParams});
+		return this.http.get<QueryResultsModel>(environment.API_BASE_URL+'/Mappings', { headers: this.httpHeaders, params: httpParams});
 	}
 
 	/**

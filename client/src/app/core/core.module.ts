@@ -1,12 +1,13 @@
 // Anglar
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CookieService } from 'ngx-cookie-service';
 // Layout Directives
 import { ContentAnimateDirective, HeaderDirective, MenuDirective, StickyDirective } from './_base/layout';
 // Pipes
-// Services
 import { FirstLetterPipe, GetObjectPipe, JoinPipe, OffcanvasDirective, SafePipe, ScrollTopDirective, SparklineChartDirective, TabClickEventDirective, TimeElapsedPipe, ToggleDirective } from './_base/layout';
+// Services
+import { CookieService } from 'ngx-cookie-service';
+import { KeycloakApiService } from './auth/keycloak-api.service';
 
 @NgModule({
 	imports: [
@@ -48,7 +49,7 @@ import { FirstLetterPipe, GetObjectPipe, JoinPipe, OffcanvasDirective, SafePipe,
 		SafePipe,
 		FirstLetterPipe,
 	],
-	providers: [CookieService]
+	providers: [CookieService, KeycloakApiService]
 })
 export class CoreModule {
 }
