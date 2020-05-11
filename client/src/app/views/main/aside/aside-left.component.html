@@ -33,10 +33,10 @@
 	</ng-template>
 </ng-template> -->
 <ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">
-	<!-- <ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container> -->
-	<ng-template>
+	<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
+	<!-- <ng-template>
 		<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
-	</ng-template>
+	</ng-template> -->
 </ng-template>
 
 <ng-template #menuItemInnerTemplate let-item="item" let-parentItem="parentItem">

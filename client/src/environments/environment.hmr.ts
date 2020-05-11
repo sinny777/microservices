@@ -9,8 +9,9 @@ import { KeycloakConfig } from 'keycloak-angular';
 // Add here your keycloak setup infos
 const keycloakConfig: KeycloakConfig = {
   url: 'http://localhost:8888/auth',
-  realm: 'smartcity',
-  clientId: 'account'
+  realm: 'development',
+  clientId: 'smartcity-web',
+  credentials: {'secret': 'a3e5e4b1-7fe7-45c3-aea3-4794fa25e18d'}
 };
 
 export const environment = {

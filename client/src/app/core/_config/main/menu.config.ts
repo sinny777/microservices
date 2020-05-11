@@ -4,7 +4,7 @@ export class MenuConfig {
 			self: {},
 			'items': [
 				{
-					'title': 'Pathway',
+					'title': 'Dashboard',
 					'root': true,
 					'page': '/dashboard',
 					'alignment': 'left'

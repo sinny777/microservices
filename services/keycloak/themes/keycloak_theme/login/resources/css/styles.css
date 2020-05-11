@@ -1,9 +1,12 @@
 .login-pf body {
-  background: #efefef none;
+  background-image: url(../img/bg2.jpg);
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 div.kc-logo-text {
-  background-image: url(../img/logo.png);
+  background-image: url(../img/watson-logo.png);
   background-repeat: no-repeat;
   background-size: contain;
   height: 160px;
@@ -23,5 +26,5 @@ div#kc-header-wrapper {
 }
 
 .card-pf {
-  background-color: #efefef;
+  background-color: #e4e6e8;
 }

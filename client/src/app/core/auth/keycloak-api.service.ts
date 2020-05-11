@@ -5,7 +5,7 @@ import { KeycloakService } from 'keycloak-angular';
 // import './keycloak';
 
 
-declare const Keycloak: any;
+// declare const Keycloak: any;
 
 @Injectable()
 export class KeycloakApiService {

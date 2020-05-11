@@ -69,7 +69,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			.subscribe(event => this.currentRouteUrl = this.router.url.split(/[?#]/)[0]);
 
 		const config = this.layoutConfigService.getConfig();
-
+		console.log('CONFIG: >>>> ', config);
 		if (objectPath.get(config, 'aside.menu.dropdown') !== true && objectPath.get(config, 'aside.self.fixed')) {
 			this.render.setAttribute(this.asideMenu.nativeElement, 'data-ktmenu-scroll', '1');
 		}

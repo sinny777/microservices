@@ -41,11 +41,14 @@ export class UserProfileComponent implements OnInit {
 		console.log('In UserProfileComponent.ngOnInit >>>>>>.... ');
 		if (await this.keycloakService.isLoggedIn()) {
 			console.log('In UserProfileComponent.ngOnInit, user is LoggedIn.... ');
-			this.user$ = from(this.keycloakService.loadUserProfile());
+			let userProfile = this.keycloakService.loadUserProfile();
+			this.user$ = await from(userProfile);
 			// let userProfile: Keycloak.KeycloakProfile  = await this.keycloakService.loadUserProfile();
 			// let token  = await this.keycloakService.getToken();
 			// this.user$ = userDetails;
-			console.log('IN UserProfileComponent, userProfile: >>>> ', this.user$);
+			// console.log('IN UserProfileComponent, userProfile: >>>> ', (await userProfile));
+			// console.log(await this.keycloakService.getToken());
+			// console.log(this.keycloakService.getUserRoles());
 			// console.log('IN UserProfileComponent, token: >>>> ', token);
 		}
 	}

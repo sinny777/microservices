@@ -20,7 +20,8 @@ export function initializer(appConfig: LayoutConfigService, keycloak: KeycloakSe
             onLoad: 'login-required',
             checkLoginIframe: false
           },
-          bearerExcludedUrls: []
+          enableBearerInterceptor: true,
+          bearerExcludedUrls: ['/assets', '/clients/public']
         });
         resolve();
       } catch (error) {

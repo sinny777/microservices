@@ -39,6 +39,13 @@ docker-compose down && docker-compose build --no-cache && docker-compose up
 
 This will run Postgres and Keycloak containers
 
+### Keycloak Details
+
+ - Keycloak Dashboard: [http://localhost:8888](http://localhost:8888)
+   Admin Credentials: admin / P@ssw0rd
+ - OAuth2.0 configuration: [http://localhost:8888/auth/realms/development/.well-known/openid-configuration](http://localhost:8888/auth/realms/development/.well-known/openid-configuration)  
+
+
 ### USING DOCKER 
 
 These builds can be scripted. When scripting the builds, consideration should be given to the chosen tags so that historical versions are preserved.

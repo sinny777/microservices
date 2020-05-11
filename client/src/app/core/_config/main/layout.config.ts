@@ -4,7 +4,7 @@ import { LayoutConfigModel } from '../../_base/layout';
 export class LayoutConfig {
 
 	public defaults: LayoutConfigModel = {
-		'appTitle':'Smart Things | KPA Smart Campus',
+		'appTitle':'Smart Things | SmartCity',
 		'demo':'main',
 		'self':{
 			 'layout':'fluid',

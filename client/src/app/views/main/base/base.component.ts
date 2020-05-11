@@ -11,7 +11,7 @@ import { LayoutConfig } from '../../../core/_config/main/layout.config';
 import { MenuConfig } from '../../../core/_config/main/menu.config';
 import { PageConfig } from '../../../core/_config/main/page.config';
 // User permissions
-import { NgxPermissionsService } from 'ngx-permissions';
+// import { NgxPermissionsService } from 'ngx-permissions';
 // import { Permission, currentUserPermissions } from '../../../core/auth';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../../core/reducers';
