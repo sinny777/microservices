@@ -16,7 +16,6 @@ import * as fromRouter from '@ngrx/router-store';
 // import * as fromUser from '../user/user.reducer';
 import * as fromAuth from '../auth/auth.reducer';
 
-
 import { environment } from '../../../environments/environment';
 
 export interface RouterStateUrl {
@@ -31,6 +30,13 @@ const modules = {
     'auth': fromAuth.authReducer,
 };
 
+// export function reducers(state: AuthState | undefined, action: Action) {
+//     return combineReducers({
+//       [fromAuth.statusFeatureKey]: fromAuth.reducer,
+//       [fromLoginPage.loginPageFeatureKey]: fromLoginPage.reducer,
+//     })(state, action);
+//   }
+
 // tslint:disable-next-line:no-empty-interface
 export interface AppState {
     router: fromRouter.RouterReducerState<RouterStateUrl>;
@@ -44,6 +50,13 @@ export const syncReducers = {
     auth: fromAuth.authReducer,
 };
 
+// export const getAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
+
+// export const getAuthLoaded = createSelector(
+//     getAuthState,
+//     fromAuth.selectAuthModel
+// );
+
 // export const getUserState = createFeatureSelector<fromUser.UserState>('user');
 
 // export const getUserLoaded = createSelector(
@@ -51,6 +64,7 @@ export const syncReducers = {
 //     fromUser.getLoaded
 // );
 
+/*
 export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
     serialize(routerState: RouterStateSnapshot): RouterStateUrl {
         let route = routerState.root;
@@ -66,6 +80,7 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
         return { url, params, queryParams };
     }
 }
+
 
 
 const deepCombineReducers = (allReducers: any) => {
@@ -84,15 +99,6 @@ const createReducer = (asyncReducers = {}) => {
     return deepCombineReducers(allReducers);
 };
 
-// Generate a reducer to set the root state in dev mode for HMR
-function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function(state: any, action: any) {
-        if (action.type === 'SET_ROOT_STATE') {
-            return action.payload;
-        }
-        return reducer(state, action);
-    };
-}
 
 function logout(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
     return function(state: AppState, action: any): AppState {
@@ -102,6 +108,8 @@ function logout(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
         return reducer(state, action);
     };
 }
+
+*/
 
 export function resetOnLogout(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
     return function(state, action) {
@@ -116,7 +124,18 @@ export function resetOnLogout(reducer: ActionReducer<AppState>): ActionReducer<A
     };
 }
 
-export const DEV_REDUCERS: MetaReducer<AppState>[] = [stateSetter, storeFreeze];
+// Generate a reducer to set the root state in dev mode for HMR
+function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
+    return function(state: any, action: any) {
+        if (action.type === 'SET_ROOT_STATE') {
+            return action.payload;
+        }
+        return reducer(state, action);
+    };
+}
+
+export const AUTH_REDUCERS: MetaReducer<AppState>[] = [stateSetter, storeFreeze];
+// export const reducers = createReducer();
 // set in constants.js file of project root
 // if (['logger', 'both'].indexOf(STORE_DEV_TOOLS) !== -1) {
 //   DEV_REDUCERS.push(storeLogger());

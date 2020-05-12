@@ -30,7 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './core/auth/auth.effects';
 
 // State
-import { DEV_REDUCERS, syncReducers, resetOnLogout, AppState } from './core/reducers';
+import { AUTH_REDUCERS, syncReducers, resetOnLogout, AppState } from './core/reducers';
 // Copmponents
 import { AppComponent } from './app.component';
 // Modules
@@ -90,7 +90,7 @@ export function hljsLanguages(): HighlightLanguage[] {
 }
 
 export const metaReducers: MetaReducer<AppState>[] = environment.production ?
- [resetOnLogout] : [...DEV_REDUCERS, resetOnLogout];
+ [resetOnLogout] : [...AUTH_REDUCERS, resetOnLogout];
 
 @NgModule({
 	declarations: [AppComponent],
@@ -108,7 +108,9 @@ export const metaReducers: MetaReducer<AppState>[] = environment.production ?
 		CoreModule,
 		OverlayModule,
 		EffectsModule.forRoot([AuthEffects]),
-		StoreModule.forRoot(syncReducers, { metaReducers }),
+		StoreModule.forRoot(syncReducers,
+			{ metaReducers }
+		  ),
 		StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
 		StoreDevtoolsModule.instrument(),
 		// AuthModule.forRoot(),

@@ -5,6 +5,8 @@ import { Action } from '@ngrx/store';
 import { AuthActions, AuthActionTypes, LoginSuccess } from './auth.actions';
 import { AuthModel } from './auth.model';
 
+export const authFeatureKey = 'auth';
+
 export interface AuthState {
     authModel: AuthModel;
     checkingAuthStatus: boolean;
