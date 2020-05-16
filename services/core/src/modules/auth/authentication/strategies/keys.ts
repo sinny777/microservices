@@ -2,6 +2,7 @@
 import {BindingKey} from '@loopback/core';
 import {LocalPasswordStrategyFactory} from './passport/passport-local';
 import {BearerStrategyFactory} from './passport/passport-bearer';
+import {JwtStrategyFactory} from './passport/passport-jwt';
 import {ResourceOwnerPasswordStrategyFactory} from './passport/passport-resource-owner-password';
 import {ClientPasswordStrategyFactory} from './passport/passport-client-password/client-password-strategy-factory-provider';
 import {GoogleAuthStrategyFactoryProvider} from './passport/passport-google-oauth2';
@@ -32,6 +33,14 @@ export namespace Strategies {
     export const BEARER_TOKEN_VERIFIER = BindingKey.create<
       VerifyFunction.BearerFn
     >('sf.passport.verifier.bearerToken');
+
+    // Passport-jwt strategy
+    export const JWT_STRATEGY_FACTORY = BindingKey.create<
+      JwtStrategyFactory
+    >('sf.passport.strategyFactory.jwt');
+    export const JWT_TOKEN_VERIFIER = BindingKey.create<
+      VerifyFunction.BearerFn
+    >('sf.passport.verifier.jwtToken');
 
     // Passport-oauth2-resource-owner-password strategy
     export const RESOURCE_OWNER_STRATEGY_FACTORY = BindingKey.create<

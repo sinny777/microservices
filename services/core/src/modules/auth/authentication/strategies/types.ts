@@ -25,6 +25,10 @@ export namespace VerifyFunction {
     (token: string, req?: Request): Promise<IAuthUser | null>;
   }
 
+  export interface JwtFn {
+    (token: string, req?: Request): Promise<IAuthUser | null>;
+  }
+
   export interface ResourceOwnerPasswordFn {
     (
       clientId: string,

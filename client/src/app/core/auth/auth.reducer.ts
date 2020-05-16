@@ -61,4 +61,4 @@ export function authReducer(state = initialState, action: AuthActions): AuthStat
     }
 }
 
-export const selectAuthModel = ((state: AppState) => state.auth.authModel);
+export const selectAuthModel = ((state: AuthState) => state.authModel);

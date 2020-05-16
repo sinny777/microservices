@@ -14,10 +14,12 @@ import {
   ClientPasswordVerifyProvider,
   LocalPasswordVerifyProvider,
   BearerTokenVerifyProvider,
+  JwtTokenVerifyProvider,
   ResourceOwnerVerifyProvider,
   LocalPasswordStrategyFactoryProvider,
   ClientPasswordStrategyFactoryProvider,
   BearerStrategyFactoryProvider,
+  JwtStrategyFactoryProvider,
   ResourceOwnerPasswordStrategyFactoryProvider,
 } from './strategies';
 import {Strategies} from './strategies/keys';
@@ -26,7 +28,7 @@ import {
   GoogleAuthVerifyProvider,
 } from './strategies/passport/passport-google-oauth2';
 
-export class AuthenticationComponent implements Component {
+export class CoreAuthenticationComponent implements Component {
   constructor() {
     this.providers = {
       [AuthenticationBindings.USER_AUTH_ACTION.key]: AuthenticateActionProvider,
@@ -44,6 +46,8 @@ export class AuthenticationComponent implements Component {
         .key]: ClientPasswordStrategyFactoryProvider,
       [Strategies.Passport.BEARER_STRATEGY_FACTORY
         .key]: BearerStrategyFactoryProvider,
+      [Strategies.Passport.JWT_STRATEGY_FACTORY
+        .key]: JwtStrategyFactoryProvider,
       [Strategies.Passport.RESOURCE_OWNER_STRATEGY_FACTORY
         .key]: ResourceOwnerPasswordStrategyFactoryProvider,
       [Strategies.Passport.GOOGLE_OAUTH2_STRATEGY_FACTORY
@@ -56,6 +60,8 @@ export class AuthenticationComponent implements Component {
         .key]: LocalPasswordVerifyProvider,
       [Strategies.Passport.BEARER_TOKEN_VERIFIER
         .key]: BearerTokenVerifyProvider,
+      [Strategies.Passport.JWT_TOKEN_VERIFIER
+        .key]: JwtTokenVerifyProvider,
       [Strategies.Passport.RESOURCE_OWNER_PASSWORD_VERIFIER
         .key]: ResourceOwnerVerifyProvider,
       [Strategies.Passport.GOOGLE_OAUTH2_VERIFIER

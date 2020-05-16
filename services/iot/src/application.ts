@@ -1,3 +1,4 @@
+import { JWTAuthenticationComponent } from './components/jwt-authentication/jwt-authentication-component';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, BindingKey} from '@loopback/core';
 import {
@@ -13,16 +14,18 @@ import {MySequence} from './sequence';
 
 import {
   AuthenticationComponent,
-  registerAuthenticationStrategy,
-  AuthenticationBindings,
+  // registerAuthenticationStrategy,
+  // AuthenticationBindings,
 } from '@loopback/authentication';
-// import {JWTAuthenticationStrategy} from './modules/auth/authentication/jwt-strategy';
-import {CommonService, JWTService} from 'microservices-core/dist/services';
-import {JWTAuthenticationStrategy} from 'microservices-core/dist/modules/auth';
-import { AuthUser } from 'microservices-core/dist/models';
+
+// import {CoreAuthenticationComponent} from './modules/auth/authentication';
+import {CommonService} from 'microservices-core/dist/services';
+// import {JWTAuthenticationStrategy} from 'microservices-core/dist/modules/auth/authentication/strategies';
+// import { AuthUser } from 'microservices-core/dist/models';
 import {
   TokenServiceBindings, CommonServiceBindings
 } from 'microservices-core/dist/keys'; 
+import { JWTService } from './components/jwt-authentication';
 
 export interface PackageInfo {
   name: string;
@@ -57,7 +60,7 @@ export class IotApplication extends BootMixin(
       servers: [{url: '/'}],
     });
 
-    this.setUpBindings();    
+    // this.setUpBindings();    
     // Set up the custom sequence
     this.sequence(MySequence);
     // Set up default home page
@@ -70,7 +73,9 @@ export class IotApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.component(AuthenticationComponent);
-    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
+    this.component(AuthenticationComponent);
+    this.component(JWTAuthenticationComponent);
+    // this.registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
     // registerAuthenticationStrategy(this, BasicAuthenticationStrategy);
     // this.component(AuthorizationComponent);
 
@@ -115,7 +120,7 @@ export class IotApplication extends BootMixin(
     // // Bind bcrypt hash services
     this.bind(CommonServiceBindings.COMMON_SERVICE).toClass(CommonService);    
     // this.bind(SecurityBindings.USER).toClass(AuthUser);
-    this.bind(AuthenticationBindings.CURRENT_USER).toClass(AuthUser);
+    // this.bind(AuthenticationBindings.CURRENT_USER).toClass(AuthUser);
     // this.bind(AuthenticationBindings.CURRENT_USER).toClass(Setter<UserProfile>);
   }
 

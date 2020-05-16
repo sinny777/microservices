@@ -1,3 +1,4 @@
+// import { selectAuthModel } from './../auth/auth.reducer';
 import {
     StoreModule,
     ActionReducerMap,
@@ -50,12 +51,13 @@ export const syncReducers = {
     auth: fromAuth.authReducer,
 };
 
-// export const getAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
 
-// export const getAuthLoaded = createSelector(
-//     getAuthState,
-//     fromAuth.selectAuthModel
-// );
+export const selectAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
+
+export const selectAuthModel = createSelector(
+    selectAuthState,
+    fromAuth.selectAuthModel
+);
 
 // export const getUserState = createFeatureSelector<fromUser.UserState>('user');
 
@@ -144,3 +146,4 @@ export const AUTH_REDUCERS: MetaReducer<AppState>[] = [stateSetter, storeFreeze]
 // export const reducers: ActionReducerMap<AppState> = { router: routerReducer, auth: fromAuth.authReducer };
 
 // export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [stateSetter, storeFreeze] : [];
+export const reducers: ActionReducerMap<AppState> = syncReducers;

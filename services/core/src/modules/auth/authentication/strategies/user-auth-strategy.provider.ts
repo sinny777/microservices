@@ -4,12 +4,14 @@ import {Strategy} from 'passport';
 import * as GoogleStrategy from 'passport-google-oauth20';
 import * as PassportBearer from 'passport-http-bearer';
 import * as PassportLocal from 'passport-local';
+import * as PassportJwt from 'passport-jwt';
 
 import {AuthenticationBindings} from '../keys';
 import {STRATEGY} from '../strategy-name.enum';
 import {AuthenticationMetadata} from '../types';
 import {Strategies} from './keys';
 import {BearerStrategyFactory} from './passport/passport-bearer';
+import {JwtStrategyFactory} from './passport/passport-jwt';
 import {GoogleAuthStrategyFactory} from './passport/passport-google-oauth2';
 import {LocalPasswordStrategyFactory} from './passport/passport-local';
 import {
@@ -25,6 +27,8 @@ export class AuthStrategyProvider implements Provider<Strategy | undefined> {
     private readonly getLocalStrategyVerifier: LocalPasswordStrategyFactory,
     @inject(Strategies.Passport.BEARER_STRATEGY_FACTORY)
     private readonly getBearerStrategyVerifier: BearerStrategyFactory,
+    @inject(Strategies.Passport.JWT_STRATEGY_FACTORY)
+    private readonly getJwtStrategyVerifier: JwtStrategyFactory,
     @inject(Strategies.Passport.RESOURCE_OWNER_STRATEGY_FACTORY)
     private readonly getResourceOwnerVerifier: ResourceOwnerPasswordStrategyFactory,
     @inject(Strategies.Passport.GOOGLE_OAUTH2_STRATEGY_FACTORY)
@@ -44,6 +48,9 @@ export class AuthStrategyProvider implements Provider<Strategy | undefined> {
     } else if (name === STRATEGY.BEARER) {
       return this.getBearerStrategyVerifier(this.metadata
         .options as PassportBearer.IStrategyOptions);
+    } else if (name === STRATEGY.JWT) {
+      return this.getJwtStrategyVerifier(this.metadata
+        .options as PassportJwt.StrategyOptions);
     } else if (name === STRATEGY.OAUTH2_RESOURCE_OWNER_GRANT) {
       return this.getResourceOwnerVerifier(this.metadata
         .options as Oauth2ResourceOwnerPassword.StrategyOptionsWithRequestInterface);

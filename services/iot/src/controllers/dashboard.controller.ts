@@ -20,7 +20,7 @@ import {
   import {AuthenticationBindings, authenticate} from '@loopback/authentication';
   import { inject } from '@loopback/core';
   import { UserProfile, securityId } from '@loopback/security';
-  import { CommonServiceBindings, CommonServiceI } from 'microservices-core/dist/keys';
+  // import { CommonServiceBindings, CommonServiceI } from 'microservices-core/dist/keys';
   import { User } from 'microservices-core/dist/models';
   // import {authorize} from 'loopback4-authorization';
 
@@ -53,7 +53,7 @@ const PING_RESPONSE: ResponseObject = {
   @api({basePath: '/api/dashboard', paths: {}})
   export class DashboardController {
     constructor(
-      @inject(CommonServiceBindings.COMMON_SERVICE) public commonService: CommonServiceI      
+      // @inject(CommonServiceBindings.COMMON_SERVICE) public commonService: CommonServiceI      
     ) {}
   
     @get('/users/me', {

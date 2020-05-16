@@ -46,7 +46,7 @@ export class UserProfileComponent implements OnInit {
 			// let userProfile: Keycloak.KeycloakProfile  = await this.keycloakService.loadUserProfile();
 			// let token  = await this.keycloakService.getToken();
 			// this.user$ = userDetails;
-			// console.log('IN UserProfileComponent, userProfile: >>>> ', (await userProfile));
+			console.log('IN UserProfileComponent, userProfile: >>>> ', (await userProfile));
 			// console.log(await this.keycloakService.getToken());
 			// console.log(this.keycloakService.getUserRoles());
 			// console.log('IN UserProfileComponent, token: >>>> ', token);

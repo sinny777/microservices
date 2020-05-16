@@ -19,18 +19,19 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { environment } from '../environments/environment';
 // Hammer JS
 import 'hammerjs';
-// NGX Permissions
-// import { NgxPermissionsModule } from 'ngx-permissions';
 // NGRX
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthEffects } from './core/auth/auth.effects';
+
+//Auth
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+// import { AuthEffects } from './core/auth/auth.effects';
 
 // State
-import { AUTH_REDUCERS, syncReducers, resetOnLogout, AppState } from './core/reducers';
+// import { AUTH_REDUCERS, syncReducers, resetOnLogout, AppState } from './core/reducers';
 // Copmponents
 import { AppComponent } from './app.component';
 // Modules
@@ -44,12 +45,9 @@ import { CountryPickerModule } from 'ngx-country-picker';
 // Layout Services
 import { LayoutConfigService, LayoutRefService, MenuAsideService, MenuConfigService, MenuHorizontalService, PageConfigService, SplashScreenService, SubheaderService,
 	KtDialogService } from './core/_base/layout';
-// Auth
-// import { AuthModule } from './views/pages/auth/auth.module';
-// import { AuthService } from './core/auth';
+
 import { BackendService } from './core/markers';
 
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializer } from './utils/app-init';
 
 // CRUD
@@ -62,6 +60,8 @@ import * as typescript from 'highlight.js/lib/languages/typescript';
 import * as scss from 'highlight.js/lib/languages/scss';
 import * as xml from 'highlight.js/lib/languages/xml';
 import * as json from 'highlight.js/lib/languages/json';
+// import { authReducer } from './core/auth/auth.reducer';
+// import { KeycloakService } from 'keycloak-angular';
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -89,8 +89,8 @@ export function hljsLanguages(): HighlightLanguage[] {
 	];
 }
 
-export const metaReducers: MetaReducer<AppState>[] = environment.production ?
- [resetOnLogout] : [...AUTH_REDUCERS, resetOnLogout];
+// export const metaReducers: MetaReducer<AppState>[] = environment.production ?
+//  [resetOnLogout] : [...AUTH_REDUCERS, resetOnLogout];
 
 @NgModule({
 	declarations: [AppComponent],
@@ -103,18 +103,14 @@ export const metaReducers: MetaReducer<AppState>[] = environment.production ?
 			passThruUnknownUrl: true,
 			dataEncapsulation: false
 		}) : [],
-		// NgxPermissionsModule.forRoot(),
+		KeycloakAngularModule,
 		PartialsModule,
 		CoreModule,
 		OverlayModule,
-		EffectsModule.forRoot([AuthEffects]),
-		StoreModule.forRoot(syncReducers,
-			{ metaReducers }
-		  ),
+		StoreModule.forRoot({}),
+		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
 		StoreDevtoolsModule.instrument(),
-		// AuthModule.forRoot(),
-		KeycloakAngularModule,
 		NgbModule,
 		TranslateModule.forRoot(),
 		MatProgressSpinnerModule,
@@ -123,8 +119,8 @@ export const metaReducers: MetaReducer<AppState>[] = environment.production ?
 	],
 	exports: [AppComponent],
 	providers: [
-		// AuthService,
 		BackendService,
+		KeycloakService,
 		LayoutConfigService,
 		LayoutRefService,
 		MenuConfigService,

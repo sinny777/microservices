@@ -9,8 +9,39 @@ import {
   IAuthClient,
   IAuthUser,
 } from './types';
+import { TokenService } from '@loopback/authentication';
 
 export * from './strategies/keys';
+
+export namespace TokenServiceBindings {
+  export const TOKEN_SECRET = BindingKey.create<string | undefined>(
+    'authentication.jwt.secret',
+  );
+
+  export const TOKEN_ISSUER = BindingKey.create<string | undefined>(
+    'authentication.jwt.issuer',
+  );
+
+  export const TOKEN_AUDIENCE = BindingKey.create<string | undefined>(
+    'authentication.jwt.audience',
+  );
+
+  export const TOKEN_ALGORITHM = BindingKey.create<string | undefined>(
+    'authentication.jwt.algorithm',
+  );
+
+  export const TOKEN_EXPIRES_IN = BindingKey.create<string | undefined>(
+    'authentication.jwt.expires.in',
+  );
+  export const TOKEN_SERVICE = BindingKey.create<TokenService>(
+    'services.authentication.jwt.tokenservice',
+  );
+
+  export const KEYS_PATH = BindingKey.create<string | undefined>(
+    'jwt.keys.path',
+  );
+
+}
 
 /**
  * Binding keys used by this component.

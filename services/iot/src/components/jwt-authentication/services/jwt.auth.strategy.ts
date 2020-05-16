@@ -1,34 +1,21 @@
-
-import {inject} from '@loopback/core';
-import {HttpErrors, Request} from '@loopback/rest';
 import {AuthenticationStrategy, TokenService} from '@loopback/authentication';
-import {UserProfile, securityId} from '@loopback/security';
+import {inject} from '@loopback/context';
+import {HttpErrors, Request} from '@loopback/rest';
+import {UserProfile} from '@loopback/security';
 import {TokenServiceBindings} from '../keys';
 
 export class JWTAuthenticationStrategy implements AuthenticationStrategy {
+  name = 'jwt';
 
-  name: string = 'jwt';
-  //    name1 = this.getStrategy
-
-  // @inject(BasicAuthenticationStrategyBindings.DEFAULT_OPTIONS)
-  // options: AuthenticationStrategyOptions;
-  
   constructor(
-    @inject(TokenServiceBindings.TOKEN_SERVICE) public tokenService: TokenService
-   ) {}
+    @inject(TokenServiceBindings.TOKEN_SERVICE)
+    public tokenService: TokenService,
+  ) {}
 
   async authenticate(request: Request): Promise<UserProfile | undefined> {
     const token: string = this.extractCredentials(request);
-    // console.log("REFERER1: >>>>> ", request.headers.referer);
-    // console.log("REFERER2: >>>>> ", request.get('Referrer'));
-    // console.log("Request, OriginalUrl: >>>>> ", request.originalUrl);
-    console.log("Request, path: >>>>> ", request.path);
-    console.log("Request, hostname: >>>>> ", request.hostname);
-    
     const userProfile: UserProfile = await this.tokenService.verifyToken(token);
-    console.log('In JWTAuthenticationStrategy.authenticate >>>>>>>>> ', userProfile[securityId]);
-    // this.setCurrentUser(userProfile);
-    return userProfile;    
+    return userProfile;
   }
 
   extractCredentials(request: Request): string {

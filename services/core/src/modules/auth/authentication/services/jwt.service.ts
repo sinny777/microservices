@@ -68,21 +68,22 @@ export class JWTService implements TokenService {
         `Error verifying token : 'token' is null`,
       );
     }
+    console.log('IN JWTTokenService.verifyToken: >>> ', token);
     // console.log(path.join(__dirname, '../../keys/public.key'));
     // console.log(path.resolve(__dirname));
-    const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/public.key'), 'utf8');
+    const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8');
     var verifyOptions = {
       issuer:  this.jwtIssuer,
       // subject:  this.jwtAudience,
-      audience:  this.jwtAudience,
-      expiresIn:  Number(this.jwtExpiresIn),
+      // audience:  this.jwtAudience,
+      // expiresIn:  Number(this.jwtExpiresIn),
       algorithm:  [this.jwtAlgorithm]
      };
     let userProfile: UserProfile;
 
     try {
       const decodedToken = await verifyAsync(token, publicKEY, verifyOptions);
-      // console.log('IN JWTService.verifyToken, decodedToken: >>>> ', decodedToken);
+      console.log('IN JWTService.verifyToken, decodedToken: >>>> ', decodedToken);
       userProfile = Object.assign(decodedToken);
       // userProfile.id =  userProfile[securityId];
       delete userProfile.aud;

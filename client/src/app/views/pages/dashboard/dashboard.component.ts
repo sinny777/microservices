@@ -10,12 +10,15 @@ import { Widget4Data } from '../../partials/content/widgets/widget4/widget4.comp
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import { selectAuthModel } from '../../../core/auth/auth.reducer';
-import { IsLoggedInCheck } from '../../../core/auth/auth.actions';
+// import { selectAuthData } from '../../../core/auth/auth.reducer';
+// import { IsLoggedInCheck } from '../../../core/auth/auth.actions';
+import * as fromAuth from '../../../core/auth/auth.reducer';
+import { selectAuthModel } from './../../../core/reducers/index';
 
 import { AppState } from '../../../core/reducers';
 import { Login } from '../../../core/auth/auth.actions';
 import { takeWhile } from 'rxjs/operators';
+import { AuthState } from '../../../core/auth/auth.reducer';
 
 // const userManagementPermissionId: string = "115b565bc29bf5bb0c545ad280f8a3dc";
 
@@ -33,20 +36,27 @@ export class DashboardComponent implements OnInit {
 	constructor(
 		private layoutConfigService: LayoutConfigService,
 		protected router: Router,
-		private store: Store<AppState>,
+		// private store: Store<AppState>,
+		private store: Store<AuthState>,
 	    private route: ActivatedRoute
 		) {
 	}
 
 	async ngOnInit() {
+		console.log('IN Dashboard Component: >>>> ' );
+		let userModel = await this.store.select(fromAuth.selectAuthModel);
 
-		// let userModel = await this.store.select(selectAuthModel);
-		let userModel = this.store.pipe(select(selectAuthModel));
-		console.log(userModel);
+		userModel.subscribe((v) => {
+			console.log(v);
+		  });
+		// console.log(userModel);
+		// let userModel = this.store.pipe(select(fromAuth.selectAuthModel));
+		// let userModel = this.store.pipe(select(fromAuth.selectAuthModel));
+		// console.log(userModel);
 		userModel.toPromise().then(authModel => {
 			console.log(authModel);
 		});
-		console.log('<<<<<<<<<:: AUTH USER ID ::>>>>>> ', (await userModel.toPromise()).id);
+		// console.log('<<<<<<<<<:: AUTH USER ID ::>>>>>> ', (await userModel.toPromise()).id);
 		
 		this.chartOptions1 = {
 			data: [10, 14, 18, 11, 9, 12, 14, 17, 18, 14],
