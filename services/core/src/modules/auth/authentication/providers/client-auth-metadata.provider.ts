@@ -1,4 +1,3 @@
-
 import {Constructor, inject, Provider} from '@loopback/context';
 import {CoreBindings} from '@loopback/core';
 

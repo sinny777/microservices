@@ -3,9 +3,9 @@ import {Provider, inject} from '@loopback/context';
 import {HttpErrors} from '@loopback/rest';
 
 import {VerifyFunction} from '../../types';
-import { IAuthUser } from '../../..';
+// import { IAuthUser } from '../../..';
 import {UserProfile} from '@loopback/security';
-import { TokenServiceBindings } from '../../../../../..';
+import { TokenServiceBindings } from '../../../keys';
 import { TokenService } from '@loopback/authentication';
 // import * as PassportJwt from 'passport-jwt';
 

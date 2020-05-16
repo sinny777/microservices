@@ -1,5 +1,5 @@
 import {model, property} from '@loopback/repository';
-import { Tenant, Role } from '..';
+import { Tenant, Role } from '../../common/models';
 import { securityId, UserProfile } from '@loopback/security';
 
 @model()

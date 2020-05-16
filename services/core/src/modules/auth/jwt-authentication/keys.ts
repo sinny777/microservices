@@ -5,6 +5,11 @@ import {BindingKey} from '@loopback/core';
 // import {User} from '../../models/user.model';
 // import {Credentials} from './services/user.service';
 
+export namespace TokenServiceConstants {
+  export const TOKEN_SECRET_VALUE = 'myjwts3cr3t';
+  export const TOKEN_EXPIRES_IN_VALUE = '21600';
+}
+
 export namespace TokenServiceBindings {
     export const TOKEN_SECRET = BindingKey.create<string | undefined>(
         'authentication.jwt.secret',

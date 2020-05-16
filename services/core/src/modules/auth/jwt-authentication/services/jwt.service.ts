@@ -33,11 +33,11 @@ export class JWTService implements TokenService {
     }
 
     // const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8');
-    const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+    const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/keycloak-public.key'), 'utf8');
     var verifyOptions = {
       issuer:  this.jwtIssuer,
       // subject:  this.jwtAudience,
-      audience:  this.jwtAudience,
+      // audience:  this.jwtAudience,
       // expiresIn:  Number(this.jwtExpiresIn),
       algorithm:  [this.jwtAlgorithm]
      };

@@ -1,4 +1,3 @@
-
 import {Getter, inject, Provider, Setter} from '@loopback/context';
 import {HttpErrors, Request, Response} from '@loopback/rest';
 import {Strategy} from 'passport';

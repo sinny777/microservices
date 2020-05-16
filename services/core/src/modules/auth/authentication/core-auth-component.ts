@@ -1,4 +1,3 @@
-
 import {Component, ProviderMap} from '@loopback/core';
 
 import {AuthenticationBindings} from './keys';

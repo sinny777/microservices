@@ -1,7 +1,7 @@
 
 import {HttpErrors} from '@loopback/rest';
 import {UserProfile, securityId} from '@loopback/security';
-import {User, AuthUser} from '../models';
+import {User} from '../models';
 import { CommonServiceI } from '../keys'
 
 export class CommonService implements CommonServiceI {

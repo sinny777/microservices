@@ -11,5 +11,4 @@ export * from './role-permission.model';
 export * from './group.model';
 export * from './group-role.model';
 export * from './user-group.model';
-export * from './auth/auth-user.model';
-export * from './auth/auth-client.model';
+

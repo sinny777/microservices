@@ -1,4 +1,3 @@
-
 import {Getter, inject, Provider, Setter} from '@loopback/context';
 import {Request} from '@loopback/rest';
 import {Strategy} from 'passport';

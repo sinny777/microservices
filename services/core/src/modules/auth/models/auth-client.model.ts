@@ -1,6 +1,5 @@
 import {model, property} from '@loopback/repository';
-
-import {BaseEntity} from '../base-entity.model';
+import {BaseEntity} from '../../common/models';
 
 @model({
   name: 'auth_clients',

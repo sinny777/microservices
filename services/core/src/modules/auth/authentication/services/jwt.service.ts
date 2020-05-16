@@ -69,9 +69,10 @@ export class JWTService implements TokenService {
       );
     }
     console.log('IN JWTTokenService.verifyToken: >>> ', token);
-    // console.log(path.join(__dirname, '../../keys/public.key'));
+    console.log(path.join(__dirname, this.keysPath+'/keycloak-public.key'));
     // console.log(path.resolve(__dirname));
-    const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8');
+    // const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8'); 
+    const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/keycloak-public.key'), 'utf8');
     var verifyOptions = {
       issuer:  this.jwtIssuer,
       // subject:  this.jwtAudience,

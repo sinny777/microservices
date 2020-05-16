@@ -1,4 +1,3 @@
-// import { TOKEN_ALGORITHM } from './../../../../core/src/keys';
 import { registerAuthenticationStrategy } from '@loopback/authentication';
 import {
     Application,
@@ -10,14 +9,15 @@ import {
 import { JWTAuthenticationStrategy } from './services/jwt.auth.strategy';
 import { JWTService } from './services/jwt.service';
 import {
-    TokenServiceBindings    
+    TokenServiceBindings,
+    TokenServiceConstants
 } from './keys';
 // import {MyUserService} from './services/user.service';
 
 export class JWTAuthenticationComponent implements Component {
     bindings = [
         Binding.bind(TokenServiceBindings.KEYS_PATH).to(
-            process.env.SECURITY_KEYS_PATH,
+            process.env.ACCOUNTS_KEYS_PATH,
         ),
         Binding.bind(TokenServiceBindings.TOKEN_ALGORITHM).to(
             process.env.TOKEN_ALGORITHM,
