@@ -7,12 +7,20 @@ import {TokenServiceBindings} from '../keys';
 import * as fs from 'fs';
 import * as path from 'path';
 
+const KeyCloakCerts = require('get-keycloak-public-key');
+
 const jwt = require('jsonwebtoken');
 const signAsync = promisify(jwt.sign);
 const verifyAsync = promisify(jwt.verify);
+let keyCloakCerts: any;
+let publicKey: string;
 
 export class JWTService implements TokenService {
   constructor(
+    @inject(TokenServiceBindings.KEYCLOAK_URL)
+    private keycloadURL: string, 
+    @inject(TokenServiceBindings.KEYCLOAK_REALM)
+    private keycloakRealm: string, 
     @inject(TokenServiceBindings.TOKEN_ISSUER)
     private jwtIssuer: string, 
     @inject(TokenServiceBindings.TOKEN_AUDIENCE)
@@ -23,7 +31,15 @@ export class JWTService implements TokenService {
     private jwtExpiresIn: string,
     @inject(TokenServiceBindings.KEYS_PATH)
     private keysPath: string    
-  ) {}
+  ) {
+     keyCloakCerts = new KeyCloakCerts(keycloadURL, keycloakRealm);
+     try{
+        publicKey  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+     }catch (error) {
+        console.error(error);
+     }
+     
+  }
 
   async verifyToken(token: string): Promise<UserProfile> {
     if (!token) {
@@ -32,21 +48,27 @@ export class JWTService implements TokenService {
       );
     }
 
-    // const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8');
-    const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/keycloak-public.key'), 'utf8');
-    var verifyOptions = {
-      issuer:  this.jwtIssuer,
-      // subject:  this.jwtAudience,
-      // audience:  this.jwtAudience,
-      // expiresIn:  Number(this.jwtExpiresIn),
-      algorithm:  [this.jwtAlgorithm]
-     };
-    
     let userProfile: UserProfile;
 
     try {
+      
+      if(!publicKey){
+        // decode the token without verification to have the kid value
+        const kid = jwt.decode(token, { complete: true }).header.kid;
+        // fetch the PEM Public Key
+        publicKey = await keyCloakCerts.fetch(kid);
+        console.log('publicKEY: >>> ', publicKey);
+      }
+      var verifyOptions = {
+        issuer:  this.jwtIssuer,
+        // subject:  this.jwtAudience,
+        audience:  this.jwtAudience,
+        // expiresIn:  Number(this.jwtExpiresIn),
+        algorithm:  [this.jwtAlgorithm]
+      };
+
       // decode user profile from token
-      const decodedToken = await verifyAsync(token, publicKEY, verifyOptions);      
+      const decodedToken = await verifyAsync(token, publicKey, verifyOptions);      
       console.log('decodedToken: >> ', decodedToken);
       // don't copy over  token field 'iat' and 'exp', nor 'email' to user profile
       userProfile = Object.assign(

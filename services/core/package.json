@@ -51,6 +51,7 @@
     "@loopback/authentication-passport": "^0.1.0",
     "@loopback/repository": "^1.13.1",
     "debug": "^4.0.0",
+    "get-keycloak-public-key": "^1.0.3",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",

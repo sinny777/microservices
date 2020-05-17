@@ -9,15 +9,20 @@ import {
 import { JWTAuthenticationStrategy } from './services/jwt.auth.strategy';
 import { JWTService } from './services/jwt.service';
 import {
-    TokenServiceBindings,
-    TokenServiceConstants
+    TokenServiceBindings
 } from './keys';
 // import {MyUserService} from './services/user.service';
 
 export class JWTAuthenticationComponent implements Component {
     bindings = [
+        Binding.bind(TokenServiceBindings.KEYCLOAK_URL).to(
+            process.env.KEYCLOAK_URL,
+        ),
+        Binding.bind(TokenServiceBindings.KEYCLOAK_REALM).to(
+            process.env.KEYCLOAK_REALM,
+        ),
         Binding.bind(TokenServiceBindings.KEYS_PATH).to(
-            process.env.ACCOUNTS_KEYS_PATH,
+            process.env.SECURITY_KEYS_PATH,
         ),
         Binding.bind(TokenServiceBindings.TOKEN_ALGORITHM).to(
             process.env.TOKEN_ALGORITHM,
