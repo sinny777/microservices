@@ -35,6 +35,7 @@ lib
 .apiconnect
 .settings
 .env
+*.env
 # credentials
 credentials.json
 data/botkit
