@@ -5,7 +5,7 @@
 import argparse, os
 
 images = [
-  ["services/accounts", "microservice-accounts"],
+  # ["services/accounts", "microservice-accounts"],
   ["services/iot", "microservice-iot"],
   ["client", "smartthings/client"]
 ]

@@ -28,6 +28,24 @@ Under the hood, there are two components to this app:
 
 ## BUILD LOCALLY
 
+### USING DOCKER COMPOSE
+
+Go inside deployments folder and run following commands:
+
+```
+docker-compose down && docker-compose build --no-cache && docker-compose up
+
+```
+
+This will run Postgres and Keycloak containers
+
+### Keycloak Details
+
+ - Keycloak Dashboard: [http://localhost:8888](http://localhost:8888)
+   Admin Credentials: admin / P@ssw0rd
+ - OAuth2.0 configuration: [http://localhost:8888/auth/realms/development/.well-known/openid-configuration](http://localhost:8888/auth/realms/development/.well-known/openid-configuration)  
+
+
 ### USING DOCKER 
 
 These builds can be scripted. When scripting the builds, consideration should be given to the chosen tags so that historical versions are preserved.
@@ -200,6 +218,24 @@ e. Point your browser to http://localhost:4200 to try out the app.
 ### To run the app on localhost using https:
 
 ssh -R smart-things.serveo.net:80:localhost:3000 serveo.net
+
+### Keycloak
+
+ - Start PostgreSql docker container for Keycloak
+
+docker run -d --name postgres --net keycloak-network -p 5432:5432 -e POSTGRES_DB=keycloak -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD=password postgres
+
+
+docker run --name keycloak --net keycloak-network -p 8080:8080 -p 9990:9990 -e DB_USER=keycloak -e DB_PASSWORD=password -e DB_VENDOR=postgres -e DB_ADDR=postgres jboss/keycloak
+
+ - Create Admin user 
+
+docker exec <CONTAINER> /opt/jboss/keycloak/bin/add-user-keycloak.sh -u <USERNAME> -p <PASSWORD>
+
+For eg. >> docker exec be795ff39675 /opt/jboss/keycloak/bin/add-user-keycloak.sh -u admin -p 1SatnamW
+
+ - Restart Container
+ docker restart <CONTAINER>
 
 ## LICENSE
 

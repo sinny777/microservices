@@ -55,12 +55,10 @@ export class AppComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		// enable/disable loader
 		this.loader = this.layoutConfigService.getConfig('loader.enabled');
-
 		const routerSubscription = this.router.events.subscribe(event => {
 			if (event instanceof NavigationEnd) {
 				// hide splash screen
 				this.splashScreenService.hide();
-
 				// scroll to top on every route change
 				window.scrollTo(0, 0);
 			}

@@ -10,19 +10,11 @@ import {ServiceMixin} from '@loopback/service-proxy';
 import * as path from 'path';
 import * as dotenv from "dotenv";
 import {MySequence} from './sequence';
-
+// import { JWTAuthenticationComponent } from './components/jwt-authentication/jwt-authentication-component';
+import { JWTAuthenticationComponent } from 'microservices-core/dist/modules/auth/jwt-authentication';
 import {
   AuthenticationComponent,
-  registerAuthenticationStrategy,
-  AuthenticationBindings,
 } from '@loopback/authentication';
-// import {JWTAuthenticationStrategy} from './modules/auth/authentication/jwt-strategy';
-import {CommonService, JWTService} from 'microservices-core/dist/services';
-import {JWTAuthenticationStrategy} from 'microservices-core/dist/modules/auth';
-import { AuthUser } from 'microservices-core/dist/models';
-import {
-  TokenServiceBindings, CommonServiceBindings
-} from 'microservices-core/dist/keys'; 
 
 export interface PackageInfo {
   name: string;
@@ -57,7 +49,7 @@ export class IotApplication extends BootMixin(
       servers: [{url: '/'}],
     });
 
-    this.setUpBindings();    
+    // this.setUpBindings();    
     // Set up the custom sequence
     this.sequence(MySequence);
     // Set up default home page
@@ -70,8 +62,7 @@ export class IotApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.component(AuthenticationComponent);
-    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
-    // registerAuthenticationStrategy(this, BasicAuthenticationStrategy);
+    this.component(JWTAuthenticationComponent);
     // this.component(AuthorizationComponent);
 
     this.projectRoot = __dirname;
@@ -91,32 +82,5 @@ export class IotApplication extends BootMixin(
     };
   }
 
-  setUpBindings(): void {
-    // Bind package.json to the application context
-    this.bind(PackageKey).to(pkg);
-
-    this.bind(TokenServiceBindings.KEYS_PATH).to(
-      process.env.ACCOUNTS_KEYS_PATH
-    );
-
-    this.bind(TokenServiceBindings.TOKEN_ISSUER).to(
-      process.env.TOKEN_ISSUER
-    );
-    this.bind(TokenServiceBindings.TOKEN_AUDIENCE).to(
-      process.env.TOKEN_AUDIENCE
-    );
-    this.bind(TokenServiceBindings.TOKEN_ALGORITHM).to(
-      process.env.TOKEN_ALGORITHM
-    );
-    this.bind(TokenServiceBindings.TOKEN_EXPIRES_IN).to(
-      process.env.TOKEN_EXPIRES_IN
-    );
-    this.bind(TokenServiceBindings.TOKEN_SERVICE).toClass(JWTService);
-    // // Bind bcrypt hash services
-    this.bind(CommonServiceBindings.COMMON_SERVICE).toClass(CommonService);    
-    // this.bind(SecurityBindings.USER).toClass(AuthUser);
-    this.bind(AuthenticationBindings.CURRENT_USER).toClass(AuthUser);
-    // this.bind(AuthenticationBindings.CURRENT_USER).toClass(Setter<UserProfile>);
-  }
 
 }

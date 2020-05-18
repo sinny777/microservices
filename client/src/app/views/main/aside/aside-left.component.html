@@ -26,11 +26,17 @@
 	</ng-container>
 </ng-template>
 
-<ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">
+<!-- <ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">
 	<ng-container *ngIf="!item.permission" [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
 	<ng-template *ngIf="item.permission" ngxPermissionsOnly="{{ item.permission }}">
 		<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
 	</ng-template>
+</ng-template> -->
+<ng-template #menuItemTemplate let-item="item" let-parentItem="parentItem">
+	<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
+	<!-- <ng-template>
+		<ng-container [ngTemplateOutlet]="menuItemInnerTemplate" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem  }"></ng-container>
+	</ng-template> -->
 </ng-template>
 
 <ng-template #menuItemInnerTemplate let-item="item" let-parentItem="parentItem">

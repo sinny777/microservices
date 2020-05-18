@@ -31,6 +31,7 @@ export class MenuAsideService {
 	loadMenu() {
 		// get menu list
 		const menuItems: any[] = objectPath.get(this.menuConfigService.getMenus(), 'aside.items');
+		// console.log('menuItems: >> ', menuItems);
 		this.menuList$.next(menuItems);
 	}
 }

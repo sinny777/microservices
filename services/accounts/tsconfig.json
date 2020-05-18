@@ -2,13 +2,26 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "@loopback/build/config/tsconfig.common.json",
   "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
     "experimentalDecorators": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noImplicitAny": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "declaration": true,
+    "typeRoots": [
+        "./node_modules/@types"
+    ]
   },
   "include": ["src", "src/**/*.json"],
   "exclude": [
     "node_modules",
+    "**/__tests__/*",
     "dist"
   ]
 }

@@ -125,26 +125,29 @@ export class GoogleMapComponent implements OnInit {
 	    scale: 1.0
 	  };
 
-		let waterTank_options = {
-	    position: {lat: 36.526836233616166, lng: 128.8196917439518},
-	    icon: {
-				'url': this.watertank1,
-				'scaledSize': {
-						width: 20,
-						height: 20
-				},
-				fillColor: '#FF0000',
-		    fillOpacity: .6,
-		    strokeWeight: 0,
-		    scale: 1
-			},
-	    clickable: true,
-	    draggable: true,
-	    crossOnDrag: true,
-	    visible: true,
-	    animation: 0,
-	    title: 'Water Tank 1'
-	  };
+	  const scaledSize: google.maps.Size =  {
+			width: 20,
+			height: 20,
+			equals: undefined
+	};
+
+		const waterTank_options: google.maps.ReadonlyMarkerOptions = {
+									position: {lat: 36.526836233616166, lng: 128.8196917439518},
+									icon: {
+											url: this.watertank1,
+											scaledSize: scaledSize,
+											fillColor: '#FF0000',
+												fillOpacity: .6,
+												strokeWeight: 0,
+												scale: 1
+											},
+									clickable: true,
+									draggable: true,
+									crossOnDrag: true,
+									visible: true,
+									animation: 0,
+									title: 'Water Tank 1'
+								};
 	  let tank_marker = new google.maps.Marker(waterTank_options);
 	  tank_marker.setMap(this.gmap);
 	}

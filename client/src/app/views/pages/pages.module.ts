@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // Partials
 import { PartialsModule } from '../partials/partials.module';
-import { UserManagementModule } from './user-management/user-management.module';
+// import { UserManagementModule } from './user-management/user-management.module';
 // Pages
 import { CoreModule } from '../../core/core.module';
 
@@ -21,7 +21,7 @@ import { CoreModule } from '../../core/core.module';
 		NgbModule,
 		CoreModule,
 		PartialsModule,
-		UserManagementModule
+		// UserManagementModule
 	],
 	providers: []
 })

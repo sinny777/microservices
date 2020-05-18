@@ -19,15 +19,19 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { environment } from '../environments/environment';
 // Hammer JS
 import 'hammerjs';
-// NGX Permissions
-import { NgxPermissionsModule } from 'ngx-permissions';
 // NGRX
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+
+//Auth
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+// import { AuthEffects } from './core/auth/auth.effects';
+
 // State
-import { metaReducers, reducers } from './core/reducers';
+// import { AUTH_REDUCERS, syncReducers, resetOnLogout, AppState } from './core/reducers';
 // Copmponents
 import { AppComponent } from './app.component';
 // Modules
@@ -41,21 +45,23 @@ import { CountryPickerModule } from 'ngx-country-picker';
 // Layout Services
 import { LayoutConfigService, LayoutRefService, MenuAsideService, MenuConfigService, MenuHorizontalService, PageConfigService, SplashScreenService, SubheaderService,
 	KtDialogService } from './core/_base/layout';
-// Auth
-import { AuthModule } from './views/pages/auth/auth.module';
-import { AuthService } from './core/auth';
+
 import { BackendService } from './core/markers';
+
+import { initializer } from './utils/app-init';
 
 // CRUD
 import { HttpUtilsService, LayoutUtilsService, TypesUtilsService } from './core/_base/crud';
 // Config
-import { LayoutConfig } from './core/_config/main/layout.config';
+// import { LayoutConfig } from './core/_config/main/layout.config';
 // Highlight JS
 import { HIGHLIGHT_OPTIONS, HighlightLanguage } from 'ngx-highlightjs';
 import * as typescript from 'highlight.js/lib/languages/typescript';
 import * as scss from 'highlight.js/lib/languages/scss';
 import * as xml from 'highlight.js/lib/languages/xml';
 import * as json from 'highlight.js/lib/languages/json';
+// import { authReducer } from './core/auth/auth.reducer';
+// import { KeycloakService } from 'keycloak-angular';
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -65,14 +71,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	maxScrollbarLength: 300,
 };
 
-export function initializeLayoutConfig(appConfig: LayoutConfigService) {
-	// initialize app by loading default demo layout config
-	return () => {
-		if (appConfig.getConfig() === null) {
-			appConfig.loadConfigs(new LayoutConfig().configs);
-		}
-	};
-}
+// export function initializeLayoutConfig(appConfig: LayoutConfigService) {
+// 	// initialize app by loading default demo layout config
+// 	return () => {
+// 		if (appConfig.getConfig() === null) {
+// 			appConfig.loadConfigs(new LayoutConfig().configs);
+// 		}
+// 	};
+// }
 
 export function hljsLanguages(): HighlightLanguage[] {
 	return [
@@ -82,6 +88,9 @@ export function hljsLanguages(): HighlightLanguage[] {
 		{name: 'json', func: json}
 	];
 }
+
+// export const metaReducers: MetaReducer<AppState>[] = environment.production ?
+//  [resetOnLogout] : [...AUTH_REDUCERS, resetOnLogout];
 
 @NgModule({
 	declarations: [AppComponent],
@@ -94,25 +103,24 @@ export function hljsLanguages(): HighlightLanguage[] {
 			passThruUnknownUrl: true,
 			dataEncapsulation: false
 		}) : [],
-		NgxPermissionsModule.forRoot(),
+		KeycloakAngularModule,
 		PartialsModule,
 		CoreModule,
 		OverlayModule,
-		StoreModule.forRoot(reducers, {metaReducers}),
+		StoreModule.forRoot({}),
 		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
 		StoreDevtoolsModule.instrument(),
-		AuthModule.forRoot(),
 		NgbModule,
 		TranslateModule.forRoot(),
 		MatProgressSpinnerModule,
 		InlineSVGModule.forRoot(),
 		CountryPickerModule.forRoot()
 	],
-	exports: [],
+	exports: [AppComponent],
 	providers: [
-		AuthService,
 		BackendService,
+		KeycloakService,
 		LayoutConfigService,
 		LayoutRefService,
 		MenuConfigService,
@@ -130,8 +138,9 @@ export function hljsLanguages(): HighlightLanguage[] {
 		{
 			// layout config initializer
 			provide: APP_INITIALIZER,
-			useFactory: initializeLayoutConfig,
-			deps: [LayoutConfigService], multi: true
+			useFactory: initializer,
+			deps: [LayoutConfigService, KeycloakService],
+			multi: true
 		},
 		{
 			provide: HIGHLIGHT_OPTIONS,

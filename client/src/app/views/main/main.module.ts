@@ -15,10 +15,13 @@ import { TranslateModule } from '@ngx-translate/core';
 // Loading bar
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 // NGRX
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+// import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
 // Ngx DatePicker
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+// import * as moment from 'moment';
+// import moment, { Moment } from "node_modules/moment/moment.d";
+// import moment, { Moment } from "moment/moment.d";
+// import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 // Perfect Scrollbar
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 // SVG inline
@@ -39,7 +42,7 @@ import { PagesModule } from '../pages/pages.module';
 import { HtmlClassService } from './html-class.service';
 import { HeaderMobileComponent } from './header/header-mobile/header-mobile.component';
 import { ErrorPageComponent } from './content/error-page/error-page.component';
-import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from '../../core/auth';
+// import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from '../../core/auth';
 
 @NgModule({
 	declarations: [
@@ -94,10 +97,11 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 	imports: [
 		CommonModule,
 		RouterModule,
-		NgxPermissionsModule.forChild(),
-		StoreModule.forFeature('roles', rolesReducer),
-		StoreModule.forFeature('permissions', permissionsReducer),
-		EffectsModule.forFeature([PermissionEffects, RoleEffects]),
+		// NgxDaterangepickerMd.forRoot(),
+		// NgxPermissionsModule.forChild(),
+		// StoreModule.forFeature('roles', rolesReducer),
+		// StoreModule.forFeature('permissions', permissionsReducer),
+		// EffectsModule.forFeature([PermissionEffects, RoleEffects]),
 		PagesRoutingModule,
 		PagesModule,
 		PartialsModule,
@@ -111,7 +115,6 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 		MatTooltipModule,
 		TranslateModule.forChild(),
 		LoadingBarModule,
-		NgxDaterangepickerMd,
 		InlineSVGModule
 	]
 })

@@ -17,15 +17,29 @@ import {
 
 import {MyUserService, PasswordUtil} from './modules/auth';
 import {
-  AuthenticationComponent,
   registerAuthenticationStrategy,
   AuthenticationBindings,
 } from '@loopback/authentication';
+
+
+import {AuthenticationComponent, Strategies} from 'microservices-core/dist/modules/auth';
+import {
+  BearerTokenVerifyProvider,
+  ClientPasswordVerifyProvider,
+  GoogleOauth2VerifyProvider,
+  LocalPasswordVerifyProvider,
+  ResourceOwnerVerifyProvider,
+} from './modules/auth';
+// import {
+//   AuthorizationBindings,
+//   AuthorizationComponent,
+// } from 'microservices-core/dist/modules/auth';
+
 import {PasswordHasherBindings} from './modules/auth/keys';
 // import {JWTAuthenticationStrategy} from './modules/auth/authentication/jwt-strategy';
 import {CommonService, JWTService} from 'microservices-core/dist/services';
-import {JWTAuthenticationStrategy} from 'microservices-core/dist/modules/auth';
-import { AuthUser } from 'microservices-core/dist/models';
+// import {JWTAuthenticationStrategy} from 'microservices-core/dist/modules/auth/authentication/strategies';
+// import { AuthUser } from 'microservices-core/dist/models';
 import {
   TokenServiceBindings, CommonServiceBindings
 } from 'microservices-core/dist/keys'; 
@@ -97,7 +111,23 @@ export class AccountsApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.component(AuthenticationComponent);
-    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
+    // Customize authentication verify handlers
+    this.bind(Strategies.Passport.OAUTH2_CLIENT_PASSWORD_VERIFIER).toProvider(
+      ClientPasswordVerifyProvider,
+    );
+    this.bind(Strategies.Passport.LOCAL_PASSWORD_VERIFIER).toProvider(
+      LocalPasswordVerifyProvider,
+    );
+    this.bind(Strategies.Passport.BEARER_TOKEN_VERIFIER).toProvider(
+      BearerTokenVerifyProvider,
+    );
+    this.bind(Strategies.Passport.RESOURCE_OWNER_PASSWORD_VERIFIER).toProvider(
+      ResourceOwnerVerifyProvider,
+    );
+    this.bind(Strategies.Passport.GOOGLE_OAUTH2_VERIFIER).toProvider(
+      GoogleOauth2VerifyProvider,
+    );
+    // registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
     // registerAuthenticationStrategy(this, BasicAuthenticationStrategy);
     // this.component(AuthorizationComponent);
 
@@ -152,7 +182,7 @@ export class AccountsApplication extends BootMixin(
     this.bind(UserServiceBindings.USER_SERVICE).toClass(MyUserService);
 
     // this.bind(SecurityBindings.USER).toClass(AuthUser);
-    this.bind(AuthenticationBindings.CURRENT_USER).toClass(AuthUser);
+    // this.bind(AuthenticationBindings.CURRENT_USER).toClass(AuthUser);
 
     // this.bind(AuthenticationBindings.CURRENT_USER).toClass(Setter<UserProfile>);
   }
