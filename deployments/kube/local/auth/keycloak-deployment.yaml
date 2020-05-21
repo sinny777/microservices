@@ -1,0 +1,62 @@
+
+# Copyright 2020 IBM.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-svc
+  labels:
+    app: keycloak
+    tier: auth
+spec:
+  type: LoadBalancer
+  ports:
+  - port:  8888
+    targetPort: 8080
+  selector:
+   app: keycloak
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+    tier: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: smartthings-keycloak:localtag        
+        envFrom:
+        - secretRef:
+            name: keycloak-secrets
+        env:
+        - name: DB_ADDR
+          valueFrom:
+            configMapKeyRef:
+              name: auth-config
+              key: POSTGRES_HOST       
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: auth-config
+              key: POSTGRES_PORT  
+        - name: DB_DATABASE
+          value: "postgres"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"       
+        ports:
+          - name: http
+            containerPort: 8080         
+      restartPolicy: Always

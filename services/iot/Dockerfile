@@ -7,12 +7,14 @@ FROM node:12-slim
 # RUN mkdir -p /home/node/app
 # WORKDIR /home/node/app
 
+RUN mkdir -p /app
+WORKDIR /app
+
 RUN npm install -g nodemon
-ADD ./services/iot /iot
-ADD ./services/core /iot/core
-WORKDIR /iot
+
+COPY . /app
+
 RUN npm ci
-RUN npm link /iot/core
 RUN npm run build
 
 # Bind to all network interfaces so that it can be mapped to the host OS

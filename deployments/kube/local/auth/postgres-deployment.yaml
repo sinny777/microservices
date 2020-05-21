@@ -1,0 +1,66 @@
+
+# Copyright 2020 IBM.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+  labels:
+    app: auth-postgres-db
+    tier: auth
+spec:
+  ports:
+  - name: "auth-postgres-db"
+    port:  5432
+    targetPort: 5432    
+  selector:
+    app: auth-postgres-db
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-postgres-db
+  labels:
+    app: auth-postgres-db
+    tier: auth
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: auth-postgres-db
+  template:
+    metadata:
+      labels:
+        app: auth-postgres-db
+    spec:
+      containers:
+        - name: auth-postgres-db
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secrets
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secrets
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_DB
+            value: "auth_db"
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+      restartPolicy: Always

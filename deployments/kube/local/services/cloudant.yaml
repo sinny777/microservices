@@ -1,0 +1,61 @@
+# Copyright 2020 IBM. 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudant-svc
+  labels:
+    app: cloudant-developer
+    tier: iot
+spec:
+  type: NodePort
+  ports:
+  - port:  80
+    targetPort: 9000
+  selector:
+   app: cloudant-developer
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cloudant-developer
+  labels:
+    app: cloudant-developer
+    tier: iot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cloudant-developer
+  template:
+    metadata:
+      labels:
+        app: cloudant-developer
+        set: cloudant-developer
+    spec:
+      containers:
+      - name: cloudant-developer
+        image: ibmcom/cloudant-developer:latest
+        volumeMounts:
+        - mountPath: /srv
+          name: cloudant-volume          
+        envFrom:
+         - configMapRef:
+             name: env-config
+        env:
+        - name: PORT
+          value: "80"        
+        ports:
+        - containerPort: 9000
+      volumes:
+        - name: cloudant-volume
+          hostPath:
+            # directory location on host
+            path: /Users/gurvindersingh/Documents/Development/data
+            # this field is optional
+            type: Directory
+      restartPolicy: Always

@@ -29,8 +29,8 @@ export namespace TokenServiceBindings {
         'services.authentication.jwt.tokenservice',
     );
 
-    export const KEYS_PATH = BindingKey.create<string | undefined>(
-        'jwt.keys.path',
+    export const KEYCLOAK_PUBLIC_KEY = BindingKey.create<string | undefined>(
+        'jwt.public.key',
     );
     
 }

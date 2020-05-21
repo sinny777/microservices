@@ -1,6 +1,6 @@
 {
-  "name": "microservices-core",
-  "version": "1.0.1",
+  "name": "@sinny777/microservices-core",
+  "version": "1.0.2",
   "description": "core utilities for microservices app",
   "author": "Gurvinder Singh (IBM)",
   "license": "Apache-2.0",
@@ -38,7 +38,7 @@
     "eslint": "lb-eslint --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "setup": "npm link",
-    "prepublishOnly": "npm run test"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "peerDependencies": {
     "@loopback/boot": "^1.5.5",

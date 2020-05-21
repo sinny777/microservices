@@ -4,8 +4,8 @@ import {HttpErrors} from '@loopback/rest';
 import {securityId, UserProfile} from '@loopback/security';
 import {promisify} from 'util';
 import {TokenServiceBindings} from '../keys';
-import * as fs from 'fs';
-import * as path from 'path';
+// import * as fs from 'fs';
+// import * as path from 'path';
 
 const KeyCloakCerts = require('get-keycloak-public-key');
 
@@ -29,12 +29,13 @@ export class JWTService implements TokenService {
     private jwtAlgorithm: string,
     @inject(TokenServiceBindings.TOKEN_EXPIRES_IN)
     private jwtExpiresIn: string,
-    @inject(TokenServiceBindings.KEYS_PATH)
-    private keysPath: string    
+    @inject(TokenServiceBindings.KEYCLOAK_PUBLIC_KEY)
+    private jwtPublicKey: string    
   ) {
      keyCloakCerts = new KeyCloakCerts(keycloadURL, keycloakRealm);
      try{
-        publicKey  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+        // publicKey  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+        publicKey = this.jwtPublicKey.replace(/\\n/gm, '\n');
      }catch (error) {
         console.error(error);
      }
@@ -56,8 +57,7 @@ export class JWTService implements TokenService {
         // decode the token without verification to have the kid value
         const kid = jwt.decode(token, { complete: true }).header.kid;
         // fetch the PEM Public Key
-        publicKey = await keyCloakCerts.fetch(kid);
-        console.log('publicKEY: >>> ', publicKey);
+        publicKey = await keyCloakCerts.fetch(kid);        
       }
       var verifyOptions = {
         issuer:  this.jwtIssuer,
@@ -69,8 +69,7 @@ export class JWTService implements TokenService {
 
       // decode user profile from token
       const decodedToken = await verifyAsync(token, publicKey, verifyOptions);      
-      console.log('decodedToken: >> ', decodedToken);
-      // don't copy over  token field 'iat' and 'exp', nor 'email' to user profile
+      // console.log('decodedToken: >> ', decodedToken);
       userProfile = Object.assign(
         {[securityId]: '', name: ''},
         {
@@ -91,6 +90,7 @@ export class JWTService implements TokenService {
     return userProfile;
   }
 
+  //NOTE: THIS METHOD IS NOT BEING USED
   async generateToken(userProfile: UserProfile): Promise<string> {
     if (!userProfile) {
       throw new HttpErrors.Unauthorized(
@@ -111,14 +111,11 @@ export class JWTService implements TokenService {
       expiresIn:  Number(this.jwtExpiresIn),
       algorithm:  this.jwtAlgorithm
     };
-    // console.log('IN JWTService.generateToken, userProfile: >>>> ', userProfile[securityId]);
-    // Generate a JSON Web Token
+
     let token: string;
     try {
-      // console.log(__dirname);
-      // const privateKEY  = fs.readFileSync(this.keysPath+'/private.key', 'utf8');
-      // console.log(path.resolve(__dirname));
-      const privateKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/private.key'), 'utf8');
+      // const privateKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/private.key'), 'utf8');
+      const privateKEY  = null;  //TODO: NOT REQUIRED 
       token = await signAsync(userProfile, privateKEY, signOptions);
     } catch (error) {
       console.error(error);

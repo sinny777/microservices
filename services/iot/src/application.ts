@@ -10,8 +10,10 @@ import {ServiceMixin} from '@loopback/service-proxy';
 import * as path from 'path';
 import * as dotenv from "dotenv";
 import {MySequence} from './sequence';
+
 // import { JWTAuthenticationComponent } from './components/jwt-authentication/jwt-authentication-component';
-import { JWTAuthenticationComponent } from 'microservices-core/dist/modules/auth/jwt-authentication';
+// import { JWTAuthenticationComponent } from 'microservices-core/dist/modules/auth/jwt-authentication';
+import { JWTAuthenticationComponent } from '@sinny777/microservices-core';
 import {
   AuthenticationComponent,
 } from '@loopback/authentication';

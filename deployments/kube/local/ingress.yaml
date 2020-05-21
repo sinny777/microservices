@@ -1,0 +1,27 @@
+# Copyright 2020 IBM. 
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: smartthings-ing
+  annotations:
+    # ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - smartthings.com
+    secretName: smartthings-tls
+  rules:
+  - host: smartthings.com
+    http:
+      paths:
+      - path: /auth
+        backend:
+          serviceName: keycloak-svc
+          servicePort: 8888
+      - path: /
+        backend:
+          serviceName: keycloak-svc
+          servicePort: 8888
+      

@@ -16,8 +16,8 @@ import {
 
 export class JWTAuthenticationComponent implements Component {
     bindings = [
-        Binding.bind(TokenServiceBindings.KEYS_PATH).to(
-            process.env.SECURITY_KEYS_PATH,
+        Binding.bind(TokenServiceBindings.KEYCLOAK_PUBLIC_KEY).to(
+            process.env.KEYCLOAK_PUBLIC_KEY,
         ),
         Binding.bind(TokenServiceBindings.TOKEN_ALGORITHM).to(
             process.env.TOKEN_ALGORITHM,

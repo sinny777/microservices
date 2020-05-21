@@ -1,4 +1,4 @@
-import {UserModifiableEntity} from 'microservices-core/dist/modules/common';
+import {UserModifiableEntity} from '@sinny777/microservices-core';
 import {model, property, hasOne} from '@loopback/repository';
 // import {v4 as uuid} from 'uuid';
 // import { Permission } from '@loopback/security';

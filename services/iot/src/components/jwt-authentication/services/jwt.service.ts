@@ -4,8 +4,6 @@ import {HttpErrors} from '@loopback/rest';
 import {securityId, UserProfile} from '@loopback/security';
 import {promisify} from 'util';
 import {TokenServiceBindings} from '../keys';
-import * as fs from 'fs';
-import * as path from 'path';
 
 const jwt = require('jsonwebtoken');
 const signAsync = promisify(jwt.sign);
@@ -21,8 +19,8 @@ export class JWTService implements TokenService {
     private jwtAlgorithm: string,
     @inject(TokenServiceBindings.TOKEN_EXPIRES_IN)
     private jwtExpiresIn: string,
-    @inject(TokenServiceBindings.KEYS_PATH)
-    private keysPath: string    
+    @inject(TokenServiceBindings.KEYCLOAK_PUBLIC_KEY)
+    private jwtPublicKey: string    
   ) {}
 
   async verifyToken(token: string): Promise<UserProfile> {
@@ -32,8 +30,10 @@ export class JWTService implements TokenService {
       );
     }
 
-    // const publicKEY  = fs.readFileSync(path.join(__dirname, '../../keys/keycloak-public.key'), 'utf8');
-    const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+    // const publicKEY  = fs.readFileSync(path.join(__dirname, '../../../../keys/keycloak-public.key'), 'utf8');
+    // const publicKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/public.key'), 'utf8');
+    const publicKEY = this.jwtPublicKey.replace(/\\n/gm, '\n');
+    
     var verifyOptions = {
       issuer:  this.jwtIssuer,
       // subject:  this.jwtAudience,
@@ -62,6 +62,7 @@ export class JWTService implements TokenService {
         },
       );
     } catch (error) {
+      console.error(error);
       throw new HttpErrors.Unauthorized(
         `Error verifying token : ${error.message}`,
       );
@@ -96,7 +97,8 @@ export class JWTService implements TokenService {
       // console.log(__dirname);
       // const privateKEY  = fs.readFileSync(this.keysPath+'/private.key', 'utf8');
       // console.log(path.resolve(__dirname));
-      const privateKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/private.key'), 'utf8');
+      // const privateKEY  = fs.readFileSync(path.join(__dirname, this.keysPath+'/private.key'), 'utf8');
+      const privateKEY  = null;
       token = await signAsync(userProfile, privateKEY, signOptions);
     } catch (error) {
       console.error(error);
