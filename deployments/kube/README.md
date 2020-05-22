@@ -18,7 +18,7 @@ openssl req -new -key developer.key -out developer.csr -subj "/CN=developer/O=IB
 #### Create a public private key pair
 ```
 
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout smartthings.key -out smartthings.crt -subj "/CN=smartthings/O=smartthings"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout smartthings.key -out smartthings.crt -subj "/CN=smartthings.com/O=smartthings"
 ```
 
 #### Convert the keys to base64 encoding

@@ -13,15 +13,21 @@ spec:
     - smartthings.com
     secretName: smartthings-tls
   rules:
-  - host: smartthings.com
+  - host: auth.smartthings.com
     http:
       paths:
-      - path: /auth
-        backend:
+      - backend:
           serviceName: keycloak-svc
           servicePort: 8888
-      - path: /
-        backend:
+  - host: iot.smartthings.com
+    http:
+      paths:
+      - backend:
+          serviceName: smartthings-iot-svc
+          servicePort: 80      
+  - http:
+      paths:
+      - backend:
           serviceName: keycloak-svc
           servicePort: 8888
       

@@ -8,8 +8,9 @@ isProd="false"
 
 case $1 in
   "dev") BUILD_ENV=""; isProd="false";;
+  "hmr") BUILD_ENV="hmr"; isProd="false";;
   "docker") BUILD_ENV="docker"; isProd="false";;
-  "prod") BUILD_ENV="production"; isProd="true";;
+  "production") BUILD_ENV="production"; isProd="true";;
   "") BUILD_ENV=""; isProd="false";;
 esac
 

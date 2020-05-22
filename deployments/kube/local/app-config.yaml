@@ -1,0 +1,32 @@
+
+# Copyright 2020 IBM. 
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+ 
+  NODE_ENV: development
+  
+  # Debug
+
+  #############################
+  ## NOTE:
+  ##
+  ## This debug string will apply to all pods and containers.
+  ## This should be reduced on production deployments!
+  ## This can be set at the container spec level for more targeted debug output
+  ##
+  #############################
+
+  DEBUG: "*" # Debug string to apply to applications
+  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhXImwCJOJSNvbe3QmN6N\nVeY/UjtmVtkjWAKpRC5LDCLT6AlRWdQl7UA/k3eBmhsTt+syf5juc6dYfaT05/2W\nNtYCKnsZ+j9VGEmc4EJwkULgdjmNt+sEw+oYbSlcNNKMrHFUIqttRrvYd3on+ebL\nlVo/jsg5Aic1Gvgtx7M39E39e/IUHmxS+Zy6rQfS2ZKyj0Gw+UA9vqw9RvLRKy37\nbeJFy2EQEC3s2S/OJUucQbhWtBaEdpYhCOWkgePqNM9GBK4BABAWOZLJ3tdyiDyG\nn3FhaZToUictPY4v/GedDO+KWuxP4+5C22EFG+bp2a4B6qeKbr61b214GneTAPtf\n9QIDAQAB\n-----END PUBLIC KEY-----\n"
+  KEYCLOAK_URL: https://auth.smartthings.com
+  KEYCLOAK_REALM: development
+  TOKEN_ISSUER: https://auth.smartthings.com/auth/realms/development
+  TOKEN_AUDIENCE: iot_backend
+  TOKEN_ALGORITHM: RS256
+  TOKEN_EXPIRES_IN: "3600"
+
+  

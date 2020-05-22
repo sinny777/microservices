@@ -8,17 +8,16 @@ import { KeycloakConfig } from 'keycloak-angular';
 
 // Add here your keycloak setup infos
 const keycloakConfig: KeycloakConfig = {
-  url: 'http://localhost:8888/auth',
+  url: 'https://auth.smartthings.com/auth/',
   realm: 'development',
-  clientId: 'smartcity-web',
-  credentials: {'secret': 'a3e5e4b1-7fe7-45c3-aea3-4794fa25e18d'}
+  clientId: 'smartcity-web'
+  // credentials: {'secret': 'a3e5e4b1-7fe7-45c3-aea3-4794fa25e18d'}
 };
 
 export const environment = {
-    production: false,
-    hmr: true,
-	API_BASE_URL: 'http://localhost:3000/api',
-	// API_BASE_URL: 'https://smart-city.serveo.net/api',
+  production: false,
+  hmr: true,
+	API_BASE_URL: 'https://iot.smartthings.com/api',
 	isMockEnabled: false, // You have to switch this, when your real back-end is done
 	keycloakConfig: keycloakConfig,
 	authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',

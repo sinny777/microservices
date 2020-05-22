@@ -1,6 +1,6 @@
 # eval $(minikube docker-env)
 
-# python ../build_services.py -t localtag
+python ../build_services.py -t localtag
 
 # kubectl create -f local/namespaces/namespace-dev.json
 # kubectl config set-context dev --namespace=smartthings-dev \
@@ -14,6 +14,8 @@ kubectl apply -f local/auth/config/auth-config.yaml
 kubectl apply -f local/auth/postgres-storage.yaml
 kubectl apply -f local/auth/postgres-deployment.yaml
 kubectl apply -f local/auth/keycloak-deployment.yaml
+kubectl apply -f local/app-config.yaml
+kubectl apply -f local/services/iot-backend.yaml
 kubectl apply -f local/ingress.yaml
 
 # kubectl apply -f kube/local/optional/ --recursive
@@ -23,6 +25,8 @@ kubectl apply -f local/ingress.yaml
 
 
 # kubectl delete -f local/ingress.yaml
+# kubectl delete -f local/services/iot-backend.yaml
+# kubectl delete -f local/app-config.yaml
 # kubectl delete -f local/auth/keycloak-deployment.yaml
 # kubectl delete -f local/auth/postgres-deployment.yaml
 # kubectl delete -f local/auth/postgres-storage.yaml
