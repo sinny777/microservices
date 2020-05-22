@@ -10,7 +10,7 @@ case $1 in
   "dev") BUILD_ENV=""; isProd="false";;
   "hmr") BUILD_ENV="hmr"; isProd="false";;
   "docker") BUILD_ENV="docker"; isProd="false";;
-  "production") BUILD_ENV="production"; isProd="true";;
+  "prod") BUILD_ENV="prod"; isProd="true";;
   "") BUILD_ENV=""; isProd="false";;
 esac
 
@@ -20,7 +20,7 @@ function build_client {
   npm install -f
   npm install -g @angular/cli@8.1.0
   npm audit fix
-  ng build --configuration=$BUILD_ENV
+  ng build --configuration $BUILD_ENV
   rm -rf node_modules
 }
 

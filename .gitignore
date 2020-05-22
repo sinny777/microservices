@@ -10,6 +10,8 @@
 *.swp
 *.tgz
 *.xml
+*.crt
+*.key
 *.apiconnect
 .DS_Store
 **/*.DS_Store

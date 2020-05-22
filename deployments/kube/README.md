@@ -29,6 +29,8 @@ cat smartthings.crt | base64
 cat smartthings.key | base64
 ```
 
+Update tls.crt and tls.key with the encoded values in auth-secrtes.yaml file
+
 ### Run/Delete Deployments
 
 ```

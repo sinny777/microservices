@@ -13,7 +13,7 @@ FROM node:12-alpine as client-build
 RUN mkdir -p /app
 WORKDIR /app
 
-ARG CLIENT_BUILD_ENV=production
+ARG CLIENT_BUILD_ENV=prod
 ENV PORT 80
 
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards

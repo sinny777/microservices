@@ -24,10 +24,16 @@ spec:
       paths:
       - backend:
           serviceName: smartthings-iot-svc
-          servicePort: 80      
+          servicePort: 80
+  - host: www.smartthings.com
+    http:
+      paths:
+      - backend:
+          serviceName: smartthings-web-svc
+          servicePort: 80       
   - http:
       paths:
       - backend:
-          serviceName: keycloak-svc
-          servicePort: 8888
+          serviceName: smartthings-web-svc
+          servicePort: 80
       

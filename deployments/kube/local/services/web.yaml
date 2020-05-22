@@ -1,0 +1,48 @@
+
+# Copyright 2020 IBM. 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartthings-web-svc
+  labels:
+    app: smartthings-web
+    tier: iot
+spec:
+  ports:
+  - port:  80
+    targetPort: 80
+  selector:
+   app: smartthings-web
+status:
+  loadBalancer: {}
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartthings-web
+  labels:
+    app: smartthings-web
+    tier: iot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smartthings-web
+  template:
+    metadata:
+      labels:
+        app: smartthings-web        
+    spec:
+      containers:
+      - name: smartthings-web
+        image: smartthings-client:localtag
+        env:
+        - name: PORT
+          value: "80"  
+        ports:
+        - name: http
+          containerPort: 80   
+      restartPolicy: Always
+

@@ -16,7 +16,7 @@ const keycloakConfig: KeycloakConfig = {
 
 export const environment = {
 	production: false,
-	hmr: true,
+	hmr: false,
 	API_BASE_URL: 'https://iot.smartthings.com/api',
 	isMockEnabled: false, // You have to switch this, when your real back-end is done
 	keycloakConfig: keycloakConfig,
