@@ -10,6 +10,8 @@
 *.swp
 *.tgz
 *.xml
+**/*.crt
+**/*.key
 *.crt
 *.key
 *.apiconnect

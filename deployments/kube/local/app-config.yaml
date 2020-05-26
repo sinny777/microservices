@@ -21,7 +21,7 @@ data:
   #############################
 
   DEBUG: "*" # Debug string to apply to applications
-  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhXImwCJOJSNvbe3QmN6N\nVeY/UjtmVtkjWAKpRC5LDCLT6AlRWdQl7UA/k3eBmhsTt+syf5juc6dYfaT05/2W\nNtYCKnsZ+j9VGEmc4EJwkULgdjmNt+sEw+oYbSlcNNKMrHFUIqttRrvYd3on+ebL\nlVo/jsg5Aic1Gvgtx7M39E39e/IUHmxS+Zy6rQfS2ZKyj0Gw+UA9vqw9RvLRKy37\nbeJFy2EQEC3s2S/OJUucQbhWtBaEdpYhCOWkgePqNM9GBK4BABAWOZLJ3tdyiDyG\nn3FhaZToUictPY4v/GedDO+KWuxP4+5C22EFG+bp2a4B6qeKbr61b214GneTAPtf\n9QIDAQAB\n-----END PUBLIC KEY-----\n"
+  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIJ749pRQl4vv98txeUQ\nOd5Y12icv1rkA9nsw+pPhWMjU3YU6dypvPanT0gD9kzYBPG8FZpBwe4p2QwxV8Hv\nQINdyMiCKkmbIIZ6avNNJa4VW4PW4tiw4cSN7yZ1TauDsvcRB8iZ7Z+/JG8lKevy\nwfSsZPOprfgFJEg9jyG1DOqpETchuoVQCuoZT8F5IGOclTJd2//89veZp7K8uymJ\n8UxVoweHPOqlzLccMSu6ivjDfgFfRwKHWRZ/nP5SLHYtVsYBb8GMQ94F7c31KvcR\nY9gObZRBzkUFlor8upL/F38qZShdib+NFgCTPyoD9YC41NSST+M4DEPB3FzyKjST\nnQIDAQAB\n-----END PUBLIC KEY-----\n"
   KEYCLOAK_URL: https://auth.smartthings.com
   KEYCLOAK_REALM: development
   TOKEN_ISSUER: https://auth.smartthings.com/auth/realms/development
