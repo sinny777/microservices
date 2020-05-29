@@ -1,11 +1,11 @@
 export class QueryResultsModel {
-	// fields
-	items: any[];
-	totalCount: number;
+  // fields
+  items: any[];
+  totalCount: number;
+  errorMessage: string;
 
-	constructor(_items: any[] = [], _totalCount: number = 0) {
-		this.items = _items;
-		this.totalCount = _totalCount;
-	}
-
+  constructor(items: any[] = [], totalCount: number = 0, errorMessage: string = '') {
+    this.items = items;
+    this.totalCount = totalCount;
+  }
 }

@@ -1,31 +1,32 @@
 // Angular
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // RxJS
 import { Observable } from 'rxjs';
 // NGRX
 import { select, Store } from '@ngrx/store';
 // State
 import { AppState } from '../../../../../core/reducers';
-import { KeycloakService } from 'keycloak-angular';
-// import { currentUser, Logout, User } from '../../../../../core/auth';
+import { currentUser, Logout, User } from '../../../../../core/auth';
 
 @Component({
 	selector: 'kt-user-profile2',
 	templateUrl: './user-profile2.component.html',
 })
 export class UserProfile2Component implements OnInit {
-	user$: Observable<Keycloak.KeycloakProfile>;
+	// Public properties
+	user$: Observable<User>;
 
-	// @Input() showAvatar: boolean = true;
-	// @Input() showHi: boolean = true;
-	// @Input() showBadge: boolean = false;
+	@Input() avatar = true;
+	@Input() greeting = true;
+	@Input() badge: boolean;
+	@Input() icon: boolean;
 
 	/**
 	 * Component constructor
 	 *
 	 * @param store: Store<AppState>
 	 */
-	constructor(private store: Store<AppState>, private keycloakService: KeycloakService) {
+	constructor(private store: Store<AppState>) {
 	}
 
 	/**
@@ -35,23 +36,14 @@ export class UserProfile2Component implements OnInit {
 	/**
 	 * On init
 	 */
-	async ngOnInit() {
-		// this.user$ = this.store.pipe(select(currentUser));
-		if (await this.keycloakService.isLoggedIn()) {
-			// this.user$ = await this.keycloakService.loadUserProfile();
-			let userProfile: Keycloak.KeycloakProfile  = await this.keycloakService.loadUserProfile();
-			let token  = await this.keycloakService.getToken();
-			// this.user$ = userDetails;
-			console.log('IN DashboardComponent, userProfile: >>>> ', userProfile);
-			console.log('IN DashboardComponent, token: >>>> ', token);
-		}
+	ngOnInit(): void {
+		this.user$ = this.store.pipe(select(currentUser));
 	}
 
 	/**
 	 * Log out
 	 */
-	async logout() {
-		// this.store.dispatch(new Logout());
-		await this.keycloakService.logout();
+	logout() {
+		this.store.dispatch(new Logout());
 	}
 }

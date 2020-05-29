@@ -2,34 +2,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-// NgBootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 // Core Module
 import { CoreModule } from '../../../core/core.module';
 import { PartialsModule } from '../../partials/partials.module';
 import { DashboardComponent } from './dashboard.component';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AuthGuard } from 'src/app/core/auth';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		PartialsModule,
-		CoreModule,
-		NgbModule,
-		AgmCoreModule.forRoot({
-      	apiKey: 'AIzaSyA_xN3mG2LL27jctSXHC4eiroRvOI454SE'
-    }),
-		RouterModule.forChild([
-			{
-				path: '',
-				component: DashboardComponent
-			},
-		]),
-	],
-	providers: [GoogleMapsAPIWrapper],
-	declarations: [
-		DashboardComponent,
-	]
+  imports: [
+    CommonModule,
+    PartialsModule,
+    CoreModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+    ]),
+    // ng-bootstrap modules
+    NgbDropdownModule,
+    NgbTabsetModule,
+    NgbTooltipModule,
+  ],
+  providers: [],
+  declarations: [
+    DashboardComponent,
+  ]
 })
 export class DashboardModule {
 }

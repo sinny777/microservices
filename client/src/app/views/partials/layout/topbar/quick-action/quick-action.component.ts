@@ -2,46 +2,43 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'kt-quick-action',
-	templateUrl: './quick-action.component.html',
+  selector: 'kt-quick-action',
+  templateUrl: './quick-action.component.html',
 })
 export class QuickActionComponent implements OnInit, AfterViewInit {
-	// Public properties
+  // Public properties
 
-	// Set icon class name
-	@Input() icon: string = 'flaticon2-gear';
-	@Input() iconType: '' | 'warning';
-	// Set true to icon as SVG or false as icon class
-	@Input() useSVG: boolean;
-	// Set bg image path
-	@Input() bgImage: string;
-	// Set skin color, default to light
-	@Input() skin: 'light' | 'dark' = 'light';
-	@Input() gridNavSkin: 'light' | 'dark' = 'light';
+  // Set icon class name
+  @Input() icon = 'flaticon2-gear';
 
-	/**
-	 * Component constructor
-	 */
-	constructor() {
-	}
+  // Set true to icon as SVG or false as icon class
+  @Input() useSVG: boolean;
 
-	/**
-	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
-	 */
+  // Set bg image path
+  @Input() bgImage: string;
 
-	/**
-	 * After view init
-	 */
-	ngAfterViewInit(): void {
-	}
+  // Set skin color, default to light
+  @Input() skin: 'light' | 'dark' = 'light';
 
-	/**
-	 * On init
-	 */
-	ngOnInit(): void {
-	}
+  /**
+   * Component constructor
+   */
+  constructor() {
+  }
 
-	onSVGInserted(svg) {
-		svg.classList.add('kt-svg-icon', 'kt-svg-icon--success', 'kt-svg-icon--lg');
-	}
+  /**
+   * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
+   */
+
+  /**
+   * After view init
+   */
+  ngAfterViewInit(): void {
+  }
+
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+  }
 }

@@ -1,22 +1,12 @@
-
-export class Audit {
-	 ownerId: string;
-	 createdBy: string;
-	 updatedBy: string;
-	 created: Date;
-	 modified: Date;
-
-	clear(): void {
-			this.ownerId = '';
-			this.createdBy = '';
-			this.updatedBy = '';
-			this.created = new Date();
-			this.modified = new Date();
-	}
-}
-
-export abstract class BaseModel {
-
-	audit: Audit;
-
+export class BaseModel {
+  // Edit
+  // tslint:disable-next-line:variable-name
+  _isEditMode = false;
+  // Log
+  // tslint:disable-next-line:variable-name
+  _userId = 0; // Admin
+  // tslint:disable-next-line:variable-name
+  _createdDate: string;
+  // tslint:disable-next-line:variable-name
+  _updatedDate: string;
 }

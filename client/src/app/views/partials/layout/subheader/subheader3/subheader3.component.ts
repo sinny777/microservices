@@ -1,5 +1,5 @@
 // Angular
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 // RxJS
 import { Subscription } from 'rxjs';
 // Layout
@@ -7,63 +7,71 @@ import { SubheaderService } from '../../../../../core/_base/layout';
 import { Breadcrumb } from '../../../../../core/_base/layout/services/subheader.service';
 
 @Component({
-	selector: 'kt-subheader3',
-	templateUrl: './subheader3.component.html',
-	styleUrls: ['./subheader3.component.scss']
+  selector: 'kt-subheader3',
+  templateUrl: './subheader3.component.html',
+  styleUrls: ['./subheader3.component.scss']
 })
 export class Subheader3Component implements OnInit, OnDestroy, AfterViewInit {
-	// Public properties
-	today: number = Date.now();
-	title: string = '';
-	desc: string = '';
-	breadcrumbs: Breadcrumb[] = [];
+  // Public properties
+  @Input() fixed = true;
+  @Input() clear = false;
+  @Input() width = 'fluid';
+  @Input() subheaderClasses = '';
+  @Input() subheaderContainerClasses = '';
+  @Input() displayDesc = false;
+  @Input() displayDaterangepicker = true;
 
-	// Private properties
-	private subscriptions: Subscription[] = [];
+  today: number = Date.now();
+  title = '';
+  desc = '';
+  breadcrumbs: Breadcrumb[] = [];
 
-	/**
-	 * Component constructor
-	 *
-	 * @param subheaderService: SubheaderService
-	 */
-	constructor(public subheaderService: SubheaderService) {
-	}
+  // Private properties
+  private subscriptions: Subscription[] = [];
 
-	/**
-	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
-	 */
+  /**
+   * Component constructor
+   *
+   * @param subheaderService: SubheaderService
+   */
+  constructor(public subheaderService: SubheaderService) {
+  }
 
-	/**
-	 * On init
-	 */
-	ngOnInit() {
-	}
+  /**
+   * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
+   */
 
-	/**
-	 * After view init
-	 */
-	ngAfterViewInit(): void {
-		this.subscriptions.push(this.subheaderService.title$.subscribe(bt => {
-			// breadcrumbs title sometimes can be undefined
-			if (bt) {
-				Promise.resolve(null).then(() => {
-					this.title = bt.title;
-					this.desc = bt.desc;
-				});
-			}
-		}));
+  /**
+   * On init
+   */
+  ngOnInit() {
+  }
 
-		this.subscriptions.push(this.subheaderService.breadcrumbs$.subscribe(bc => {
-			Promise.resolve(null).then(() => {
-				this.breadcrumbs = bc;
-			});
-		}));
-	}
+  /**
+   * After view init
+   */
+  ngAfterViewInit(): void {
+    this.subscriptions.push(this.subheaderService.title$.subscribe(bt => {
+      // breadcrumbs title sometimes can be undefined
+      if (bt) {
+        Promise.resolve(null).then(() => {
+          this.title = bt.title;
+          this.desc = bt.desc;
+        });
+      }
+    }));
 
-	/**
-	 * On destroy
-	 */
-	ngOnDestroy(): void {
-		this.subscriptions.forEach(sb => sb.unsubscribe());
-	}
+    this.subscriptions.push(this.subheaderService.breadcrumbs$.subscribe(bc => {
+      Promise.resolve(null).then(() => {
+        this.breadcrumbs = bc;
+      });
+    }));
+  }
+
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
 }

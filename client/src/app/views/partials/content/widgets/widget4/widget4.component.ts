@@ -23,7 +23,7 @@ export class Widget4Component implements OnInit {
 	// Public properties
 	@Input() data: Widget4Data[];
 
-	@ContentChild('actionTemplate', {static: false}) actionTemplate: TemplateRef<any>;
+	@ContentChild('actionTemplate', {static: true}) actionTemplate: TemplateRef<any>;
 
 	/**
 	 * Component constructor
@@ -58,7 +58,7 @@ export class Widget4Component implements OnInit {
 					url: 'https://keenthemes.com.my/metronic',
 				}, {
 					pic: './assets/media/files/javascript.svg',
-					title: 'Make JS Great Again',
+					title: 'Make JS Development',
 					url: 'https://keenthemes.com.my/metronic',
 				}, {
 					pic: './assets/media/files/zip.svg',

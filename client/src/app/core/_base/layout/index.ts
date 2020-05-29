@@ -28,7 +28,6 @@ export { SafePipe } from './pipes/safe.pipe';
 export { TimeElapsedPipe } from './pipes/time-elapsed.pipe';
 
 // Services
-// export { DataTableService } from './services/datatable.service';
 export { TranslationService } from './services/translation.service';
 
 export { LayoutConfigService } from './services/layout-config.service';
@@ -41,5 +40,4 @@ export { SplashScreenService } from './services/splash-screen.service';
 export { SubheaderService } from './services/subheader.service';
 export { KtDialogService } from './services/kt-dialog.service';
 
-// Server
-export { FakeApiService } from './server/fake-api/fake-api.service';
+

@@ -1,6 +1,5 @@
 // Models
-export { BaseModel, Audit } from './models/_base.model';
-export { COMPARISON, OPERATOR, DATA_TYPE, Condition, Rule } from './models/_logicConfig.model';
+export { BaseModel } from './models/_base.model';
 export { BaseDataSource } from './models/_base.datasource';
 export { QueryParamsModel } from './models/query-models/query-params.model';
 export { QueryResultsModel } from './models/query-models/query-results.model';

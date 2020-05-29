@@ -1,18 +1,30 @@
 // Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// NgBootstrap
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// Code Preview
+import { ClipboardModule } from 'ngx-clipboard';
+import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+// Perfect ScrollBar
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { CodePreviewComponent } from './code-preview.component';
-import { CodePreviewInnerComponent } from './code-preview-inner/code-preview-inner.component';
+// Core Module
+import { CoreModule } from '../../../../../core/core.module';
+// Highlight JS
+import { HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		NgbModule
+		CoreModule,
+		HighlightModule,
+		PerfectScrollbarModule,
+		ClipboardModule,
+
+		// ngbootstrap
+		NgbTabsetModule,
+		NgbTooltipModule,
 	],
-	exports: [CodePreviewComponent, CodePreviewInnerComponent],
-	declarations: [CodePreviewComponent, CodePreviewInnerComponent]
+	exports: [CodePreviewComponent],
+	declarations: [CodePreviewComponent]
 })
-export class CodePreviewModule {}
+export class CodePreviewModule {
+}

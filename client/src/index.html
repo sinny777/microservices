@@ -1,24 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 
 <head>
 	<meta charset="utf-8">
-	<title>Smart Things | SmartCity</title>
+	<title>SmartThings | Angular Demo</title>
 	<base href="/">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/x-icon" href="./assets/media/logos/favicon.ico">
-	<link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700"
+		rel="stylesheet">
 
-	<!-- For production, include the demo base style here -->
-	<!--<link id="demo" href="assets/demo/default/base/style.bundle.css" rel="stylesheet" >-->
+  <script src="assets/js/components/util.js" type="application/javascript"></script>
+  <script src="assets/js/components/header.js" type="application/javascript"></script>
+  <script src="assets/js/components/menu.js" type="application/javascript"></script>
+  <script src="assets/js/components/offcanvas.js" type="application/javascript"></script>
+  <script src="assets/js/components/scrolltop.js" type="application/javascript"></script>
+  <script src="assets/js/components/toggle.js" type="application/javascript"></script>
+  <script src="assets/js/components/dialog.js" type="application/javascript"></script>
+  <script src="assets/js/components/wizard.js" type="application/javascript"></script>
+
+
+  <!-- <script src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js"></script>
+  <script>
+
+    const options = {
+      integrationID: '48ac0886-dd9c-4a08-b09d-7ef9515e15ef',
+      region: 'us-south',
+      carbonTheme: 'g90'
+    };
+
+    window.loadWatsonAssistantChat(options).then(function(instance) {
+
+      // Instance method to adjust specific CSS variables
+      instance.updateCSSVariables({
+        'BASE-font-family': '"Times New Roman", Times, serif',
+        '$focus': 'lime',
+        '$hover-primary': 'lime',
+        '$interactive-01': 'blue'
+      });
+
+      // Your handler
+      function handler(obj) {
+        console.log(obj.type, obj.data);
+      }
+      console.log('instance', instance);
+
+      // console.log out details of any "receive" event
+      instance.on({ type: "receive", handler: handler });
+      // console.log out details of any "send" event
+      instance.on({ type: "send", handler: handler });
+
+      // 30 seconds later, unsubscribe from listening to "send" events
+      setTimeout(function(){
+        instance.off({ type: "send", handler: handler});
+      }, 30000);
+
+      // Actually render the Web Chat.
+      instance.render();
+    });
+
+  </script> -->
+
+
 </head>
 
-<body kt-root>
+<body kt-root id="kt_body">
 
+  <script>
+    parent.postMessage(location.href, location.origin)
+  </script>
 
 </body>
-
-<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyA_xN3mG2LL27jctSXHC4eiroRvOI454SE"></script>
 
 </html>

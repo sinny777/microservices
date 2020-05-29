@@ -20,15 +20,15 @@ import { Observable, Subscription } from 'rxjs';
 	selector: 'kt-portlet-header',
 	styleUrls: ['portlet-header.component.scss'],
 	template: `
-		<div class="kt-portlet__head-label" [hidden]="noTitle">
-			<span class="kt-portlet__head-icon" #refIcon [hidden]="hideIcon">
+		<div class="card-title" [hidden]="noTitle">
+			<span class="card-icon" #refIcon [hidden]="hideIcon || !icon">
 				<ng-content *ngIf="!icon" select="[ktPortletIcon]"></ng-content>
 				<i *ngIf="icon" [ngClass]="icon"></i>
 			</span>
 			<ng-content *ngIf="!title" select="[ktPortletTitle]"></ng-content>
-			<h3 *ngIf="title" class="kt-portlet__head-title" [innerHTML]="title"></h3>
+			<h3 *ngIf="title" class="card-label" [innerHTML]="title"></h3>
 		</div>
-		<div class="kt-portlet__head-toolbar" #refTools [hidden]="hideTools">
+		<div class="card-toolbar" #refTools [hidden]="hideTools">
 			<ng-content select="[ktPortletTools]"></ng-content>
 		</div>`
 })
@@ -46,15 +46,15 @@ export class PortletHeaderComponent implements OnInit, AfterViewInit, OnDestroy 
 	@Input() sticky: boolean;
 	// enable loading to display
 	@Input() viewLoading$: Observable<boolean>;
-	viewLoading: boolean = false;
+	viewLoading = false;
 
-	@HostBinding('class') classes: string = 'kt-portlet__head';
+	@HostBinding('class') classes = 'card-header';
 	@HostBinding('attr.ktSticky') stickyDirective: StickyDirective;
 
-	@ViewChild('refIcon', { static: true }) refIcon: ElementRef;
+	@ViewChild('refIcon', {static: true}) refIcon: ElementRef;
 	hideIcon: boolean;
 
-	@ViewChild('refTools', { static: true }) refTools: ElementRef;
+	@ViewChild('refTools', {static: true}) refTools: ElementRef;
 	hideTools: boolean;
 
 	private lastScrollTop = 0;
@@ -82,27 +82,29 @@ export class PortletHeaderComponent implements OnInit, AfterViewInit, OnDestroy 
 		if (this.sticky) {
 			Promise.resolve(null).then(() => {
 				// get boundary top margin for sticky header
-				const headerElement = <HTMLElement>document.querySelector('.kt-header');
-				const subheaderElement = <HTMLElement>document.querySelector('.kt-subheader');
-				const headerMobileElement = <HTMLElement>document.querySelector('.kt-header-mobile');
+				const headerElement = document.querySelector('.header') as HTMLElement;
+				const subheaderElement = document.querySelector('.subheader') as HTMLElement;
+				const headerMobileElement = document.querySelector('.header-mobile') as HTMLElement;
 
 				let height = 0;
 
-				// mobile header
-				if (window.getComputedStyle(headerElement).height === '0px') {
-					height += headerMobileElement.offsetHeight;
-				} else {
-					// desktop header
-					if (document.body.classList.contains('kt-header--minimize-topbar')) {
-						// hardcoded minimized header height
-						height = 60;
+				if (headerElement != null) {
+					// mobile header
+					if (window.getComputedStyle(headerElement).height === '0px') {
+						height += headerMobileElement.offsetHeight;
 					} else {
-						// normal fixed header
-						if (document.body.classList.contains('kt-header--fixed')) {
-							height += headerElement.offsetHeight;
-						}
-						if (document.body.classList.contains('kt-subheader--fixed')) {
-							height += subheaderElement.offsetHeight;
+						// desktop header
+						if (document.body.classList.contains('header-minimize-topbar')) {
+							// hardcoded minimized header height
+							height = 60;
+						} else {
+							// normal fixed header
+							if (document.body.classList.contains('header-fixed')) {
+								height += headerElement.offsetHeight;
+							}
+							if (document.body.classList.contains('subheader-fixed')) {
+								height += subheaderElement.offsetHeight;
+							}
 						}
 					}
 				}
@@ -123,7 +125,9 @@ export class PortletHeaderComponent implements OnInit, AfterViewInit, OnDestroy 
 		if (this.sticky) {
 			this.stickyDirective.ngOnInit();
 		}
+	}
 
+	ngAfterViewInit(): void {
 		// append custom class
 		this.classes += this.class ? ' ' + this.class : '';
 
@@ -133,9 +137,6 @@ export class PortletHeaderComponent implements OnInit, AfterViewInit, OnDestroy 
 		// hide tools' parent node if no tools template is provided
 		this.hideTools = this.refTools.nativeElement.children.length === 0;
 
-	}
-
-	ngAfterViewInit(): void {
 		if (this.sticky) {
 			this.updateStickyPosition();
 			this.stickyDirective.ngAfterViewInit();
