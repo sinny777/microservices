@@ -7,7 +7,7 @@ import argparse, os
 images = [
   ["../../services/keycloak", "smartthings-keycloak"],
   ["../../services/iot", "smartthings-iot"],
-  ["../../client", "smartthings-client"]
+  ["../../client/custom_ui", "custom_ui"]
 ]
 
 parser = argparse.ArgumentParser()

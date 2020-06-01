@@ -23,6 +23,7 @@ RUN ls /opt/jboss/tools/
 # COPY ./config /config/
 # ADD ./config /config/
 
+EXPOSE 22
 ENTRYPOINT [ "/opt/jboss/tools/docker-entrypoint.sh" ]
 
 CMD ["-b", "0.0.0.0", "-Dkeycloak.profile.feature.upload_scripts=enabled", "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/jboss/keycloak/config", "-Dkeycloak.migration.strategy=IGNORE_EXISTING"]

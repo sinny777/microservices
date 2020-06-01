@@ -1,0 +1,24 @@
+
+$font-path: '~carbon-components/src/globals/fonts';
+
+// To change the theme uncomment the below import and which ever carbon theme you want to use
+// @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
+// @import "~carbon-components/scss/globals/scss/vendor/@carbon/themes/scss/themes";
+@import "@carbon/themes/scss/themes";
+
+
+$carbon--theme: $carbon--theme--g100;
+// $carbon--theme: $carbon--theme--g90;
+// $carbon--theme: $carbon--theme--g10;
+
+@include carbon--theme();
+
+// $ui-background: #f4f4f4 !default;
+
+@import "~carbon-components/scss/globals/scss/styles.scss";
+
+html, body {
+	// background-color: #f4f4f4;
+	min-height:100vh;
+	height: auto;
+}

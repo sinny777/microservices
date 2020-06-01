@@ -1,0 +1,111 @@
+<ibm-header [brand]="brandTemplate" name=" - WA Demo" [route]="['/']" >
+	<!-- <ibm-hamburger *ngIf="hasHamburger" [active]="leftPanelActive" (selected)="leftPanelActive = !leftPanelActive"> </ibm-hamburger> -->
+	<ibm-hamburger *ngIf="hasHamburger" [active]="leftPanelActive" (selected)="leftPanelActive = !leftPanelActive"> </ibm-hamburger>
+
+	<ibm-header-navigation ariaLabel="Watson Assistant Demo">
+
+		<ibm-search placeholder="Search" ></ibm-search>
+
+		<ibm-header-item >Support</ibm-header-item>
+		<ibm-header-menu title="Docs">
+			<ibm-header-item><span>IBM Cloud Platform</span></ibm-header-item>
+			<ibm-header-item><span>Watson Assistant</span></ibm-header-item>
+			<ibm-header-item>Watson Discovery</ibm-header-item>
+			<ibm-header-item>DevOps</ibm-header-item>
+		</ibm-header-menu>
+
+	</ibm-header-navigation>
+
+	<ibm-header-global>
+		<ibm-header-action #notificationAction title="action" (click)="notificationClicked($event)">
+			<svg ibmIconNotification size="20"></svg>
+		</ibm-header-action>
+
+		<ibm-header-action  #avatarAction title="action" >
+			<svg ibmIconUserAvatar size="20"></svg>
+		</ibm-header-action>
+
+		<ibm-header-action #switcherAction title="action">
+			<svg ibmIconAppSwitcher size="20"></svg>
+		</ibm-header-action>
+	</ibm-header-global>
+</ibm-header>
+
+
+<!-- <ng-template #brandTemplate >
+	<a class="bx--header__name">
+		<span class="bx--header__name--prefix">IBM</span>
+		[Platform]
+	</a>
+</ng-template> -->
+
+<!-- <ibm-overflow-menu
+	[flip]="flip"
+	[customTrigger]="avatarAction"
+	placement="bottom"
+	[offset]="offset">
+	<ibm-overflow-menu-option (selected)="selected($event)" (click)="click($event)">Option 1</ibm-overflow-menu-option>
+	<ibm-overflow-menu-option (selected)="selected($event)">Option 2</ibm-overflow-menu-option>
+	<ibm-overflow-menu-option disabled="true" (selected)="selected($event)">Disabled</ibm-overflow-menu-option>
+	<ibm-overflow-menu-option type="danger" (selected)="selected($event)">Danger option</ibm-overflow-menu-option>
+</ibm-overflow-menu>
+<ibm-placeholder></ibm-placeholder> -->
+
+<!-- <ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" [hidden]="!leftPanelActive"> -->
+<ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" >
+	<ibm-sidenav-item [active]="hasActiveChild">
+		<svg icon ibmIconDashboard size="16"></svg>
+		Dashboard
+	</ibm-sidenav-item>
+	<ibm-sidenav-item>
+		<svg icon ibmIconSettings size="16"></svg>
+		Configurations
+	</ibm-sidenav-item>
+	<ibm-sidenav-menu title="UI">
+		<svg icon ibmIconCarbon size="16"></svg>
+		<ibm-sidenav-item ><a href="https://www.carbondesignsystem.com/" ibmLink target="_blank">Carbon Design</a>  </ibm-sidenav-item>
+		<ibm-sidenav-item ><a href="https://github.com/IBM/carbon-components-angular#readme" ibmLink target="_blank">Carbon Components</a></ibm-sidenav-item>
+		<ibm-sidenav-item><a href="https://angular.carbondesignsystem.com/" ibmLink target="_blank">Carbon Angular</a></ibm-sidenav-item>
+	</ibm-sidenav-menu>
+	<ibm-sidenav-menu title="Demos">
+		<svg icon ibmIconWatson size="16"></svg>
+		<ibm-sidenav-item> Insurance Agent </ibm-sidenav-item>
+	</ibm-sidenav-menu>
+</ibm-sidenav>
+
+
+<ibm-panel #avatarPanel [expanded]="avatarAction.active">
+	<ibm-switcher-list class="avatarPanel">
+		<ibm-switcher-list-item active="false" routerLink="profile">
+			<!-- <a href="#" ibmLink>Profile and settings</a> -->Profile
+		</ibm-switcher-list-item>
+		<ibm-switcher-list-item routerLink="configuration">
+			<!-- <a href="#" ibmLink>Configuration</a> -->Configurations
+		</ibm-switcher-list-item>
+		<ibm-switcher-list-item routerLink="privacy">Privacy</ibm-switcher-list-item>
+		<ibm-switcher-list-item routerLink="feedback">Feedback</ibm-switcher-list-item>
+	</ibm-switcher-list>
+	<ibm-switcher-list class="avatarPanel">
+		<ibm-switcher-list-item routerLink="logout">Logout</ibm-switcher-list-item>
+	</ibm-switcher-list>
+</ibm-panel>
+
+<ibm-panel [expanded]="notificationAction.active">
+	<ibm-switcher-list>
+		<ibm-switcher-list-item active="true">Notification item one</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Notification item two</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Notification item three</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Notification item four</ibm-switcher-list-item>
+	</ibm-switcher-list>
+</ibm-panel>
+
+<ibm-panel [expanded]="switcherAction.active">
+	<ibm-switcher-list>
+		<ibm-switcher-list-item active="true">Switcher item one</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Switcher item two</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Switcher item three</ibm-switcher-list-item>
+		<ibm-switcher-list-item>Switcher item four</ibm-switcher-list-item>
+	</ibm-switcher-list>
+</ibm-panel>
+
+

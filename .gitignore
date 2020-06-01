@@ -12,6 +12,7 @@
 *.xml
 **/*.crt
 **/*.key
+**/*.pem
 *.crt
 *.key
 *.apiconnect
