@@ -61,21 +61,31 @@
 		<svg icon ibmIconSettings size="16"></svg>
 		Configurations
 	</ibm-sidenav-item>
+
 	<ibm-sidenav-menu title="UI">
 		<svg icon ibmIconCarbon size="16"></svg>
 		<ibm-sidenav-item ><a href="https://www.carbondesignsystem.com/" ibmLink target="_blank">Carbon Design</a>  </ibm-sidenav-item>
 		<ibm-sidenav-item ><a href="https://github.com/IBM/carbon-components-angular#readme" ibmLink target="_blank">Carbon Components</a></ibm-sidenav-item>
 		<ibm-sidenav-item><a href="https://angular.carbondesignsystem.com/" ibmLink target="_blank">Carbon Angular</a></ibm-sidenav-item>
 	</ibm-sidenav-menu>
+
 	<ibm-sidenav-menu title="Demos">
 		<svg icon ibmIconWatson size="16"></svg>
 		<ibm-sidenav-item> Insurance Agent </ibm-sidenav-item>
 	</ibm-sidenav-menu>
+
+	<hr class="bx--side-nav__divider" />
+
+	<ibm-sidenav-menu title="Resources">
+		<ibm-sidenav-item> Insurance Agent </ibm-sidenav-item>
+	</ibm-sidenav-menu>
+
+
 </ibm-sidenav>
 
 
 <ibm-panel #avatarPanel [expanded]="avatarAction.active">
-	<ibm-switcher-list class="avatarPanel">
+	<ibm-switcher-list >
 		<ibm-switcher-list-item active="false" routerLink="profile">
 			<!-- <a href="#" ibmLink>Profile and settings</a> -->Profile
 		</ibm-switcher-list-item>
@@ -85,9 +95,18 @@
 		<ibm-switcher-list-item routerLink="privacy">Privacy</ibm-switcher-list-item>
 		<ibm-switcher-list-item routerLink="feedback">Feedback</ibm-switcher-list-item>
 	</ibm-switcher-list>
-	<ibm-switcher-list class="avatarPanel">
-		<ibm-switcher-list-item routerLink="logout">Logout</ibm-switcher-list-item>
+
+	<!-- <hr class="bx--switcher__divider" /> -->
+
+	<ibm-switcher-list >
+		<div class="bx--switcher__divider">
+			<span>User Actions</span>
+		</div>
 	</ibm-switcher-list>
+
+
+	<ibm-switcher-list-item routerLink="logout">Logout</ibm-switcher-list-item>
+
 </ibm-panel>
 
 <ibm-panel [expanded]="notificationAction.active">

@@ -20,11 +20,13 @@ data:
   ##
   #############################
 
+  ## awk -v ORS='\\n' '1' keys/keycloak-public.key | pbcopy
+
   DEBUG: "*" # Debug string to apply to applications
-  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIJ749pRQl4vv98txeUQ\nOd5Y12icv1rkA9nsw+pPhWMjU3YU6dypvPanT0gD9kzYBPG8FZpBwe4p2QwxV8Hv\nQINdyMiCKkmbIIZ6avNNJa4VW4PW4tiw4cSN7yZ1TauDsvcRB8iZ7Z+/JG8lKevy\nwfSsZPOprfgFJEg9jyG1DOqpETchuoVQCuoZT8F5IGOclTJd2//89veZp7K8uymJ\n8UxVoweHPOqlzLccMSu6ivjDfgFfRwKHWRZ/nP5SLHYtVsYBb8GMQ94F7c31KvcR\nY9gObZRBzkUFlor8upL/F38qZShdib+NFgCTPyoD9YC41NSST+M4DEPB3FzyKjST\nnQIDAQAB\n-----END PUBLIC KEY-----\n"
-  KEYCLOAK_URL: https://auth.smartthings.com
+  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTUGO/RYTIt/bbI6PdUa\n1bTfWbS990fyVKqseN14YPGFLnlAnY8dWiNxSfHxym1iDF8enBe4bWqRgoxjGUjl\nqfyhiblBSghC1AViRqMEqDQWoLcC3XXh9BrvPFNpEXyrskG2+/Bpem4nEOJhxf8W\nqo3BnZh1wCzE/SrIDcw8/nusCupjHMwj2aOte1qnRCCRr2+b4CMvEpG5wr/rL8CN\nfNQ26qTzfx58uTS1ndizKrO4G+2iomWlkGw/YSGa0jygWyQQx+ppvnF9y7L5112J\nOizsGvP0lwM3dVJMTXLrw5Deol6RS4zJD65VwEHs83QeX+zLVspq0fJ0t/QfudRN\ndQIDAQAB\n-----END PUBLIC KEY-----\n"
+  KEYCLOAK_URL: https://microservices-auth.mybluemix.net
   KEYCLOAK_REALM: development
-  TOKEN_ISSUER: https://auth.smartthings.com/auth/realms/development
+  TOKEN_ISSUER: https://microservices-auth.mybluemix.net/auth/realms/development
   TOKEN_AUDIENCE: iot_backend
   TOKEN_ALGORITHM: RS256
   TOKEN_EXPIRES_IN: "3600"

@@ -1,19 +1,30 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "importHelpers": true,
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "module": "esnext",
-    "baseUrl": "./"
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+	  "baseUrl": "./",
+	  "outDir": "./dist/out-tsc",
+	  "sourceMap": true,
+	  "declaration": false,
+	  "downlevelIteration": true,
+	  "experimentalDecorators": true,
+	  "module": "esnext",
+	  "moduleResolution": "node",
+	  "importHelpers": true,
+	  // "emitDecoratorMetadata": true,
+	  "target": "es2015", // es5
+	  // "typeRoots": [
+	  //   "node_modules/@types"
+	  // ],
+	  "lib": [
+		"es2018",
+		"dom"
+	  ]
+	  // "allowSyntheticDefaultImports": true
+	},
+	"angularCompilerOptions": {
+	  "fullTemplateTypeCheck": false,
+	  "strictInjectionParameters": true,
+	  "enableIvy": false
+	}
 }
+

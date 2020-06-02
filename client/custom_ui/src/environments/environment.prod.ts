@@ -3,7 +3,8 @@
 const keycloakConfig: any = {
   'realm': 'development',
   'clientId': 'smartcity-web',
-  'url': 'https://gae-keycloak-service-dot-hukam-157906.an.r.appspot.com/auth',
+  // 'url': 'https://gae-keycloak-service-dot-hukam-157906.an.r.appspot.com/auth',
+  'url': 'https://microservices-auth.mybluemix.net/auth',
   'ssl-required': 'external',
   'resource': 'smartcity-web',
   'public-client': true,

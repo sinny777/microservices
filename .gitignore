@@ -13,8 +13,8 @@
 **/*.crt
 **/*.key
 **/*.pem
-*.crt
-*.key
+**/*.crt
+**/*.key
 *.apiconnect
 .DS_Store
 **/*.DS_Store

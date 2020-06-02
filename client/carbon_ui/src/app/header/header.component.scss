@@ -21,8 +21,30 @@ a.bx--header__name {
 	max-height: 300px;
 }
 
-.avatarPanel {
-	max-height: 300px;
+.bx--side-nav__divider {
+    display: block;
+    margin: 4rem 1rem 0;
+    border-style: solid;
+    border-bottom: none;
+	// border-color: #393939;
+	border-color: var(--cds-ui-03,#e0e0e0);
+}
+
+.bx--switcher__divider {
+    color: #525252;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	border-bottom: 1px solid #525252;
+	margin: 32px 5rem 8px;
+	width: 100%;
+}
+
+.bx--switcher__divider span {
+	font-size: .75rem;
+	font-weight: 400;
+	line-height: 1rem;
+	letter-spacing: .32px;
+	color: #c6c6c6;
 }
 
 
