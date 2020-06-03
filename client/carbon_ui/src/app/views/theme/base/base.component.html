@@ -1,0 +1,15 @@
+
+<ng-container *ngIf="selfLayout !== 'blank'; else blankLayout">
+		<app-header></app-header>
+		<main class="bx--content">
+			<router-outlet></router-outlet>
+		</main>
+		<app-footer></app-footer>
+</ng-container>
+
+<ng-template #blankLayout>
+	<div class="">
+		<router-outlet></router-outlet>
+	</div>
+</ng-template>
+

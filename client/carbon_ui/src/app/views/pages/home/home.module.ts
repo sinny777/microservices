@@ -1,7 +1,6 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { StarterHomeComponent } from './starter-home/starter-home.component';
 import {
 	GridModule,
 	ListModule,
@@ -9,12 +8,16 @@ import {
 	TilesModule,
 	DialogModule
 } from 'carbon-components-angular';
-import { StarterHomeRoutingModule } from './starter-home-routing.module';
+
+import { StarterHomeComponent } from './starter-home/starter-home.component';
+import { HomeRoutingModule } from './home-routing.module';
+import { ThemeModule } from '../../theme/theme.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		StarterHomeRoutingModule,
+		ThemeModule,
+		HomeRoutingModule,
 		GridModule,
 		ListModule,
 		TabsModule,
@@ -23,4 +26,4 @@ import { StarterHomeRoutingModule } from './starter-home-routing.module';
 	],
 	declarations: [StarterHomeComponent]
 })
-export class StarterHomeModule { }
+export class HomeModule { }

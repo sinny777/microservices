@@ -7,8 +7,8 @@ $font-path: '~carbon-components/src/globals/fonts';
 @import "@carbon/themes/scss/themes";
 
 
-$carbon--theme: $carbon--theme--g100;
-// $carbon--theme: $carbon--theme--g90;
+// $carbon--theme: $carbon--theme--g100;
+$carbon--theme: $carbon--theme--g90;
 // $carbon--theme: $carbon--theme--g10;
 
 @include carbon--theme();
