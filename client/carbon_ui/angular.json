@@ -20,14 +20,15 @@
               "src/assets",
               "src/sw.js",
               "src/manifest.json",
-			  "src/favicon.ico",
-			  "src/assets/js/keycloak/keycloak.min.js",
-              "src/assets/js/keycloak/keycloak-authz.js"
+			  "src/favicon.ico"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+				"src/assets/js/keycloak/keycloak.min.js",
+              	"src/assets/js/keycloak/keycloak-authz.js"
+			]
           },
           "configurations": {
             "production": {
