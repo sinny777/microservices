@@ -1,9 +1,8 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from './core/reducers';
-import { isLoggedIn } from './core/auth';
 import { tap } from 'rxjs/operators';
-import { LoginSuccess } from './core/auth/_actions/auth.actions';
+import { isLoggedIn } from './core/auth';
 
 @Component({
 	selector: 'app-root',
@@ -13,23 +12,17 @@ import { LoginSuccess } from './core/auth/_actions/auth.actions';
 })
 export class AppComponent implements OnInit {
 
-	// constructor(private store: Store<AppState>, private keycloakService: KeycloakService) {}
+	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
+
 		// this.store
 		// 	.pipe(
 		// 		select(isLoggedIn),
-		// 		tap(loggedIn => {
-		// 			if (!loggedIn) {
-
-		// 			}
+		// 		tap(userLoggedIn => {
+		// 			console.log('IN AppComponent, User Is userLoggedIn: >>> ', userLoggedIn);
 		// 		})
 		// 	);
-		// const authenticated = this.keycloakService.isAuthenticated();
-		// console.log('IS AUTHENTICATED: >>> ', authenticated);
-		// // localStorage.setItem(environment.authTokenKey, keycloakService.getToken());
-		// if (authenticated) {
-		// 	this.store.dispatch(new LoginSuccess({ authToken: this.keycloakService.getToken() }));
-		// }
+
 	}
 }

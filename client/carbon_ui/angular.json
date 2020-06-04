@@ -20,7 +20,8 @@
                             "src/assets",
                             "src/sw.js",
                             "src/manifest.json",
-                            "src/favicon.ico"
+							"src/favicon.ico",
+							"src/silent-check-sso.html"
                         ],
                         "styles": [
                             "src/styles.scss"

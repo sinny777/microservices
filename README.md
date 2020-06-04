@@ -18,7 +18,7 @@ This repository can help you quickly getting started with IBM Watson IoT Platfor
 
 This shows the capabilities of [IBM Watson IoT Platform](https://console.bluemix.net/docs/services/conversation/index.html#about)
 
-### Demo URL: [https://smart-things.mybluemix.net](https://smart-things.mybluemix.net)
+### Demo URL: [https://carbonui-microservices.mybluemix.net](https://carbonui-microservices.mybluemix.net)
 
 ## HOW IT WORKS
 
