@@ -13,14 +13,6 @@ a.bx--header__name {
 	padding-right: 6.5em;
 }
 
-// .bx--panel--expanded {
-// 	max-height: 300px;
-// }
-
-.bx--panel--overlay {
-	max-height: 250px;
-}
-
 .bx--side-nav__divider {
     display: block;
     margin: 4rem 1rem 0;
@@ -45,6 +37,22 @@ a.bx--header__name {
 	line-height: 1rem;
 	letter-spacing: .32px;
 	color: #c6c6c6;
+}
+
+.bx--panel--expanded {
+	max-height: 180px;
+}
+
+.bx--panel--overlay {
+	max-height: 180px;
+}
+
+.user_panel .bx--panel--expanded  {
+	max-height: 300px;
+}
+
+.user_panel .bx--grid{
+	padding: 2rem;
 }
 
 

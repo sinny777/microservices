@@ -35,6 +35,7 @@ import {
 import { BaseComponent } from './base/base.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { authReducer, AuthEffects } from 'src/app/core/auth';
 
 
 @NgModule({
@@ -54,6 +55,8 @@ import { FooterComponent } from './footer/footer.component';
 	imports: [
 		CommonModule,
 		RouterModule,
+		StoreModule.forFeature('auth', authReducer),
+		EffectsModule.forFeature([AuthEffects]),
 		FormsModule,
 		UIShellModule,
 		DialogModule,

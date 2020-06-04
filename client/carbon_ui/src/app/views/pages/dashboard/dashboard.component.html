@@ -1,6 +1,9 @@
-<div class="starter-home" ibmGrid>
-	<h1 class="title">Home Page </h1>
-	<p class="subtitle">You have offically built your first Carbon Angular app</p>
+
+<!-- <p> Secured Dashboard </p> -->
+
+<div class="dashboard" ibmGrid>
+	<h1 class="title">Dashboard </h1>
+
 	<div class="body-text" ibmRow>
 		<div ibmCol [columnNumbers]="{'lg': 6, 'md': 12, 'sm': 12}">
 			<p>
@@ -24,18 +27,10 @@
 		</div>
 	</div>
 
-	<!-- <span ibmTooltip="Testing of tooltip" [placement]="'top'" trigger="click" >Top Tooltip</span>
-	<ibm-tooltip-definition
-		[content]="'Brief description of the dotted, underlined word above.'"
-		[placement]="'bottom'"
-		[alignment]="'start'">
-		Bottom Tooltip
-	</ibm-tooltip-definition> -->
-
 	<ibm-tabs [isNavigation]="true">
 		<ibm-tab heading="carbon-angular">
 			<p>Description</p><br>
-			<p class="starter-tab-description">
+			<p class="dashboard-tab-description">
 				A component library that gives developers a collection of
 				re-usable angular components that they can use for building
 				websites and user interfaces
@@ -58,7 +53,7 @@
 		</ibm-tab>
 		<ibm-tab heading="carbon-charts">
 			<p>Description</p><br>
-			<p class="starter-tab-description">
+			<p class="dashboard-tab-description">
 				Carbon Charts is an open-source JavaScript data visualization
 				library used as a functional component of IBM's Carbon Design System.
 			</p>

@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 // NGRX
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 // State
-import { metaReducers, reducers } from './core/reducers';
+import { metaReducers, reducers, AppState } from './core/reducers';
 
-import { KeycloakService, Login } from './core/auth';
+import { KeycloakService, Login, AuthGuard } from './core/auth';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ThemeModule } from './views/theme/theme.module';
@@ -25,17 +25,22 @@ import {
 	HttpUtilsService,
 	TypesUtilsService
 } from './core/_base/crud';
+import { LoginSuccess } from './core/auth/_actions/auth.actions';
 
-export function initAuth(keycloakService: KeycloakService) {
-	return () => {
-		return keycloakService.init();
-	};
+export function initAuth(store: Store<AppState>, keycloakService: KeycloakService) {
+	return () => new Promise(async resolve => {
+		const authenticated = await keycloakService.init();
+		if (authenticated) {
+			store.dispatch(new LoginSuccess({ authToken: keycloakService.getToken() }));
+		}
+		resolve(true);
+	});
 }
 
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -52,11 +57,13 @@ export function initAuth(keycloakService: KeycloakService) {
 	],
 	providers: [
 		AuthService,
+		AuthGuard,
 		KeycloakService,
+		HttpUtilsService,
 		{
 			provide: APP_INITIALIZER,
 			useFactory: initAuth,
-			deps: [KeycloakService],
+			deps: [Store, KeycloakService],
 			multi: true
 		},
 	],

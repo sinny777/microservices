@@ -16,14 +16,27 @@
 
 	</ibm-header-navigation>
 
-	<ibm-header-global>
+	<ibm-header-global >
 		<ibm-header-action #notificationAction title="action" (click)="notificationClicked($event)">
 			<svg ibmIconNotification size="20"></svg>
 		</ibm-header-action>
 
-		<ibm-header-action  #avatarAction title="action" >
+		<ng-container [ngSwitch]="(user$ | async)?.id && 'isLoggedIn'">
+			<ng-container *ngSwitchCase="'isLoggedIn'">
+				<ibm-header-action #avatarAction title="action" (click)="avatarClicked($event)" >
+					<svg ibmIconUserAvatar size="20"></svg>
+				</ibm-header-action>
+			</ng-container>
+			<ng-container *ngSwitchDefault>
+				<ibm-header-navigation ariaLabel="Login">
+					<ibm-header-item (click)="login()">Login</ibm-header-item>
+				</ibm-header-navigation>
+			</ng-container>
+		</ng-container>
+
+		<!-- <ibm-header-action *ngIf="user$ | async as _user;" #avatarAction title="action" (click)="avatarClicked($event)" >
 			<svg ibmIconUserAvatar size="20"></svg>
-		</ibm-header-action>
+		</ibm-header-action> -->
 
 		<ibm-header-action #switcherAction title="action">
 			<svg ibmIconAppSwitcher size="20"></svg>
@@ -31,29 +44,9 @@
 	</ibm-header-global>
 </ibm-header>
 
-
-<!-- <ng-template #brandTemplate >
-	<a class="bx--header__name">
-		<span class="bx--header__name--prefix">IBM</span>
-		[Platform]
-	</a>
-</ng-template> -->
-
-<!-- <ibm-overflow-menu
-	[flip]="flip"
-	[customTrigger]="avatarAction"
-	placement="bottom"
-	[offset]="offset">
-	<ibm-overflow-menu-option (selected)="selected($event)" (click)="click($event)">Option 1</ibm-overflow-menu-option>
-	<ibm-overflow-menu-option (selected)="selected($event)">Option 2</ibm-overflow-menu-option>
-	<ibm-overflow-menu-option disabled="true" (selected)="selected($event)">Disabled</ibm-overflow-menu-option>
-	<ibm-overflow-menu-option type="danger" (selected)="selected($event)">Danger option</ibm-overflow-menu-option>
-</ibm-overflow-menu>
-<ibm-placeholder></ibm-placeholder> -->
-
 <!-- <ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" [hidden]="!leftPanelActive"> -->
 <ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" >
-	<ibm-sidenav-item [active]="hasActiveChild">
+	<ibm-sidenav-item [route]="['dashboard']">
 		<svg icon ibmIconDashboard size="16"></svg>
 		Dashboard
 	</ibm-sidenav-item>
@@ -83,12 +76,25 @@
 
 </ibm-sidenav>
 
-
-<ibm-panel #avatarPanel [expanded]="avatarAction.active">
+<!-- <a href="#" ibmLink>Profile and settings</a> -->
+<ibm-panel class="user_panel" [expanded]="showUserPanel">
 	<ibm-switcher-list >
-		<ibm-switcher-list-item active="false" routerLink="profile">
-			<!-- <a href="#" ibmLink>Profile and settings</a> -->Profile & Settings
-		</ibm-switcher-list-item>
+		<ng-container *ngIf="user$ | async as _user">
+			<div ibmGrid>
+				<div class="body-text" ibmRow>
+					<!-- <div ibmCol [columnNumbers]="{'lg': 3, 'md': 6, 'sm': 6}">
+						<h1>Pic</h1>
+					</div> -->
+					<div ibmCol [columnNumbers]="{'lg': 12}">
+						<h4 class="title">{{_user.name}}</h4>
+					</div>
+				</div>
+			</div>
+
+			<ibm-switcher-list-item routerLink="profile">
+				Profile & Settings
+			</ibm-switcher-list-item>
+		</ng-container>
 
 		<ibm-switcher-list-item routerLink="privacy">Privacy</ibm-switcher-list-item>
 		<ibm-switcher-list-item routerLink="feedback">Feedback</ibm-switcher-list-item>
@@ -102,8 +108,7 @@
 		</div>
 	</ibm-switcher-list>
 
-
-	<ibm-switcher-list-item routerLink="logout">Logout</ibm-switcher-list-item>
+	<ibm-switcher-list-item (click)="logout()">Logout</ibm-switcher-list-item>
 
 </ibm-panel>
 

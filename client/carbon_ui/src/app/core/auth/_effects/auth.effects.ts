@@ -1,3 +1,4 @@
+import { LoginSuccess } from './../_actions/auth.actions';
 // Angular
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
@@ -13,78 +14,96 @@ import { AuthService, KeycloakService } from '../_services/index';
 import { AppState } from '../../reducers';
 import { environment } from '../../../../environments/environment';
 import { isUserLoaded } from '../_selectors/auth.selectors';
-import { User } from '..';
+// import { User } from '..';
 
 @Injectable()
 export class AuthEffects {
-  @Effect({dispatch: false})
-  login$ = this.actions$.pipe(
-    ofType<Login>(AuthActionTypes.Login),
-    tap(action => {
-      localStorage.setItem(environment.authTokenKey, action.payload.authToken);
-      this.store.dispatch(new UserRequested());
-    })
-  );
+	@Effect({ dispatch: false })
+	login$ = this.actions$.pipe(
+		ofType<Login>(AuthActionTypes.Login),
+		tap(() => {
+			let loginOptions = {};
+			if (this.returnUrl && this.returnUrl.indexOf('error') !== -1) {
+				loginOptions = {
+					redirectUri: window.location.origin + '/home'
+				};
+			}
+			this.auth.login(loginOptions);
+		})
+	);
 
-  @Effect({dispatch: false})
-  logout$ = this.actions$.pipe(
-    ofType<Logout>(AuthActionTypes.Logout),
-    tap(() => {
-      localStorage.removeItem(environment.authTokenKey);
-      this.auth.logout();
-      this.router.navigate(['/home'], {queryParams: {returnUrl: this.returnUrl}});
-      document.location.reload();
-    })
-  );
+	@Effect({ dispatch: false })
+	loginSuccess$ = this.actions$.pipe(
+		ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
+		tap(action => {
+			console.log('IN LOGIN SUCCESS: >>> ');
+			localStorage.setItem(environment.authTokenKey, action.payload.authToken);
+			this.store.dispatch(new UserRequested());
+		})
+	);
 
-  @Effect({dispatch: false})
-  loadUser$ = this.actions$
-    .pipe(
-      ofType<UserRequested>(AuthActionTypes.UserRequested),
-      withLatestFrom(this.store.pipe(select(isUserLoaded))),
-      filter(([action, _isUserLoaded]) => !_isUserLoaded),
-      mergeMap(([action, _isUserLoaded]) => this.auth.getUserByToken()),
-      tap(_user => {
-        if (_user) {
-          console.log('USER DETAILS :>>> ', _user);
-          this.store.dispatch(new UserLoaded({user: _user}));
-        } else {
-          this.store.dispatch(new Logout());
-        }
-      }),
-      catchError((error) => {
-        return error;
-      })
-    );
+	@Effect({ dispatch: false })
+	logout$ = this.actions$.pipe(
+		ofType<Logout>(AuthActionTypes.Logout),
+		tap(() => {
+			localStorage.removeItem(environment.authTokenKey);
+			const logoutOptions = {
+				redirectUri: window.location.origin + '/home'
+			};
+			this.returnUrl = logoutOptions.redirectUri;
+			this.auth.logout(logoutOptions);
+			this.router.navigate(['/home'], { queryParams: { returnUrl: logoutOptions.redirectUri } });
+		})
+	);
 
-  // @Effect()
-  // init$ = this.actions$.pipe(
-  //   ofType(ROOT_EFFECTS_INIT),
-  //   map(action => ...)
-  // );
+	@Effect({ dispatch: false })
+	loadUser$ = this.actions$
+		.pipe(
+			ofType<UserRequested>(AuthActionTypes.UserRequested),
+			withLatestFrom(this.store.pipe(select(isUserLoaded))),
+			filter(([action, _isUserLoaded]) => !_isUserLoaded),
+			mergeMap(([action, _isUserLoaded]) => this.auth.getUserByToken()),
+			tap(_user => {
+				if (_user) {
+					console.log('USER DETAILS :>>> ', _user);
+					this.store.dispatch(new UserLoaded({ user: _user }));
+				} else {
+					this.store.dispatch(new Logout());
+				}
+			}),
+			catchError((error) => {
+				return error;
+			})
+		);
 
-  @Effect()
-  init$: Observable<Action> = defer(() => {
-    const userToken = localStorage.getItem(environment.authTokenKey);
-    let observableResult = of({type: 'NO_ACTION'});
-    console.log('IN AUTH EFFECT init, userToken >>>>> : ', this.auth.getToken());
-    if (userToken) {
-      observableResult = of(new Login({authToken: userToken}));
-    }
-    return observableResult;
-  });
+	// @Effect()
+	// init$ = this.actions$.pipe(
+	//   ofType(ROOT_EFFECTS_INIT),
+	//   map(action => ...)
+	// );
 
-  private returnUrl: string;
+	@Effect()
+	init$: Observable<Action> = defer(() => {
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		const observableResult = of({ type: 'NO_ACTION' });
+		console.log('IN AUTH EFFECT init, userToken >>>>> : ', userToken);
+		// if (userToken) {
+		// 	observableResult = of(new LoginSuccess({ authToken: userToken }));
+		// }
+		return observableResult;
+	});
 
-  constructor(private actions$: Actions,
-              private router: Router,
-              private auth: KeycloakService,
-              private store: Store<AppState>) {
+	private returnUrl: string;
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.returnUrl = event.url;
-      }
-    });
-  }
+	constructor(private actions$: Actions,
+		private router: Router,
+		private auth: KeycloakService,
+		private store: Store<AppState>) {
+
+		this.router.events.subscribe(event => {
+			if (event instanceof NavigationEnd) {
+				this.returnUrl = event.url;
+			}
+		});
+	}
 }

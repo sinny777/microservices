@@ -1,5 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
+// import { Location } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '..';
@@ -7,9 +8,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 // import { map, catchError } from 'rxjs/operators';
 
 declare const Keycloak: any;
-
-// const USERINFO_URL = 'https://auth.smartthings.com/auth/realms/development/protocol/openid-connect/userinfo/';
-const IOT_BASE_URL = 'https://iot.smartthings.com';
 
 @Injectable({
 	providedIn: 'root'
@@ -27,20 +25,21 @@ export class KeycloakService {
 	async init(): Promise<any> {
 		if (!this.keycloak.authenticated) {
 			const returnURL = window.location.origin + '/silent-check-sso.html';
-			console.log('IN KeycloakService.init, returnURL: >>>>> ', returnURL);
 			return await this.keycloak.init({ onLoad: 'check-sso', checkLoginIframe: false, silentCheckSsoRedirectUri: returnURL });
 			// this.keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
 		} else {
 			console.log('IN KeycloakService.init: >>>>> ', this.keycloak.authenticated);
+			localStorage.setItem(environment.authTokenKey, this.keycloak.token);
+			return true;
 		}
 	}
 
-	login() {
-		this.keycloak.login();
+	login(option) {
+		this.keycloak.login(option);
 	}
 
-	logout() {
-		this.keycloak.logout();
+	logout(option) {
+		this.keycloak.logout(option);
 	}
 
 	isAuthenticated() {
@@ -58,7 +57,7 @@ export class KeycloakService {
 		}
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>(IOT_BASE_URL + '/api/dashboard/users/me', { headers: httpHeaders });
+		return this.http.get<User>(environment.IOT_BASE_URL + '/api/dashboard/users/me', { headers: httpHeaders });
 		// .pipe(
 		//   map((res: any) => {
 		//     console.log(res);
