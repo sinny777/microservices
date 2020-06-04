@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: smartthings-web
-        image: custom_ui:localtag
+        image: carbon_ui:localtag
         env:
         - name: PORT
           value: "80"  

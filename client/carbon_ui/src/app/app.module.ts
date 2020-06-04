@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // NGRX
 import { StoreModule, Store } from '@ngrx/store';
@@ -66,6 +67,7 @@ export function initAuth(store: Store<AppState>, keycloakService: KeycloakServic
 			deps: [Store, KeycloakService],
 			multi: true
 		},
+		{provide: LocationStrategy, useClass: HashLocationStrategy}
 	],
 	bootstrap: [AppComponent]
 })

@@ -21,7 +21,8 @@
                             "src/sw.js",
                             "src/manifest.json",
 							"src/favicon.ico",
-							"src/silent-check-sso.html"
+							"src/silent-check-sso.html",
+							"src/.htaccess"
                         ],
                         "styles": [
                             "src/styles.scss"
@@ -40,7 +41,7 @@
                                 }
                             ],
                             "optimization": true,
-                            "outputHashing": "all",
+                            "outputHashing": "none",
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
