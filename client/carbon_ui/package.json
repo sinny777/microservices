@@ -4,15 +4,18 @@
   "license": "",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+	"start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
+	"main": "dist/index.html",
+    "build": "ng build && cp src/config/.cfignore src/config/manifest.yml src/config/Staticfile dist",
     "test": "ng test",
     "test:once": "ng test --watch=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+	"e2e": "ng e2e",
+	"dist": "ng build --configuration=production && cp src/config/.cfignore src/config/manifest.yml src/config/Staticfile dist"
   },
   "engines": {
-    "node": ">= 10.9"
+    "node": "10.12.0",
+    "npm": "6.9.0"
   },
   "private": true,
   "dependencies": {

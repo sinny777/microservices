@@ -21,10 +21,13 @@
 	  ]
 	  // "allowSyntheticDefaultImports": true
 	},
+	"exclude": [
+		"test.ts",
+		"**/*.spec.ts"
+	],
 	"angularCompilerOptions": {
 	  "fullTemplateTypeCheck": false,
 	  "strictInjectionParameters": true,
 	  "enableIvy": false
 	}
-}
-
+  }

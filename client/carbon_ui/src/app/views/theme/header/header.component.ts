@@ -1,6 +1,4 @@
-import { LoginSuccess } from './../../../core/auth/_actions/auth.actions';
 import { Component, HostBinding, ViewEncapsulation, Input, OnInit } from '@angular/core';
-
 // RxJS
 import { Observable } from 'rxjs';
 // NGRX
@@ -46,15 +44,11 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit() {
 		this.user$ = this.store.pipe(select(currentUser));
-		// const authenticated = this.keycloakService.isAuthenticated();
-		// console.log('IS AUTHENTICATED: >>> ', authenticated);
-		// // localStorage.setItem(environment.authTokenKey, keycloakService.getToken());
-		// if (authenticated) {
-		// 	this.store.dispatch(new LoginSuccess({ authToken: this.keycloakService.getToken() }));
-		// }
-		// this.store.dispatch(new Login({authToken: this.keycloakService.getToken()}));
 	}
 
+	/**
+	 * Login
+	 */
 	login() {
 		console.log('IN UserProfile Component, Login: >>>>>> ');
 		// this.keycloakService.login();

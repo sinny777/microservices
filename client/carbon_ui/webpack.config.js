@@ -15,7 +15,8 @@ const rootPath = path.resolve(__dirname);
 const distPath = rootPath + "/src/assets";
 
 const entries = {
-	"css/style.angular": "./src/assets/sass/style.angular.scss"
+	// "css/style.carbon": "./src/styles.scss"
+	// "css/style.angular": "./src/assets/sass/style.angular.scss"
 };
 
 // remove older folders and files

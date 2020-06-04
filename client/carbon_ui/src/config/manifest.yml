@@ -1,0 +1,6 @@
+---
+applications:
+- name:      carbonui-microservices
+  host:      carbonui-microservices
+  memory:    128M
+  buildpack: staticfile_buildpack
