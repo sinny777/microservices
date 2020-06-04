@@ -1,4 +1,3 @@
-import { KeycloakService } from './../../../custom_ui/src/app/core/auth/_services/keycloak.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from './core/reducers';

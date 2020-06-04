@@ -4,12 +4,12 @@ export { AuthNoticeService } from './auth-notice/auth-notice.service';
 
 // ACTIONS
 export {
-    Login,
-    Logout,
-    UserRequested,
-    UserLoaded,
-    AuthActionTypes,
-    AuthActions
+	Login,
+	Logout,
+	UserRequested,
+	UserLoaded,
+	AuthActionTypes,
+	AuthActions
 } from './_actions/auth.actions';
 
 // EFFECTS
@@ -21,11 +21,11 @@ export { authReducer } from './_reducers/auth.reducers';
 
 // SELECTORS
 export {
-    isLoggedIn,
-    isLoggedOut,
-    isUserLoaded,
-    currentAuthToken,
-    currentUser
+	isLoggedIn,
+	isLoggedOut,
+	isUserLoaded,
+	currentAuthToken,
+	currentUser
 } from './_selectors/auth.selectors';
 
 // GUARDS
