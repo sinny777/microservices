@@ -4,7 +4,7 @@
 
 	<ibm-header-navigation ariaLabel="Watson Assistant Demo">
 
-		<ibm-search placeholder="Search" ></ibm-search>
+		<ibm-search placeholder="Search" class="top-search"></ibm-search>
 
 		<ibm-header-item >Support</ibm-header-item>
 		<ibm-header-menu title="Docs">
@@ -46,12 +46,13 @@
 
 <!-- <ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" [hidden]="!leftPanelActive"> -->
 <ibm-sidenav rail="!leftPanelActive" [expanded]="leftPanelActive" >
-	<ibm-sidenav-item [route]="['dashboard']">
+
+	<ibm-sidenav-item [route]="['dashboard']" [active]="router.isActive('dashboard', false)">
 		<svg icon ibmIconDashboard size="16"></svg>
 		Dashboard
 	</ibm-sidenav-item>
-	<ibm-sidenav-item>
-		<svg icon ibmIconSettings size="16"></svg>
+	<ibm-sidenav-item  routerLink="/configurations" [active]="router.isActive('configurations', false)"  >
+		<svg icon ibmIconSettings size="16" ></svg>
 		Configurations
 	</ibm-sidenav-item>
 

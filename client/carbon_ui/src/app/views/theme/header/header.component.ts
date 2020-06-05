@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { User, KeycloakService, currentUser, Login, Logout } from 'src/app/core/auth';
 import { AppState } from 'src/app/core/reducers';
+import { Router, RouterLinkActive } from '@angular/router';
 
 
 @Component({
@@ -26,8 +27,10 @@ export class HeaderComponent implements OnInit {
 	hasActiveChild = true;
 	showSearch = true;
 	showUserPanel = false;
+	myRoute: any;
 
-	constructor(private store: Store<AppState>, private keycloakService: KeycloakService) {
+	constructor(private store: Store<AppState>, protected router: Router) {
+		// this.myRoute = this.router;
 	}
 
 	hamburgerClicked(event) {
@@ -36,6 +39,7 @@ export class HeaderComponent implements OnInit {
 
 	notificationClicked(event) {
 		// console.log(event);
+		console.log(this.router.isActive('dashboard', false));
 	}
 
 	avatarClicked(event) {

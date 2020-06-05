@@ -6,8 +6,8 @@
 const keycloakConfig: any = {
 	'realm': 'development',
 	'clientId': 'smartcity-web',
-	// 'url': 'https://auth.smartthings.com/auth',
-	'url': 'https://microservices-auth.mybluemix.net/auth',
+	'url': 'https://auth.smartthings.com/auth',
+	// 'url': 'https://microservices-auth.mybluemix.net/auth',
 	'ssl-required': 'external',
 	'resource': 'smartcity-web',
 	'public-client': true,

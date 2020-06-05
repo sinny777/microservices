@@ -14,10 +14,10 @@ kubectl config use-context dev
 # kubectl apply -f local/auth/postgres-storage.yaml
 # kubectl apply -f local/auth/postgres-deployment.yaml
 # kubectl apply -f local/auth/keycloak-deployment.yaml
-kubectl apply -f local/app-config.yaml
-kubectl apply -f local/services/iot-backend.yaml
-kubectl apply -f local/services/web.yaml
-kubectl apply -f local/ingress.yaml
+# kubectl apply -f local/app-config.yaml
+# kubectl apply -f local/services/iot-backend.yaml
+# kubectl apply -f local/services/web.yaml
+# kubectl apply -f local/ingress.yaml
 
 # kubectl apply -f kube/local/optional/ --recursive
 # kubectl apply -f kube/local/pods/ --recursive
@@ -35,7 +35,7 @@ kubectl apply -f local/ingress.yaml
 # kubectl delete -f local/auth/config/auth-config.yaml
 # kubectl delete -f local/auth/config/auth-secrets.yaml
 
-
+ng 
 sleep 5
 
 # open https://minikube.info

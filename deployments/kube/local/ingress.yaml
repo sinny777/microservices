@@ -8,7 +8,7 @@ metadata:
     # ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:4200"
     # nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
 spec:
@@ -17,12 +17,12 @@ spec:
     - smartthings.com
     secretName: smartthings-tls
   rules:
-  # - host: auth.smartthings.com
-  #   http:
-  #     paths:
-  #     - backend:
-  #         serviceName: keycloak-svc
-  #         servicePort: 8888
+  - host: auth.smartthings.com
+    http:
+      paths:
+      - backend:
+          serviceName: keycloak-svc
+          servicePort: 8888
   - host: iot.smartthings.com
     http:
       paths:

@@ -22,11 +22,22 @@ data:
 
   ## awk -v ORS='\\n' '1' keys/keycloak-public.key | pbcopy
 
+##############  CLOUD CONFIGURATIONS #############
+  # DEBUG: "*" # Debug string to apply to applications
+  # KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTUGO/RYTIt/bbI6PdUa\n1bTfWbS990fyVKqseN14YPGFLnlAnY8dWiNxSfHxym1iDF8enBe4bWqRgoxjGUjl\nqfyhiblBSghC1AViRqMEqDQWoLcC3XXh9BrvPFNpEXyrskG2+/Bpem4nEOJhxf8W\nqo3BnZh1wCzE/SrIDcw8/nusCupjHMwj2aOte1qnRCCRr2+b4CMvEpG5wr/rL8CN\nfNQ26qTzfx58uTS1ndizKrO4G+2iomWlkGw/YSGa0jygWyQQx+ppvnF9y7L5112J\nOizsGvP0lwM3dVJMTXLrw5Deol6RS4zJD65VwEHs83QeX+zLVspq0fJ0t/QfudRN\ndQIDAQAB\n-----END PUBLIC KEY-----\n"
+  # KEYCLOAK_URL: https://microservices-auth.mybluemix.net
+  # KEYCLOAK_REALM: development
+  # TOKEN_ISSUER: https://microservices-auth.mybluemix.net/auth/realms/development
+  # TOKEN_AUDIENCE: iot_backend
+  # TOKEN_ALGORITHM: RS256
+  # TOKEN_EXPIRES_IN: "3600"
+
+##############  LOCAL CONFIGURATIONS #############
   DEBUG: "*" # Debug string to apply to applications
-  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTUGO/RYTIt/bbI6PdUa\n1bTfWbS990fyVKqseN14YPGFLnlAnY8dWiNxSfHxym1iDF8enBe4bWqRgoxjGUjl\nqfyhiblBSghC1AViRqMEqDQWoLcC3XXh9BrvPFNpEXyrskG2+/Bpem4nEOJhxf8W\nqo3BnZh1wCzE/SrIDcw8/nusCupjHMwj2aOte1qnRCCRr2+b4CMvEpG5wr/rL8CN\nfNQ26qTzfx58uTS1ndizKrO4G+2iomWlkGw/YSGa0jygWyQQx+ppvnF9y7L5112J\nOizsGvP0lwM3dVJMTXLrw5Deol6RS4zJD65VwEHs83QeX+zLVspq0fJ0t/QfudRN\ndQIDAQAB\n-----END PUBLIC KEY-----\n"
-  KEYCLOAK_URL: https://microservices-auth.mybluemix.net
+  KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmZNGwcAqTXlLfnianbHa\n17R03oOgk7sjKdrF+xjAdCmPEWUtbLKUN3fRGeoo/9QEXBP29copt1evnvC35J9q\njt46LMu4HHWhPxLglDwlQ/74hvj9YcjX4XzTOkagStZwXZA2hD7HDnWhbdt+Vrrt\n6Drj2FpjdioSkZWoszyHCEakkWVk5YYLLRav7tim/Z1wsiiNRRQ6l9kIDEL5aPbk\nnrl7aSEBNLJ4vGwvNFZ1yVHouxjR/YJwSdSJssfDltvBM7mm5Vi7H4VC7FQqUaPw\npmRmbCIv0ixJcHm9yBnrCqy/uGT2gj8sqdfVaPh6s6HxyOs7zBgLdAxIG50qHznC\nvQIDAQAB\n-----END PUBLIC KEY-----\n\n"
+  KEYCLOAK_URL: https://auth.smartthings.com
   KEYCLOAK_REALM: development
-  TOKEN_ISSUER: https://microservices-auth.mybluemix.net/auth/realms/development
+  TOKEN_ISSUER: https://auth.smartthings.com/auth/realms/development
   TOKEN_AUDIENCE: iot_backend
   TOKEN_ALGORITHM: RS256
   TOKEN_EXPIRES_IN: "3600"
