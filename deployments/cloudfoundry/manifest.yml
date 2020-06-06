@@ -1,0 +1,73 @@
+## docker tag IMAGE_ID sinny777/smartthings-keyclloak:latest
+## docker push sinny777/smartthings-keyclloak:latest
+
+---
+applications:
+- name: microservices-auth
+  docker:
+    image: sinny777/smartthings-keycloak:latest
+  instances: 1
+  memory: 2G
+  disk_quota: 2G
+  timeout: 600
+  allow_app_ssh_access: true
+  properties:
+    cflinuxfs3-rootfs:
+      trusted_certs: |
+        -----BEGIN CERTIFICATE-----
+        FAKECERTIFICATEDvgVpBCRFAKECERTIFICATEBgkqhkFAKECERTIFICATEFADBh
+        MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+        d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD
+        QTAeFw0wNjExMTAwMDAwMDBaFw0zMTExMTAwMDAwMDBaMGExCzAJBgNVBAYTAlVT
+        FAKECERTIFICATEEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j
+        b20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IENBMIIBIjANBgkqhkiG
+        9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4jvhEXLeqKTTo1eqUKKPC3eQyaKl7hLOllsB
+        CSDMAZOnTjC3U/dDxGkAV53ijSLdhwZAAIEJzs4bg7/fzTtxRuLWZscFs3YnFo97
+        nh6Vfe63SKMI2tavegw5BmV/Sl0fvBf4q77uKNd0f3p4mVmFaG5cIzJLv07A6Fpt
+        43C/dxC//FAKECERTIFICATEql1GNXFAKECERTIFICATEsfUX7Q6hL+hqkpMfT7P
+        FAKECERTIFICATEd5m3OFBqOasv+zbMUZBfHWymeMr/y7vrTC0LUq7dBMtoM1O/4
+        gdW7jVg/tRvoSSiicNoxBN33shbyTApOB6jtSj1etX+jkMOvJwIDAQABo2MwYTAO
+        BgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUA95QNVbR
+        TLtm8KPiGxvDl7I90VUwHwYDVR0jBBgwFoAUA95QNVbRTLtm8KPiGxvDl7I90VUw
+        DQYJKoZIhvcNAQEFBQADggEBAMucN6pIExIK+t1EnE9SsPTfrgT1eXkIoyQY/Esr
+        hMAtudXH/vTBH1jLuG2cenTnmCmrEbXjcKChzUyImZOMkXDiqw8cvpOp/2PV5Adg
+        FAKECERTIFICATE0jmP6P6fbtGbfYmbW0W5BjfIttep3Sp+dWOIrWcBAI+0tKIJF
+        FAKECERTIFICATEv8NZ5YBberOgOzW6sRBc4L0na4UU+Krk2U886UAb3LujEV0ls
+        FAKECERTIFICATErp+uvFRTp2InBuThs4pFsiv9kuXclVzDAGySj4dzp30d8tbQk
+        FAKECERTIFICATE5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=
+        -----END CERTIFICATE-----
+        -----BEGIN CERTIFICATE-----
+        FAKECERTIFICATEDvgVpBCRFAKECERTIFICATEBgkqhkFAKECERTIFICATEFADBh
+        MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+        d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD
+        QTAeFw0wNjExMTAwMDAwMDBaFw0zMTExMTAwMDAwMDBaMGExCzAJBgNVBAYTAlVT
+        FAKECERTIFICATEEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j
+        b20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IENBMIIBIjANBgkqhkiG
+        9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4jvhEXLeqKTTo1eqUKKPC3eQyaKl7hLOllsB
+        CSDMAZOnTjC3U/dDxGkAV53ijSLdhwZAAIEJzs4bg7/fzTtxRuLWZscFs3YnFo97
+        nh6Vfe63SKMI2tavegw5BmV/Sl0fvBf4q77uKNd0f3p4mVmFaG5cIzJLv07A6Fpt
+        43C/dxC//FAKECERTIFICATEql1GNXFAKECERTIFICATEsfUX7Q6hL+hqkpMfT7P
+        FAKECERTIFICATEd5m3OFBqOasv+zbMUZBfHWymeMr/y7vrTC0LUq7dBMtoM1O/4
+        gdW7jVg/tRvoSSiicNoxBN33shbyTApOB6jtSj1etX+jkMOvJwIDAQABo2MwYTAO
+        BgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUA95QNVbR
+        TLtm8KPiGxvDl7I90VUwHwYDVR0jBBgwFoAUA95QNVbRTLtm8KPiGxvDl7I90VUw
+        DQYJKoZIhvcNAQEFBQADggEBAMucN6pIExIK+t1EnE9SsPTfrgT1eXkIoyQY/Esr
+        hMAtudXH/vTBH1jLuG2cenTnmCmrEbXjcKChzUyImZOMkXDiqw8cvpOp/2PV5Adg
+        FAKECERTIFICATE0jmP6P6fbtGbfYmbW0W5BjfIttep3Sp+dWOIrWcBAI+0tKIJF
+        FAKECERTIFICATEv8NZ5YBberOgOzW6sRBc4L0na4UU+Krk2U886UAb3LujEV0ls
+        FAKECERTIFICATErp+uvFRTp2InBuThs4pFsiv9kuXclVzDAGySj4dzp30d8tbQk
+        FAKECERTIFICATE5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=
+        -----END CERTIFICATE-----
+  env: 
+    PROXY_ADDRESS_FORWARDING: true
+    OPTIMIZE_MEMORY: true
+    # CF_SYSTEM_CERT_PATH: /etc/cf-system-certificates/
+    DB_VENDOR: postgres
+    DB_ADDR: YOUR_DB_ADDR
+    DB_PORT: 28209
+    DB_DATABASE: YOUR_DB_NAME
+    DB_USER: YOUR_DB_USER
+    DB_PASSWORD: YOUR_DB_PASSWORD
+    JDBC_PARAMS: 'ssl=true&sslmode=allow&sslrootcert=/etc/ssl/certs/ca-bundle.crt'
+    JAVA_OPTS: -server -Xms2048m -Xmx6144m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true 
+
