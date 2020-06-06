@@ -61,3 +61,4 @@ If you're actively working on customizing your service worker or doing testing, 
 ## References
 
 [Icons](https://github.com/carbon-design-system/carbon-icons-angular)
+[Keycloak Authorization](https://www.pika.dev/npm/keycloak-authz-angular)
