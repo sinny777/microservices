@@ -1,6 +1,7 @@
 # eval $(minikube docker-env)
 
-python ../build_services.py -t latest -P
+# python ../build_services.py -t latest -P
+python ../build_services.py -t localtag
 
 # kubectl create -f local/namespaces/namespace-dev.json
 # kubectl config set-context dev --namespace=smartthings-dev \
