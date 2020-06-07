@@ -38,6 +38,7 @@ spec:
       containers:
       - name: smartthings-iot
         image: smartthings-iot:localtag
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: app-config

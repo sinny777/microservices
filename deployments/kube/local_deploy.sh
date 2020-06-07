@@ -1,5 +1,6 @@
 # eval $(minikube docker-env)
 
+# python ../build_services.py -t latest -P
 python ../build_services.py -t localtag
 
 # kubectl create -f local/namespaces/namespace-dev.json
@@ -7,7 +8,7 @@ python ../build_services.py -t localtag
 #   --cluster=docker-desktop \
 #   --user=docker-desktop
 
-kubectl config use-context dev
+# kubectl config use-context dev
 
 # kubectl apply -f local/auth/config/auth-secrets.yaml
 # kubectl apply -f local/auth/config/auth-config.yaml
@@ -35,7 +36,6 @@ kubectl config use-context dev
 # kubectl delete -f local/auth/config/auth-config.yaml
 # kubectl delete -f local/auth/config/auth-secrets.yaml
 
-ng 
 sleep 5
 
 # open https://minikube.info
