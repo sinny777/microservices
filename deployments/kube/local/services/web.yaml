@@ -38,6 +38,7 @@ spec:
       containers:
       - name: smartthings-web
         image: carbon_ui:localtag
+        imagePullPolicy: Always
         env:
         - name: PORT
           value: "80"  

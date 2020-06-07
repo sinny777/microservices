@@ -37,7 +37,8 @@ spec:
     spec:
       containers:
       - name: keycloak
-        image: smartthings-keycloak:localtag        
+        image: smartthings-keycloak:localtag
+        imagePullPolicy: Always    
         envFrom:
         - secretRef:
             name: keycloak-secrets

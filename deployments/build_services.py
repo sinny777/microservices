@@ -2,12 +2,13 @@
 ## Copyright 2020 
 ##
 
-import argparse, os
+import argparse, os 
 
 images = [
   ["../../services/keycloak", "smartthings-keycloak"],
   ["../../services/iot", "smartthings-iot"],
-  ["../../client/carbon_ui", "carbon_ui"]
+  ["../../client/carbon_ui", "carbon_ui"],
+  ["../../client/custom_ui", "custom_ui"]
 ]
 
 parser = argparse.ArgumentParser()
@@ -42,3 +43,5 @@ else:
       print("Pushing: " + docker_tag)
       os.system("docker push " + docker_tag)
 
+## TO REMOVE DANGLING IMAGES
+## docker rmi $(docker images -f "dangling=true" -q)
