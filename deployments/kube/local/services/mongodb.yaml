@@ -1,0 +1,59 @@
+# Copyright 2020 IBM. 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-svc
+  labels:
+    app: mongodb-enterprise
+    tier: iot
+spec:
+  type: NodePort
+  ports:
+  - port:  27017
+    targetPort: 27017
+    nodePort: 32017
+  selector:
+   app: mongodb-enterprise
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-enterprise
+  labels:
+    app: mongodb-enterprise
+    tier: iot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mongodb-enterprise
+  template:
+    metadata:
+      labels:
+        app: mongodb-enterprise
+        set: mongodb-enterprise
+    spec:
+      containers:
+      - name: mongodb-enterprise
+        image: sinny777/mongo-enterprise:4.2
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongodb-volume
+        env:
+        - name: PORT
+          value: "27017"        
+        ports:
+        - containerPort: 27017
+      volumes:
+        - name: mongodb-volume
+          hostPath:
+            # directory location on host
+            path: /Users/gurvindersingh/Documents/Development/data/mongodb
+            # this field is optional
+            type: Directory
+      restartPolicy: Always
