@@ -16,7 +16,7 @@
 # kubectl apply -f local/auth/postgres-deployment.yaml
 # kubectl apply -f local/auth/keycloak-deployment.yaml
 # kubectl apply -f local/app-config.yaml
-kubectl apply -f local/services/mongodb.yaml
+# kubectl apply -f local/services/mongodb.yaml
 # kubectl apply -f local/services/iot-backend.yaml
 # kubectl apply -f local/services/web.yaml
 kubectl apply -f local/ingress.yaml

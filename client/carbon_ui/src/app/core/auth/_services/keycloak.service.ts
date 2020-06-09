@@ -50,6 +50,18 @@ export class KeycloakService {
 		return this.keycloak.token;
 	}
 
+	async loadUserProfile() {
+		return await this.keycloak.loadUserProfile();
+	}
+
+	hasRealmRole(role) {
+		return this.keycloak.hasRealmRole(role);
+	}
+
+	hasResourceRole (role, resource) {
+		return this.keycloak.hasResourceRole(role, resource);
+	}
+
 	getUserByToken(): Observable<User> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		if (!userToken) {

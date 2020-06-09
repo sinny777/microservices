@@ -34,7 +34,8 @@ export class Asset extends UserModifiableEntity {
 
   @property({
     type: 'string',
-    required: false,
+    required: true,
+    index: true
   })
   type?: string;
 
