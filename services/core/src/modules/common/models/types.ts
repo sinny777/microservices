@@ -4,11 +4,18 @@ export type Credentials = {
   password: string;
 };
 
-export const enum TenantType {
+export enum TenantType {
     APPLICATION = 'application',
     CUSTOMER = 'customer',
     VENDOR = 'vendor',
     OTHER = 'other'
+}
+
+export const enum AddressType {
+  HOME = 'HOME',
+  BILLING = 'BILLING',
+  OFFICE = 'OFFICE',
+  OTHER = 'other'
 }
 
 export const enum RoleType {
@@ -16,5 +23,5 @@ export const enum RoleType {
   TENANT_ADMIN = 'TENANT_ADMIN',
   MANAGER = 'MANAGER',
   OPERATOR = 'OPERATOR',
-  USER = 'USER',
+  APP_USER = 'APP_USER',
 }

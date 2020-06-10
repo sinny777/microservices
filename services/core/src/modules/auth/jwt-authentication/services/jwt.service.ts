@@ -62,7 +62,7 @@ export class JWTService implements TokenService {
       var verifyOptions = {
         issuer:  this.jwtIssuer,
         // subject:  this.jwtAudience,
-        audience:  this.jwtAudience,
+        // audience:  this.jwtAudience,
         // expiresIn:  Number(this.jwtExpiresIn),
         algorithm:  [this.jwtAlgorithm]
       };
@@ -79,7 +79,7 @@ export class JWTService implements TokenService {
           id: decodedToken.sub,
           firstName: decodedToken.given_name,
           lastName: decodedToken.family_name,
-          roles: decodedToken.resource_access[this.jwtAudience]['roles']          
+          access: {realmAccess: decodedToken.realm_access, resourceAccess: decodedToken.resource_access}
         },
       );
     } catch (error) {

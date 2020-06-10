@@ -1,8 +1,8 @@
+import { Contact } from './contact.model';
 import { model, property, hasMany} from '@loopback/repository';
 // import {v4 as uuid} from 'uuid';
-import { TenantType } from './types';
+import { TenantType, AddressType } from './types';
 import { UserModifiableEntity } from './user-modifiable-entity.model';
-import { Role } from './role.model';
 
 @model({
   name: 'tenants',
@@ -21,8 +21,11 @@ export class Tenant extends UserModifiableEntity {
   @property({
     type: 'string',
     required: true,
+    jsonSchema: {
+      enum: Object.values(TenantType),
+    },
   })
-  type?: TenantType;
+  type: TenantType;
 
   @property({
     type: 'string',
@@ -30,53 +33,10 @@ export class Tenant extends UserModifiableEntity {
   })
   title: string | undefined;
 
-  @hasMany(() => Role, {keyTo: 'tenantId'})
-  roles?: Role[];
-
   @property({
-    type: 'string',
+    type: 'object',
   })
-  address1?: string;
-
-  @property({
-    type: 'string',
-  })
-  address2?: string;
-
-  @property({
-    type: 'string',
-  })
-  address3?: string;
-
-  @property({
-    type: 'string',
-  })
-  address4?: string;
-
-  @property({
-    type: 'string',
-  })
-  city?: string;
-
-  @property({
-    type: 'string',
-  })
-  state?: string;
-
-  @property({
-    type: 'string',
-  })
-  zip?: string;
-
-  @property({
-    type: 'string',
-  })
-  country?: string;
-
-  @property({
-    type: 'string',
-  })
-  region?: string;
+  contact?: Contact;
 
   @property({
     type: 'string',

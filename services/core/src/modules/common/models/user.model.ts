@@ -1,12 +1,6 @@
 import {UserModifiableEntity} from './user-modifiable-entity.model';
 import {model, property, hasOne} from '@loopback/repository';
 // import {v4 as uuid} from 'uuid';
-// import { Permission } from '@loopback/security';
-// import { UserModifiableEntity } from './user-modifiable-entity.model';
-import {
-  UserCredentials,
-  UserCredentialsWithRelations,
-} from './user-credentials.model';
 
 @model({
   settings: {
@@ -71,9 +65,6 @@ export class User extends UserModifiableEntity {
   })
   lastLogin?: string;
 
-  @hasOne(() => UserCredentials, {keyTo: 'user_id'})
-  credentials?: UserCredentials;
-
   constructor(data?: Partial<User>) {
     super(data);
     // if (data != null && typeof data === 'object') {
@@ -83,7 +74,7 @@ export class User extends UserModifiableEntity {
 }
 
 export interface UserRelations {
-  credentials?: UserCredentialsWithRelations;
+  
 }
 
 export type UserWithRelations = User & UserRelations;
