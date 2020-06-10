@@ -1,14 +1,13 @@
-import {Tenant, TenantRelations, User, Role} from 'microservices-core';
-import {TenantsDataSource} from '../datasources';
-import {DefaultUserModifyCrudRepository} from './default-user-modify-crud.repository.base';
+import { Customer } from '@sinny777/microservices-core/dist/modules/common/models/customer.model';
+import { Tenant, TenantRelations } from '@sinny777/microservices-core';
+import { TenantsDataSource } from '../datasources';
+import { DefaultUserModifyCrudRepository } from '@sinny777/microservices-core/dist/modules/common/repositories';
 import { AuthenticationBindings } from '@loopback/authentication';
-import { RoleRepository } from '.';
-import {
-  HasManyRepositoryFactory,
-  repository,
-} from '@loopback/repository';
+
 import {inject, Getter} from '@loopback/core';
 import { UserProfile } from '@loopback/security';
+import { HasManyRepositoryFactory, repository } from '@loopback/repository';
+import { CustomerRepository } from '.';
 
 export class TenantRepository extends DefaultUserModifyCrudRepository<
   Tenant,
@@ -16,22 +15,26 @@ export class TenantRepository extends DefaultUserModifyCrudRepository<
   TenantRelations
 > {
 
-  public readonly roles: HasManyRepositoryFactory<
-    Role,
+  public readonly customers: HasManyRepositoryFactory<
+    Customer,
     typeof Tenant.prototype.id
-    >;
+  >;
 
   constructor(
     @inject('datasources.tenants') dataSource: TenantsDataSource,
+    @repository.getter('CustomerRepository')
+    getCustomerRepository: Getter<CustomerRepository>,
     @inject.getter(AuthenticationBindings.CURRENT_USER)
-    protected readonly getCurrentUser: Getter<UserProfile | undefined>,
-    @repository.getter('RoleRepository')
-    getRoleRepository: Getter<RoleRepository>,
+    protected readonly getCurrentUser: Getter<UserProfile | undefined>,   
   ) {
     super(Tenant, dataSource, getCurrentUser);
-    this.roles = this.createHasManyRepositoryFactoryFor(
-      'roles',
-      getRoleRepository
+    this.customers = this.createHasManyRepositoryFactoryFor(
+      'customers',
+      getCustomerRepository,
     );
+
+    // add this line to register inclusion resolver
+    this.registerInclusionResolver('customers', this.customers.inclusionResolver);
+
   }
 }

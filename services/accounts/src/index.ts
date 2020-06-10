@@ -4,7 +4,6 @@ import {ApplicationConfig} from '@loopback/core';
 export {AccountsApplication};
 
 export async function main(options: ApplicationConfig = {}) {
-  // console.log(options);
   let PORT = process.env.PORT || 3000;
   options.rest.port = PORT;
   if(!options){
@@ -20,7 +19,8 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  
+  console.log(`Accopunts Server is running at ${url}`);
+  console.log(`Try ${url}/ping`);
+
   return app;
 }

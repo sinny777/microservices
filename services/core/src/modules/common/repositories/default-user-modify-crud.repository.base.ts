@@ -1,11 +1,9 @@
-import {DataObject, Getter, Where, Count, DefaultCrudRepository} from '@loopback/repository';
-import {UserModifiableEntity} from 'microservices-core';
-// import {UsersDataSource} from '../datasources';
+import { DataObject, Getter, Where, Count, DefaultCrudRepository, model } from '@loopback/repository';
+import {UserModifiableEntity} from '../models/user-modifiable-entity.model';
 import {juggler} from '@loopback/repository';
 import { Options } from 'loopback-datasource-juggler';
 import {HttpErrors} from '@loopback/rest';
-import {AuthorizeErrorKeys} from '../modules/auth/authorization';
-// import { MyUserProfile } from '../modules/auth/authentication/types';
+import {AuthorizeErrorKeys} from '../../auth/keys';
 import { UserProfile } from '@loopback/security';
 
 export abstract class DefaultUserModifyCrudRepository<

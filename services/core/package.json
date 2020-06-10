@@ -1,6 +1,6 @@
 {
   "name": "@sinny777/microservices-core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "core utilities for microservices app",
   "author": "Gurvinder Singh (IBM)",
   "license": "Apache-2.0",

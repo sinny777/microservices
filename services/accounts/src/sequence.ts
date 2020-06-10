@@ -1,4 +1,4 @@
-import { inject } from '@loopback/core';
+import {inject} from '@loopback/context';
 import {
   FindRoute,
   InvokeMethod,
@@ -8,20 +8,9 @@ import {
   RestBindings,
   Send,
   SequenceHandler,
-  HttpErrors,
 } from '@loopback/rest';
 import { AuthenticationBindings, AuthenticateFn, AUTHENTICATION_STRATEGY_NOT_FOUND, USER_PROFILE_NOT_FOUND } from '@loopback/authentication';
 import { UserProfile } from '@loopback/security';
-
-/*
-import {
-  AuthorizatonBindings,
-  AuthorizeFn,
-  AuthorizeErrorKeys,
-  UserPermissionsFn,
-  PermissionKey,
-} from './modules/auth/authorization';
-*/
 
 const SequenceActions = RestBindings.SequenceActions;
 
@@ -34,11 +23,6 @@ export class MySequence implements SequenceHandler {
     @inject(SequenceActions.REJECT) public reject: Reject,
     @inject(AuthenticationBindings.AUTH_ACTION)
     protected authenticateRequest: AuthenticateFn,
-    // @inject(AuthorizatonBindings.USER_PERMISSIONS)
-    // protected fetchUserPermissons: UserPermissionsFn,
-    // @inject(AuthorizatonBindings.AUTHORIZE_ACTION)
-    // protected checkAuthorization: AuthorizeFn,
-    // @inject.getter(AuthenticationBindings.CURRENT_USER) readonly getCurrentUser: Getter<UserProfile>,
   ) {}
 
   async handle(context: RequestContext) {

@@ -18,18 +18,18 @@ import {
   requestBody,
   api,
 } from '@loopback/rest';
-import {Tenant} from 'microservices-core';
+import {Tenant} from '@sinny777/microservices-core';
 import {TenantRepository} from '../repositories';
 import {AuthenticationBindings, authenticate} from '@loopback/authentication';
 
-@api({basePath: '/api/accounts', paths: {}})
+@api({basePath: '/api/accounts/tenants', paths: {}})
 export class TenantController {
   constructor(
     @repository(TenantRepository)
     public tenantRepository : TenantRepository,
   ) {}
 
-  @post('/tenants', {
+  @post('/', {
     responses: {
       '200': {
         description: 'Tenant model instance',
@@ -53,7 +53,7 @@ export class TenantController {
     return this.tenantRepository.create(tenant);
   }
 
-  @get('/tenants/count', {
+  @get('/count', {
     responses: {
       '200': {
         description: 'Tenant model count',
@@ -68,7 +68,7 @@ export class TenantController {
     return this.tenantRepository.count(where);
   }
 
-  @get('/tenants', {
+  @get('/', {
     responses: {
       '200': {
         description: 'Array of Tenant model instances',
@@ -87,7 +87,7 @@ export class TenantController {
     return this.tenantRepository.find(filter);
   }
 
-  @patch('/tenants', {
+  @patch('/', {
     responses: {
       '200': {
         description: 'Tenant PATCH success count',
@@ -110,7 +110,7 @@ export class TenantController {
     return this.tenantRepository.updateAll(tenant, where);
   }
 
-  @get('/tenants/{id}', {
+  @get('/{id}', {
     responses: {
       '200': {
         description: 'Tenant model instance',
@@ -123,7 +123,7 @@ export class TenantController {
     return this.tenantRepository.findById(id);
   }
 
-  @patch('/tenants/{id}', {
+  @patch('/{id}', {
     responses: {
       '204': {
         description: 'Tenant PATCH success',
@@ -145,7 +145,7 @@ export class TenantController {
     await this.tenantRepository.updateById(id, tenant);
   }
 
-  @put('/tenants/{id}', {
+  @put('/{id}', {
     responses: {
       '204': {
         description: 'Tenant PUT success',
@@ -160,7 +160,7 @@ export class TenantController {
     await this.tenantRepository.replaceById(id, tenant);
   }
 
-  @del('/tenants/{id}', {
+  @del('/{id}', {
     responses: {
       '204': {
         description: 'Tenant DELETE success',

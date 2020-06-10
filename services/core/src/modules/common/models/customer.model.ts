@@ -1,15 +1,12 @@
-import { Customer } from './customer.model';
 import { Contact } from './contact.model';
-import { model, property, hasMany} from '@loopback/repository';
-// import {v4 as uuid} from 'uuid';
-import { TenantType, AddressType } from './types';
+import { model, property} from '@loopback/repository';
 import { UserModifiableEntity } from './user-modifiable-entity.model';
 
 @model({
-  name: 'tenants',
+  name: 'customers',
   settings: {strict: false}
 })
-export class Tenant extends UserModifiableEntity {
+export class Customer extends UserModifiableEntity {
 
   @property({
     type: 'string',
@@ -20,13 +17,9 @@ export class Tenant extends UserModifiableEntity {
   id?: string;
 
   @property({
-    type: 'string',
-    required: true,
-    jsonSchema: {
-      enum: Object.values(TenantType),
-    },
+    type: 'string'    
   })
-  type: TenantType;
+  tenantId: string;
 
   @property({
     type: 'string',
@@ -51,22 +44,19 @@ export class Tenant extends UserModifiableEntity {
   })
   moreInfo?: string;
 
-  @hasMany(() => Customer, {keyTo: 'tenantId'})
-  customers?: Customer[];
-
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // [prop: string]: any;
 
-  constructor(data?: Partial<Tenant>) {
+  constructor(data?: Partial<Customer>) {
     super(data);
   }
 }
 
-export interface TenantRelations {
+export interface CustomerRelations {
   // describe navigational properties here
 }
 
-export type TenantWithRelations = Tenant & TenantRelations;
+export type CustomerWithRelations = Customer & CustomerRelations;
