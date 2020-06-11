@@ -1,6 +1,7 @@
 import { Contact } from './contact.model';
 import { model, property} from '@loopback/repository';
 import { UserModifiableEntity } from './user-modifiable-entity.model';
+import { TenantWithRelations } from '.';
 
 @model({
   name: 'customers',
@@ -57,6 +58,7 @@ export class Customer extends UserModifiableEntity {
 
 export interface CustomerRelations {
   // describe navigational properties here
+  tenant?: TenantWithRelations;
 }
 
 export type CustomerWithRelations = Customer & CustomerRelations;

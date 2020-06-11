@@ -39,6 +39,17 @@ export namespace TokenServiceBindings {
     
 }
 
+
+export interface AuthenticationStrategyOptions {
+    [property: string]: any;
+  }
+  
+  export namespace JwtAuthenticationStrategyBindings {
+    export const DEFAULT_OPTIONS = BindingKey.create<
+      AuthenticationStrategyOptions
+    >('authentication.strategies.jwt.defaultoptions');
+  }
+
 // export namespace UserServiceBindings {
 //   export const USER_SERVICE = BindingKey.create<UserService<User, Credentials>>(
 //     'services.user.service',

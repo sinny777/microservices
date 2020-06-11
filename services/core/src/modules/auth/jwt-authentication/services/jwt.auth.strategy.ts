@@ -1,15 +1,23 @@
-import {AuthenticationStrategy, TokenService} from '@loopback/authentication';
-import {inject} from '@loopback/context';
+
+import {inject, Getter} from '@loopback/core';
+
+import {AuthenticationStrategy, TokenService, AuthenticationBindings, AuthenticationMetadata} from '@loopback/authentication';
+// import {inject} from '@loopback/context';
 import {HttpErrors, Request} from '@loopback/rest';
 import {UserProfile} from '@loopback/security';
-import {TokenServiceBindings} from '../keys';
+import {TokenServiceBindings, JwtAuthenticationStrategyBindings, AuthenticationStrategyOptions} from '../keys';
 
 export class JWTAuthenticationStrategy implements AuthenticationStrategy {
   name = 'jwt';
 
+  @inject(JwtAuthenticationStrategyBindings.DEFAULT_OPTIONS)
+  options: AuthenticationStrategyOptions;
+
   constructor(
     @inject(TokenServiceBindings.TOKEN_SERVICE)
     public tokenService: TokenService,
+    @inject.getter(AuthenticationBindings.METADATA)
+    readonly getMetaData: Getter<AuthenticationMetadata>
   ) {}
 
   async authenticate(request: Request): Promise<UserProfile | undefined> {
@@ -42,4 +50,32 @@ export class JWTAuthenticationStrategy implements AuthenticationStrategy {
 
     return token;
   }
+
+  async processOptions() {
+    /**
+        Obtain the options object specified in the @authenticate decorator
+        of a controller method associated with the current request.
+        The AuthenticationMetadata interface contains : strategy:string, options?:object
+        We want the options property.
+    */
+    const controllerMethodAuthenticationMetadata = await this.getMetaData();
+
+    if (!this.options) this.options = {}; //if no default options were bound, assign empty options object
+
+    //override default options with request-level options
+    this.options = Object.assign(
+      {},
+      this.options,
+      controllerMethodAuthenticationMetadata.options,
+    );
+  }
+
+  // modifySpec(spec: OpenApiSpec): OpenApiSpec {
+  //   return mergeSecuritySchemeToSpec(spec, this.name, {
+  //     type: 'http',
+  //     scheme: 'bearer',
+  //     bearerFormat: 'JWT',
+  //   });
+  // }
+
 }

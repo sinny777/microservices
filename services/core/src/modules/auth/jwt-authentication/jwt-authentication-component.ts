@@ -1,19 +1,23 @@
-import { registerAuthenticationStrategy } from '@loopback/authentication';
+import { registerAuthenticationStrategy, AuthenticationBindings, AuthenticationStrategyProvider } from '@loopback/authentication';
 import {
     Application,
     Binding,
     Component,
     CoreBindings,
-    inject,
+    inject
 } from '@loopback/core';
+
+
 import { JWTAuthenticationStrategy } from './services/jwt.auth.strategy';
 import { JWTService } from './services/jwt.service';
 import {
     TokenServiceBindings
 } from './keys';
-// import {MyUserService} from './services/user.service';
 
 export class JWTAuthenticationComponent implements Component {
+
+    // providers?: ProviderMap;
+
     bindings = [
         Binding.bind(TokenServiceBindings.KEYCLOAK_URL).to(
             process.env.KEYCLOAK_URL,
@@ -45,6 +49,6 @@ export class JWTAuthenticationComponent implements Component {
         // Binding.bind(UserServiceBindings.USER_SERVICE).toClass(MyUserService),
     ];
     constructor(@inject(CoreBindings.APPLICATION_INSTANCE) app: Application) {
-        registerAuthenticationStrategy(app, JWTAuthenticationStrategy);
+        registerAuthenticationStrategy(app, JWTAuthenticationStrategy);     
     }
 }

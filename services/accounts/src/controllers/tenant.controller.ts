@@ -19,16 +19,21 @@ import {
   api,
 } from '@loopback/rest';
 import {Tenant} from '@sinny777/microservices-core';
+// import { Tenant } from '../models';
 import {TenantRepository} from '../repositories';
-import {AuthenticationBindings, authenticate} from '@loopback/authentication';
+import {authenticate} from '@loopback/authentication';
 
-@api({basePath: '/api/accounts/tenants', paths: {}})
+@api({basePath: '/api/tenants', paths: {}})
 export class TenantController {
   constructor(
     @repository(TenantRepository)
     public tenantRepository : TenantRepository,
   ) {}
 
+  /**
+   * 
+   * @param tenant Save Tenant
+   */
   @post('/', {
     responses: {
       '200': {
@@ -53,6 +58,10 @@ export class TenantController {
     return this.tenantRepository.create(tenant);
   }
 
+  /**
+   * 
+   * @param where Get count of Tenants
+   */
   @get('/count', {
     responses: {
       '200': {
@@ -68,6 +77,10 @@ export class TenantController {
     return this.tenantRepository.count(where);
   }
 
+  /**
+   * Find Tenants
+   * @param filter 
+   */
   @get('/', {
     responses: {
       '200': {
@@ -87,6 +100,11 @@ export class TenantController {
     return this.tenantRepository.find(filter);
   }
 
+  /**
+   * Update All Tenants based on where condition
+   * @param tenant 
+   * @param where 
+   */
   @patch('/', {
     responses: {
       '200': {
@@ -110,6 +128,10 @@ export class TenantController {
     return this.tenantRepository.updateAll(tenant, where);
   }
 
+  /**
+   * Find Tenant By Id
+   * @param id 
+   */
   @get('/{id}', {
     responses: {
       '200': {
@@ -123,6 +145,11 @@ export class TenantController {
     return this.tenantRepository.findById(id);
   }
 
+  /**
+   * Update Tenant by Id
+   * @param id 
+   * @param tenant 
+   */
   @patch('/{id}', {
     responses: {
       '204': {
@@ -160,6 +187,10 @@ export class TenantController {
     await this.tenantRepository.replaceById(id, tenant);
   }
 
+  /**
+   * Delete Tenant by Id
+   * @param id 
+   */
   @del('/{id}', {
     responses: {
       '204': {
@@ -171,4 +202,5 @@ export class TenantController {
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.tenantRepository.deleteById(id);
   }
+
 }

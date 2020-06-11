@@ -2,7 +2,7 @@ import { Customer } from './customer.model';
 import { Contact } from './contact.model';
 import { model, property, hasMany} from '@loopback/repository';
 // import {v4 as uuid} from 'uuid';
-import { TenantType, AddressType } from './types';
+import { TenantType } from './types';
 import { UserModifiableEntity } from './user-modifiable-entity.model';
 
 @model({

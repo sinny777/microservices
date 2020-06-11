@@ -1,5 +1,5 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig, BindingKey} from '@loopback/core';
+import {ApplicationConfig, BindingKey, Binding} from '@loopback/core';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
@@ -11,12 +11,8 @@ import * as path from 'path';
 import * as dotenv from "dotenv";
 import {MySequence} from './sequence';
 
-// import { JWTAuthenticationComponent } from './components/jwt-authentication/jwt-authentication-component';
-// import { JWTAuthenticationComponent } from 'microservices-core/dist/modules/auth/jwt-authentication';
-import { JWTAuthenticationComponent } from '@sinny777/microservices-core';
-import {
-  AuthenticationComponent,
-} from '@loopback/authentication';
+import { JWTAuthenticationComponent, JwtAuthenticationStrategyBindings } from '@sinny777/microservices-core';
+import {AuthenticationComponent} from '@loopback/authentication';
 
 export interface PackageInfo {
   name: string;
@@ -46,7 +42,7 @@ export class AccountsApplication extends BootMixin(
    this.api({
       openapi: '3.0.0',
       info: {title: pkg.name, version: pkg.version},
-      paths: {},
+      paths: {}, 
       // components: {securitySchemes: SECURITY_SCHEME_SPEC},
       servers: [{url: '/'}],
     });
@@ -63,12 +59,17 @@ export class AccountsApplication extends BootMixin(
     });
     this.component(RestExplorerComponent);
 
+    this.bind(JwtAuthenticationStrategyBindings.DEFAULT_OPTIONS).to({
+      gatherStatistics: true,
+    });
+
     this.component(AuthenticationComponent);
     this.component(JWTAuthenticationComponent);
     // this.component(AuthorizationComponent);
+    // registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
 
     this.projectRoot = __dirname;
-    // Customize @loopback/boot Booter Conventions here
+    
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here
@@ -83,6 +84,5 @@ export class AccountsApplication extends BootMixin(
       }
     };
   }
-
 
 }
