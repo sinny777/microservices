@@ -15,6 +15,7 @@ RUN npm install -g nodemon
 COPY . /app
 
 RUN npm ci
+RUN npm run clean
 RUN npm run build
 
 # Bind to all network interfaces so that it can be mapped to the host OS

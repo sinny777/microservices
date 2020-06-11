@@ -38,13 +38,30 @@ spec:
       containers:
       - name: smartthings-iot
         image: smartthings-iot:localtag
-        imagePullPolicy: Always
-        envFrom:
-        - configMapRef:
-            name: app-config
+        imagePullPolicy: Never
         env:
-        - name: PORT
-          value: "3000"  
+          - name: DB_CONNECTOR
+            value: "mongodb"
+          - name: DB_URL
+            value: ""
+          - name: DB_HOST
+            value: "mongodb-svc"
+          - name: DB_PORT
+            value: "27017"
+          - name: DB_NAME
+            value: "smartthings"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: DB_USERNAME
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: DB_PASSWORD
+          - name: PORT
+            value: "3000"  
         ports:
         - name: http
           containerPort: 3000   

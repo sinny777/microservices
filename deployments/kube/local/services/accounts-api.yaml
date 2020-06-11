@@ -1,0 +1,72 @@
+
+# Copyright 2020 IBM. 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartthings-account-svc
+  labels:
+    app: smartthings-account
+    tier: accounts
+spec:
+  ports:
+  - port:  80
+    targetPort: 3000
+  selector:
+   app: smartthings-account
+status:
+  loadBalancer: {}
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartthings-account
+  labels:
+    app: smartthings-account
+    tier: accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smartthings-account
+  template:
+    metadata:
+      labels:
+        app: smartthings-account        
+    spec:
+      containers:
+      - name: smartthings-account
+        image: smartthings-account:localtag
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: app-config
+        env:
+          - name: DB_CONNECTOR
+            value: "mongodb"
+          - name: DB_URL
+            value: ""
+          - name: DB_HOST
+            value: "mongodb-svc"
+          - name: DB_PORT
+            value: "27017"
+          - name: DB_NAME
+            value: "smartthings"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: DB_USERNAME
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secrets
+                key: DB_PASSWORD
+          - name: PORT
+            value: "3000"        
+        ports:
+        - name: http
+          containerPort: 3000   
+      restartPolicy: Always
+
