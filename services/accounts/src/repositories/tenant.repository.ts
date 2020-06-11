@@ -1,8 +1,7 @@
 // import { Customer, Tenant, TenantRelations  } from '../models';
-import {Customer, Tenant, TenantRelations  } from '@sinny777/microservices-core';
+import {Customer, Tenant, TenantRelations, DefaultUserModifyCrudRepository  } from '@sinny777/microservices-core';
 
 import { TenantsDataSource } from '../datasources';
-import { DefaultUserModifyCrudRepository } from './default-user-modify-crud.repository.base';
 import { AuthenticationBindings } from '@loopback/authentication';
 
 import {inject, Getter} from '@loopback/core';

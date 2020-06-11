@@ -1,8 +1,8 @@
-import { Customer, CustomerRelations } from '@sinny777/microservices-core';
+import { Customer, CustomerRelations, DefaultUserModifyCrudRepository } from '@sinny777/microservices-core';
 // import { Customer, CustomerRelations } from '../models';
 
 import { CustomersDataSource } from '../datasources';
-import { DefaultUserModifyCrudRepository } from './default-user-modify-crud.repository.base';
+// import { DefaultUserModifyCrudRepository } from './default-user-modify-crud.repository.base';
 import { AuthenticationBindings } from '@loopback/authentication';
 
 import {inject, Getter} from '@loopback/core';
