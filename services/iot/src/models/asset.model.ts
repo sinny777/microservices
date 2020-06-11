@@ -1,5 +1,5 @@
 import {UserModifiableEntity} from '@sinny777/microservices-core';
-import {model, property, hasOne} from '@loopback/repository';
+import {model, property} from '@loopback/repository';
 // import {v4 as uuid} from 'uuid';
 // import { Permission } from '@loopback/security';
 
@@ -68,5 +68,10 @@ export class Asset extends UserModifiableEntity {
   }
 }
 
-export type AssetWithRelations = Asset;
+export interface AssetRelations {
+  // describe navigational properties here
+}
+
+export type AssetWithRelations = Asset & AssetRelations;
+
 

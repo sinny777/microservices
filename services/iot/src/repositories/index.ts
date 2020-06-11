@@ -1,1 +1,1 @@
-export * from './tenant.repository';
+export * from './asset.repository';

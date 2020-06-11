@@ -1,17 +1,17 @@
 import {inject} from '@loopback/core';
 import {juggler} from '@loopback/repository';
-import * as config from './tenants.datasource.json';
+import * as config from './default.datasource.json';
 
-export class TenantsDataSource extends juggler.DataSource {
-  static dataSourceName = 'tenants';
+export class AssetsDataSource extends juggler.DataSource {
+  static dataSourceName = 'assets';
 
   constructor(
-    @inject('datasources.config.tenants', {optional: true})
+    @inject('datasources.config.assets', {optional: true})
       dsConfig: object = config,
   ) {
 
     dsConfig = {
-      name: 'tenants',
+      name: 'assets',
       connector: process.env.DB_CONNECTOR,
       url: process.env.DB_URL,
       host: process.env.DB_HOST,

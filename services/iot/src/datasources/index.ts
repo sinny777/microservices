@@ -1,3 +1,3 @@
-export * from './tenants.datasource';
+export * from './assets.datasource';
 
 
