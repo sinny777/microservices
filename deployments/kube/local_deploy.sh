@@ -8,7 +8,7 @@
 #   --cluster=docker-desktop \
 #   --user=docker-desktop
 
-# kubectl config use-context dev
+kubectl config use-context dev
 
 # kubectl apply -f local/auth/config/auth-secrets.yaml
 # kubectl apply -f local/auth/config/auth-config.yaml
@@ -18,10 +18,10 @@
 # kubectl apply -f local/app-config.yaml
 # kubectl apply -f local/app-secrets.yaml
 # kubectl apply -f local/services/mongodb.yaml
-kubectl apply -f local/services/accounts-api.yaml
+# kubectl apply -f local/services/accounts-api.yaml
 # kubectl apply -f local/services/iot-api.yaml
 # kubectl apply -f local/services/web.yaml
-kubectl apply -f local/ingress.yaml
+# kubectl apply -f local/ingress.yaml
 
 
 
