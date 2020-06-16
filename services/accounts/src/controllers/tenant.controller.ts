@@ -27,7 +27,7 @@ import {authenticate} from '@loopback/authentication';
 export class TenantController {
   constructor(
     @repository(TenantRepository)
-    public tenantRepository : TenantRepository,
+    public tenantRepository : TenantRepository   
   ) {}
 
   /**

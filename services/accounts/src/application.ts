@@ -1,3 +1,4 @@
+import { AccountService } from './services/account.service';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, BindingKey, Binding} from '@loopback/core';
 import {
@@ -13,6 +14,8 @@ import {MySequence} from './sequence';
 
 import { JWTAuthenticationComponent, JwtAuthenticationStrategyBindings } from '@sinny777/microservices-core';
 import {AuthenticationComponent} from '@loopback/authentication';
+
+import {UserProfile, SecurityBindings} from '@loopback/security';
 
 export interface PackageInfo {
   name: string;
@@ -68,6 +71,10 @@ export class AccountsApplication extends BootMixin(
     // this.component(AuthorizationComponent);
     // registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
 
+    // this.bind('account.service').to(AccountService);
+    // this.bind(SecurityBindings.USER).to(UserProfile);
+    this.service(AccountService);
+
     this.projectRoot = __dirname;
     
     this.bootOptions = {
@@ -80,6 +87,11 @@ export class AccountsApplication extends BootMixin(
       repositories: {
         dirs: ['repositories'],
         extensions: ['.repository.js'],
+        nested: true,
+      },
+      services: {
+        dirs: ['services'],
+        extensions: ['.service.js'],
         nested: true,
       }
     };

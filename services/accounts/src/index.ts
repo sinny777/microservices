@@ -18,7 +18,7 @@ export async function main(options: ApplicationConfig = {}) {
     }
   }
   const app = new AccountsApplication(options);
-  
+
   await app.boot();
   await app.start();
 

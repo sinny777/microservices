@@ -7,11 +7,11 @@ export async function migrate(args: string[]) {
   const app = new AccountsApplication();
   await app.boot();
   await app.migrateSchema({existingSchema});
-  
+
   // const authClientRepository: AuthClientRepository = await app.getRepository(AuthClientRepository);
   // const tenantRepository: TenantRepository = await app.getRepository(TenantRepository);
   // const userRepository: UserRepository = await app.getRepository(UserRepository);
-
+  
   // const tenant: Tenant = data.tenants[0] as Tenant;
   // const createdTenant = await tenantRepository.create(tenant);
   // console.log(createdTenant);

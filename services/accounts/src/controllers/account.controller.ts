@@ -18,20 +18,20 @@ import {
     requestBody,
     api,
   } from '@loopback/rest';
-  import {Tenant} from '@sinny777/microservices-core';
-  // import { Tenant } from '../models';
-  import {TenantRepository} from '../repositories';
+  import {SecurityBindings, UserProfile} from '@loopback/security';
+  import { AccountService } from './../services/account.service';
+  // import {Tenant} from '@sinny777/microservices-core';
   import {authenticate, AuthenticationBindings} from '@loopback/authentication';
-  import { UserProfile } from '@loopback/security';
-import { inject } from '@loopback/core';
+  
+import { inject, service } from '@loopback/core';
 
 
 
 @api({basePath: '/api/accounts', paths: {}})
 export class AccountController {
   constructor(
-    @repository(TenantRepository)
-    public tenantRepository : TenantRepository,
+    @service(AccountService)
+    public accountService : AccountService,
   ) {}
 
 
@@ -49,14 +49,35 @@ export class AccountController {
   @authenticate('jwt')
   async fetchCurrentUser(
     @inject(AuthenticationBindings.CURRENT_USER)
+    // @inject(SecurityBindings.USER)
     currentUserProfile: UserProfile,
   ): Promise<UserProfile> {
     // (@jannyHou)FIXME: explore a way to generate OpenAPI schema
     // for symbol property
-    console.log('IN DashboardController.fetchCurrentUser, currentUserProfile: >>>> ', currentUserProfile);
+    console.log('IN AccountsController.fetchCurrentUser, currentUserProfile: >>>> ', currentUserProfile);
     // currentUserProfile.id = currentUserProfile[securityId];
     // delete currentUserProfile[securityId];
-    return currentUserProfile;
+    return this.accountService.getUserDetails();    
+  }
+
+  @get('/clients', {
+    // security: OPERATION_SECURITY_SPEC,
+    responses: {
+      '200': {
+        description: 'Fetch Clients/Tenants',
+        content: {
+          'application/json': Object,
+        },
+      },
+    },
+  })
+  @authenticate('jwt')
+  async findClients(
+   ): Promise<any> {
+    // (@jannyHou)FIXME: explore a way to generate OpenAPI schema
+    // for symbol property
+    console.log('IN AccountsController.findClients: >>>> ');
+    return this.accountService.getClients();    
   }
 
 }
