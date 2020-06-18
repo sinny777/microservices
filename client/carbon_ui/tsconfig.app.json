@@ -11,10 +11,17 @@
     "include": [
         "src/**/*.d.ts",
         "src/*.d.ts",
-        "src/*.html"
+		"src/*.html",
+		"src/**/*",
+        "typings/**/*"
 	],
 	"exclude": [
 		"test.ts",
 		"**/*.spec.ts"
-	]
+	],
+	"angularCompilerOptions": {
+		"fullTemplateTypeCheck": false,
+		"strictInjectionParameters": true,
+		"enableIvy": false
+	}
 }

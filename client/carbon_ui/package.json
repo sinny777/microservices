@@ -4,7 +4,7 @@
   "license": "",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
+    "start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve --proxy-config src/config/proxy/proxy.conf.json --vendor-chunk",
     "main": "dist/index.html",
     "build": "ng build && cp src/config/.cfignore src/config/manifest.yml src/config/Staticfile dist",
     "test": "ng test",
@@ -45,7 +45,7 @@
     "@angular/cli": "^9.1.7",
     "@angular/compiler-cli": "^9.1.9",
     "@types/jasmine": "^3.5.10",
-    "@types/node": "~14.0.9",
+    "@types/node": "^14.0.13",
     "codelyzer": "^5.2.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.2",

@@ -1,0 +1,20 @@
+{
+    "/accounts-endpoint": {
+        "target": "https://accounts.smartthings.com",
+		"secure": false,
+		"logLevel": "debug",
+		"changeOrigin": "true",
+		"pathRewrite": {
+			"^/accounts-endpoint": "/api"
+		}
+	},
+	"/iot-endpoint": {
+        "target": "https://iot.smartthings.com",
+		"secure": false,
+		"logLevel": "debug",
+		"changeOrigin": "true",
+		"pathRewrite": {
+			"^/iot-endpoint": "/api"
+		}
+	}
+}

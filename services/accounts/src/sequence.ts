@@ -30,6 +30,11 @@ export class MySequence implements SequenceHandler {
       const {request, response} = context;
       const route = this.findRoute(request);
       const args = await this.parseParams(request, route);
+
+     
+      // response.header("Access-Control-Allow-Origin", 'http://localhost:4200');
+      // response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      // console.log('HEADERS SET FOR CORS : >>> ');
       
       // Do authentication of the user and fetch user permissions below
       const authUser: UserProfile | undefined = await this.authenticateRequest(request);
@@ -75,4 +80,21 @@ export class MySequence implements SequenceHandler {
       // return;
     }
   }
+
+  // extractCredentials(request: Request): string {
+  //   if (!request.headers.authorization) {
+  //     throw new HttpErrors.Unauthorized(`Authorization header not found.`);
+  //   }
+
+  //   // for example : Bearer xxx.yyy.zzz
+  //   const authHeaderValue = request.headers.authorization;
+
+  //   //split the string into 2 parts : 'Bearer ' and the `xxx.yyy.zzz`
+  //   const parts = authHeaderValue.split(' ');
+    
+  //   const token = parts[1];
+
+  //   return token;
+  // }
+
 }

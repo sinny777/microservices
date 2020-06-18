@@ -1,14 +1,14 @@
 # eval $(minikube docker-env)
 
 # python ../build_services.py -t latest -r sinny777 -P
-# python ../build_services.py -t localtag
+# python ../build_services.py -t latest
 
 # kubectl create -f local/namespaces/namespace-dev.json
 # kubectl config set-context dev --namespace=smartthings-dev \
 #   --cluster=docker-desktop \
 #   --user=docker-desktop
 
-kubectl config use-context dev
+# kubectl config use-context dev
 
 # kubectl apply -f local/auth/config/auth-secrets.yaml
 # kubectl apply -f local/auth/config/auth-config.yaml
@@ -21,7 +21,7 @@ kubectl config use-context dev
 # kubectl apply -f local/services/accounts-api.yaml
 # kubectl apply -f local/services/iot-api.yaml
 # kubectl apply -f local/services/web.yaml
-# kubectl apply -f local/ingress.yaml
+kubectl apply -f local/ingress.yaml
 
 
 

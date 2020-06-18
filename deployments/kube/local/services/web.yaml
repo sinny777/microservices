@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: smartthings-web
-        image: carbon_ui:localtag
+        image: carbon_ui:latest
         imagePullPolicy: Never
         env:
         - name: PORT

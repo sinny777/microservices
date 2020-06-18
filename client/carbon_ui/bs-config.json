@@ -1,4 +1,6 @@
 {
 	"port": 4200,
-	"cors": true
+	"cors": true,
+	"server": {    "baseDir": "dist"  },
+	"injectChanges" : true
 }

@@ -15,7 +15,6 @@ declare const Keycloak: any;
 export class KeycloakService {
 
 	auth: any = {};
-
 	keycloak: any;
 
 	constructor(private http: HttpClient) {
@@ -68,8 +67,10 @@ export class KeycloakService {
 			throw new Error('NO VALID TOKEN !! ');
 		}
 		let httpHeaders = new HttpHeaders();
-		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>(environment.IOT_BASE_URL + '/api/dashboard/users/me', { headers: httpHeaders });
+		// httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+		httpHeaders.set('Content-Type', 'application/json');
+		return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders});
+		// return this.http.get<User>('/accounts-api/accounts/users/me', { headers: httpHeaders, withCredentials: true });
 		// .pipe(
 		//   map((res: any) => {
 		//     console.log(res);

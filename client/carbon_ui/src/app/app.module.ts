@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // NGRX
@@ -24,7 +24,8 @@ import { AuthService } from './core/auth';
 // CRUD
 import {
 	HttpUtilsService,
-	TypesUtilsService
+	TypesUtilsService,
+	InterceptService
 } from './core/_base/crud';
 import { LoginSuccess } from './core/auth/_actions/auth.actions';
 
@@ -67,6 +68,7 @@ export function initAuth(store: Store<AppState>, keycloakService: KeycloakServic
 			deps: [Store, KeycloakService],
 			multi: true
 		},
+		{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true },
 		{provide: LocationStrategy, useClass: HashLocationStrategy}
 	],
 	bootstrap: [AppComponent]

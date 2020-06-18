@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: smartthings-account
-        image: smartthings-account:localtag
+        image: smartthings-account:latest
         imagePullPolicy: Never
         envFrom:
         - configMapRef:
@@ -63,6 +63,16 @@ spec:
               secretKeyRef:
                 name: mongodb-secrets
                 key: DB_PASSWORD
+          - name: CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: account-secrets
+                key: CLIENT_ID
+          - name: CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: account-secrets
+                key: CLIENT_SECRET
           - name: PORT
             value: "3000"        
         ports:

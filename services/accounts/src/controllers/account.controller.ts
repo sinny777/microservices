@@ -25,8 +25,6 @@ import {
   
 import { inject, service } from '@loopback/core';
 
-
-
 @api({basePath: '/api/accounts', paths: {}})
 export class AccountController {
   constructor(

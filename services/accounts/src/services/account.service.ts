@@ -26,13 +26,18 @@ export class AccountService {
     CLIENT_ID = process.env.CLIENT_ID;
     CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-    https.globalAgent.options.rejectUnauthorized = false;
+    console.log('CLIENT_ID: >> ', CLIENT_ID);
+    console.log('CLIENT_SECRET: >> ', CLIENT_SECRET);
+
+    // const verifySSL = process.env.NODE_ENV === 'production'; 
+    const verifySSL = false;
+    https.globalAgent.options.rejectUnauthorized = verifySSL;
     kcAdminClient = new KcAdminClient({
         baseUrl: keycloadURL+'/auth',
         realmName: keycloakRealm,
         requestConfig: {
           httpsAgent: new https.Agent({  
-            rejectUnauthorized: false
+            rejectUnauthorized: verifySSL
           })
         }
     });
@@ -90,9 +95,9 @@ export class AccountService {
       this.currentUserProfile.groups = groups;      
      
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       throw new HttpErrors.Unauthorized(
-        `Error getUserInfo: ${error.message}`,
+        `Error getUserDetails: ${error.message}`,
       );
     }
     return this.currentUserProfile;

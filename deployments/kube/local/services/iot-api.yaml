@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: smartthings-iot
-        image: smartthings-iot:localtag
+        image: smartthings-iot:latest
         imagePullPolicy: Never
         env:
           - name: DB_CONNECTOR

@@ -48,11 +48,12 @@ export class AuthService {
 	}
 
 	getUserByToken(): Observable<User> {
+		console.log('In Auth Service, getUserByToken: >>> ');
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		// return this.http.get<User>(API_USERS_URL, {headers: httpHeaders});
-		return this.http.post<User>(environment.IOT_BASE_URL + '/api/dashboard/users/me', { headers: httpHeaders })
+		return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders})
+		// return this.http.get<User>(environment.ACCOUNTS_BASE_URL + '/api/accounts/users/me', { headers: httpHeaders })
 			.pipe(
 				map((res: any) => {
 					console.log(res);

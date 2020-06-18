@@ -8,7 +8,7 @@ images = [
   # ["../../services/keycloak", "smartthings-keycloak"],
   ["../../services/accounts", "smartthings-account"],
   ["../../services/iot", "smartthings-iot"],
-  # ["../../client/carbon_ui", "carbon_ui"],
+  ["../../client/carbon_ui", "carbon_ui"],
   # ["../../client/custom_ui", "custom_ui"]
 ]
 

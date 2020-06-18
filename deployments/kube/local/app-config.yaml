@@ -35,10 +35,10 @@ data:
 ##############  LOCAL CONFIGURATIONS #############
   DEBUG: "*" # Debug string to apply to applications
   KEYCLOAK_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmZNGwcAqTXlLfnianbHa\n17R03oOgk7sjKdrF+xjAdCmPEWUtbLKUN3fRGeoo/9QEXBP29copt1evnvC35J9q\njt46LMu4HHWhPxLglDwlQ/74hvj9YcjX4XzTOkagStZwXZA2hD7HDnWhbdt+Vrrt\n6Drj2FpjdioSkZWoszyHCEakkWVk5YYLLRav7tim/Z1wsiiNRRQ6l9kIDEL5aPbk\nnrl7aSEBNLJ4vGwvNFZ1yVHouxjR/YJwSdSJssfDltvBM7mm5Vi7H4VC7FQqUaPw\npmRmbCIv0ixJcHm9yBnrCqy/uGT2gj8sqdfVaPh6s6HxyOs7zBgLdAxIG50qHznC\nvQIDAQAB\n-----END PUBLIC KEY-----\n\n"
-  KEYCLOAK_URL: https://auth.smartthings.com
+  KEYCLOAK_URL: http://keycloak-svc:8888
   KEYCLOAK_REALM: development
   TOKEN_ISSUER: https://auth.smartthings.com/auth/realms/development
-  TOKEN_AUDIENCE: iot_backend
+  TOKEN_AUDIENCE: account
   TOKEN_ALGORITHM: RS256
   TOKEN_EXPIRES_IN: "3600"
 

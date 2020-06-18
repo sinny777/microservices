@@ -1,10 +1,11 @@
+// const { api_endpoints } = require('../config/app_config.json');
 
 // Add here your keycloak setup infos
 const keycloakConfig: any = {
 	'realm': 'development',
 	'clientId': 'smartcity-web',
-	// 'url': 'https://gae-keycloak-service-dot-hukam-157906.an.r.appspot.com/auth',
-	'url': 'https://microservices-auth.mybluemix.net/auth',
+	// 'url': https://microservices-auth.mybluemix.net/auth',
+	'url': 'https://auth.smartthings.com/auth',
 	'ssl-required': 'external',
 	'resource': 'smartcity-web',
 	'public-client': true,
@@ -17,6 +18,5 @@ export const environment = {
 	production: true,
 	isMockEnabled: true, // You have to switch this, when your real back-end is done
 	authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',
-	IOT_BASE_URL: 'https://iot.smartthings.com',
 	keycloakConfig
 };

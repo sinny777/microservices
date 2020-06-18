@@ -2,6 +2,9 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// const { api_endpoints } = require('../config/app_config.json');
+// var app_config = require('../config/app_config.json');
+
 // Add here your keycloak setup infos
 const keycloakConfig: any = {
 	'realm': 'development',
@@ -19,7 +22,6 @@ const keycloakConfig: any = {
 export const environment = {
 	production: false,
 	isMockEnabled: true, // You have to switch this, when your real back-end is done
-	IOT_BASE_URL: 'https://iot.smartthings.com',
 	authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',
 	keycloakConfig
 };
