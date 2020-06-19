@@ -31,24 +31,20 @@ jobs:
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build Accounts Service
       run: |
-        echo Building Accounts Service,
         docker build ./services/accounts -t sinny777/smartthings-account:latest
     - name: Build IoT Service
       run: |
-        echo Building IoT Service,
         docker build ./services/iot -t sinny777/smartthings-iot:latest
     - name: Build CarbonUI Service
       run: |
-        echo Building CarbonUI Service,
         docker build ./client/carbon_ui -t sinny777/smartthings-carbon_ui:latest
-    - name: Build CustomUI Service
-      run: |
-        echo Building CustomUI Service,
-        docker build ./client/custom_ui -t sinny777/smartthings-custom_ui:latest
+    # - name: Build CustomUI Service
+    #   run: |
+    #     docker build ./client/custom_ui -t sinny777/smartthings-custom_ui:latest
     - name: Docker Push
       run: |
         echo Pushing All services to Dockerhub,
         docker push sinny777/smartthings-account:latest
         docker push sinny777/smartthings-iot:latest
         docker push sinny777/smartthings-carbon_ui:latest
-        docker push sinny777/smartthings-custom_ui:latest
+    #     docker push sinny777/smartthings-custom_ui:latest
