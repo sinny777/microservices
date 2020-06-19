@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Docker Build and Push CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a set of commands using the runners shell
+    - name: Build Accounts Service
+      run: |
+        echo Building Accounts Service,
+        docker build ./services/accounts -t sinny777/smartthings-account:latest
+    - name: Build IoT Service
+      run: |
+        echo Building IoT Service,
+        docker build ./services/iot -t sinny777/smartthings-iot:latest
+    - name: Build CarbonUI Service
+      run: |
+        echo Building CarbonUI Service,
+        docker build ./client/carbon_ui -t sinny777/smartthings-carbon_ui:latest
+    - name: Build CustomUI Service
+      run: |
+        echo Building CustomUI Service,
+        docker build ./client/custom_ui -t sinny777/smartthings-custom_ui:latest
