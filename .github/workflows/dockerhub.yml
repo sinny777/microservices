@@ -23,6 +23,12 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a set of commands using the runners shell
+    - name: Docker Login
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build Accounts Service
       run: |
         echo Building Accounts Service,
@@ -39,3 +45,10 @@ jobs:
       run: |
         echo Building CustomUI Service,
         docker build ./client/custom_ui -t sinny777/smartthings-custom_ui:latest
+    - name: Docker Push
+      run: |
+        echo Pushing All services to Dockerhub,
+        docker push sinny777/smartthings-account:latest
+        docker push sinny777/smartthings-iot:latest
+        docker push sinny777/smartthings-carbon_ui:latest
+        docker push sinny777/smartthings-custom_ui:latest
