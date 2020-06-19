@@ -1,5 +1,8 @@
 FROM ubuntu:bionic
 
+LABEL author="Gurvinder Singh <sinny777@gmail.com>"
+LABEL profile="http://www.gurvinder.info"
+
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 

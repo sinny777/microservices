@@ -1,6 +1,9 @@
 
 FROM node:12-slim
 
+LABEL author="Gurvinder Singh <sinny777@gmail.com>"
+LABEL profile="http://www.gurvinder.info"
+
 # Set to a non-root built-in user `node`
 # USER node
 # Create app directory (with user `node`)

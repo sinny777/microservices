@@ -1,6 +1,7 @@
 FROM quay.io/keycloak/keycloak:10.0.1
 
-LABEL maintainer = "Gurvinder Singh <sinny777@gmail.com>"
+LABEL authors="Gurvinder Singh <sinny777@gmail.com>"
+LABEL profile="http://www.gurvinder.info"
 
 # Initial account credentials
 ENV KEYCLOAK_USER admin
