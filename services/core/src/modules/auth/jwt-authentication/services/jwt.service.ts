@@ -79,6 +79,7 @@ export class JWTService implements TokenService {
           id: decodedToken.sub,
           firstName: decodedToken.given_name,
           lastName: decodedToken.family_name,
+          email: decodedToken.email,
           access: {realmAccess: decodedToken.realm_access, resourceAccess: decodedToken.resource_access}
         },
       );

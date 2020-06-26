@@ -80,7 +80,7 @@ export class AccountService {
   }
 
   async getUserDetails(): Promise<UserProfile> {
-    console.log('IN AccountService.getUserDetails: >>>> ');
+    console.log('IN AccountService.getUserDetails: >>>> ', this.currentUserProfile);
     if (!this.currentUserProfile) {
       throw new HttpErrors.Unauthorized(
         `User is not authenticated...`,
@@ -118,6 +118,22 @@ export class AccountService {
       );
     }    
   }
+
+  // async getClients(): Promise<any> {
+  //   console.log('IN AccountService.getClients: >>>> ');
+  //   try {
+  //     if(!kcAdminClient || !kcAdminClient.accessToken){
+  //       await this.initKeycloak();
+  //     }      
+
+  //    return await kcAdminClient.clients.find();    
+     
+  //   } catch (error) {
+  //     throw new HttpErrors.Unauthorized(
+  //       `Error getUserInfo: ${error.message}`,
+  //     );
+  //   }    
+  // }
   
 
 }
