@@ -66,11 +66,11 @@ export class KeycloakService {
 		if (!userToken) {
 			throw new Error('NO VALID TOKEN !! ');
 		}
-		let httpHeaders = new HttpHeaders();
+		// let httpHeaders = new HttpHeaders();
 		// httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		httpHeaders.set('Content-Type', 'application/json');
-		return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders});
-		// return this.http.get<User>('/accounts-api/accounts/users/me', { headers: httpHeaders, withCredentials: true });
+		// httpHeaders.set('Content-Type', 'application/json');
+		// return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders});
+		return this.http.get<User>(environment.ACCOUNTS_API_URL + '/api/accounts/users/me');
 		// .pipe(
 		//   map((res: any) => {
 		//     console.log(res);

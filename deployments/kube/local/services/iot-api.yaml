@@ -39,6 +39,9 @@ spec:
       - name: smartthings-iot
         image: smartthings-iot:latest
         imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: app-config
         env:
           - name: DB_CONNECTOR
             value: "mongodb"

@@ -8,7 +8,7 @@
 #   --cluster=docker-desktop \
 #   --user=docker-desktop
 
-# kubectl config use-context dev
+kubectl config use-context dev
 
 # kubectl delete -f local/ingress.yaml
 # kubectl delete -f local/services/web.yaml
@@ -30,12 +30,12 @@
 # kubectl apply -f local/auth/postgres-storage.yaml
 # kubectl apply -f local/auth/postgres-deployment.yaml
 # kubectl apply -f local/auth/keycloak-deployment.yaml
-kubectl apply -f local/app-config.yaml
-kubectl apply -f local/app-secrets.yaml
+# kubectl apply -f local/app-config.yaml
+# kubectl apply -f local/app-secrets.yaml
 # kubectl apply -f local/services/mongodb.yaml
-kubectl apply -f local/services/accounts-api.yaml
-kubectl apply -f local/services/iot-api.yaml
-kubectl apply -f local/services/web.yaml
+# kubectl apply -f local/services/accounts-api.yaml
+# kubectl apply -f local/services/iot-api.yaml
+# kubectl apply -f local/services/web.yaml
 kubectl apply -f local/ingress.yaml
 
 

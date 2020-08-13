@@ -16,6 +16,8 @@ export class AuthService {
 	constructor(private http: HttpClient) {
 	}
 
+	/*
+	BELOW METHOD NOT IN USE
 	// Authentication/Authorization
 	login(email: string, password: string): Observable<User> {
 		console.log('IN AUTH SERVICE LOGIN METHOD: >>>> ');
@@ -44,16 +46,16 @@ export class AuthService {
 					return null;
 				})
 			);
-
 	}
+	*/
 
 	getUserByToken(): Observable<User> {
 		console.log('In Auth Service, getUserByToken: >>> ');
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders})
-		// return this.http.get<User>(environment.ACCOUNTS_BASE_URL + '/api/accounts/users/me', { headers: httpHeaders })
+		// return this.http.get<User>('/accounts-endpoint/accounts/users/me', { headers: httpHeaders})
+		return this.http.get<User>(environment.ACCOUNTS_API_URL + '/api/accounts/users/me', { headers: httpHeaders })
 			.pipe(
 				map((res: any) => {
 					console.log(res);
