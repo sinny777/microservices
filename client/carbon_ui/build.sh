@@ -19,6 +19,7 @@ echo "*********** RUNNING CLIENT BUILD WITH BUILD_ENV=$BUILD_ENV environment ***
 function build_client {
   npm install -f
   npm install -g @angular/cli@9.1.3
+  npm install --only=dev
   npm audit fix
   ng build --configuration $BUILD_ENV
   rm -rf node_modules
