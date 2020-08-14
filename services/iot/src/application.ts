@@ -7,6 +7,7 @@ import {
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
+import {MetricsComponent} from '@loopback/extension-metrics';
 import * as path from 'path';
 import * as dotenv from "dotenv";
 import {MySequence} from './sequence';
@@ -62,6 +63,8 @@ export class IotApplication extends BootMixin(
     this.bind(JwtAuthenticationStrategyBindings.DEFAULT_OPTIONS).to({
       gatherStatistics: true,
     });
+
+    this.component(MetricsComponent);
 
     this.component(AuthenticationComponent);
     this.component(JWTAuthenticationComponent);

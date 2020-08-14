@@ -4,18 +4,8 @@ import {model, property} from '@loopback/repository';
 // import { Permission } from '@loopback/security';
 
 @model({
-  settings: {
-    indexes: {
-      name: {
-        keys: {
-          name: 1,
-        },
-        options: {
-          unique: true,
-        },
-      },
-    },
-  },
+  name: 'assets',
+  settings: {strict: false}
 })
 export class Asset extends UserModifiableEntity {
   @property({
@@ -24,6 +14,14 @@ export class Asset extends UserModifiableEntity {
     defaultFn: "uuidv4"
   })
   id?: string;
+
+  @property({
+    type: 'string',
+    required: false,
+    index: true,
+    default: null
+  })
+  parentId?: string;
 
   @property({
     type: 'string',

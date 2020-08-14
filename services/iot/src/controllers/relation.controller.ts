@@ -19,6 +19,7 @@ import {
 } from '@loopback/rest';
 import {EntityRelation} from '../models';
 import {EntityRelationRepository} from '../repositories';
+import { authenticate } from '@loopback/authentication';
 
 @api({basePath: '/api/entity-relations', paths: {}})
 export class RelationController {
@@ -35,6 +36,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async create(
     @requestBody({
       content: {
@@ -59,6 +61,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async count(
     @param.where(EntityRelation) where?: Where<EntityRelation>,
   ): Promise<Count> {
@@ -80,6 +83,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async find(
     @param.filter(EntityRelation) filter?: Filter<EntityRelation>,
   ): Promise<EntityRelation[]> {
@@ -94,6 +98,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async updateAll(
     @requestBody({
       content: {
@@ -120,6 +125,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async findById(
     @param.path.string('id') id: string,
     @param.filter(EntityRelation, {exclude: 'where'}) filter?: FilterExcludingWhere<EntityRelation>
@@ -134,6 +140,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -155,6 +162,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() entityRelation: EntityRelation,
@@ -169,6 +177,7 @@ export class RelationController {
       },
     },
   })
+  @authenticate('jwt')
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.entityRelationRepository.deleteById(id);
   }

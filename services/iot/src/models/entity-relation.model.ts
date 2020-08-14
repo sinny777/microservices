@@ -17,18 +17,18 @@ export class EntityRelation extends UserModifiableEntity {
   id?: string;
   
   @property({
-    type: 'string',
+    type: 'object',
     required: true,
     index: true
   })
-  fromId?: string;
+  from?: object;
 
   @property({
-    type: 'string',
+    type: 'object',
     required: true,
     index: true
   })
-  toId?: string;
+  to?: object;
 
   @property({
     type: 'string',

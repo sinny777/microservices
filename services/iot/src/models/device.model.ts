@@ -2,6 +2,7 @@ import {model, property} from '@loopback/repository';
 import { UserModifiableEntity } from '@sinny777/microservices-core';
 
 @model({
+  name: 'devices',
   settings: {
     indexes: {
       name: {
