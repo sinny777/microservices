@@ -17,7 +17,7 @@
     SHARED = 'SHARED'
   }
 
-  export const enum EntityRelationType {
+  export enum EntityRelationType {
     CONTAINS = 'CONTAINS',
     MANAGES = 'MANAGES'    
   }

@@ -19,6 +19,7 @@ import {
 } from '@loopback/rest';
 import {Asset} from '../models';
 import {AssetRepository} from '../repositories';
+import { authenticate } from '@loopback/authentication';
 
 @api({basePath: '/api/assets', paths: {}})
 export class AssetController {
@@ -35,6 +36,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async create(
     @requestBody({
       content: {

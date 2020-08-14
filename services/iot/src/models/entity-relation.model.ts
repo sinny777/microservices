@@ -1,60 +1,44 @@
 import {UserModifiableEntity} from '@sinny777/microservices-core';
 import {model, property} from '@loopback/repository';
-// import {v4 as uuid} from 'uuid';
-// import { Permission } from '@loopback/security';
+import { EntityRelationType } from '.';
+
 
 @model({
-  settings: {
-    indexes: {
-      name: {
-        keys: {
-          name: 1,
-        },
-        options: {
-          unique: true,
-        },
-      },
-    },
-  },
+    name: 'entity-relations',
+    settings: {strict: false}
 })
-export class Asset extends UserModifiableEntity {
+export class EntityRelation extends UserModifiableEntity {
+
   @property({
     type: 'string',
-    id: true,
-    defaultFn: "uuidv4"
+    required: false,
+    id: true
   })
   id?: string;
+  
+  @property({
+    type: 'string',
+    required: true,
+    index: true
+  })
+  fromId?: string;
 
   @property({
     type: 'string',
     required: true,
     index: true
   })
-  name?: string;
+  toId?: string;
 
   @property({
     type: 'string',
     required: true,
-    index: true
+    index: true,
+    jsonSchema: {
+      enum: Object.values(EntityRelationType),
+    }
   })
-  type?: string;
-
-  @property({
-    type: 'string'    
-  })
-  label?: string;
-
-  @property({
-    type: 'string',
-    required: false
-  })
-  tenantId?: string;
-
-  @property({
-    type: 'string',
-    required: false
-  })
-  customerId?: string;
+  type?: EntityRelationType;
 
   @property({
     type: 'string',
@@ -65,7 +49,7 @@ export class Asset extends UserModifiableEntity {
  
   // Define well-known properties here
 
-  constructor(data?: Partial<Asset>) {
+  constructor(data?: Partial<EntityRelation>) {
     super(data);
     // if (data != null && typeof data === 'object') {
     //   Object.assign(this, data);
@@ -73,10 +57,10 @@ export class Asset extends UserModifiableEntity {
   }
 }
 
-export interface AssetRelations {
+export interface EntityRelationRelations {
   // describe navigational properties here
 }
 
-export type AssetWithRelations = Asset & AssetRelations;
+export type EntityRelationWithRelations = EntityRelation & EntityRelationRelations;
 
 
