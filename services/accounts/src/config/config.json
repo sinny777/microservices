@@ -1,0 +1,10 @@
+{
+    "skip_clients": [
+        "account",
+        "account-console",
+        "admin-cli",
+        "broker",
+        "realm-management",
+        "security-admin-console"
+    ]
+}

@@ -1,10 +1,10 @@
 
-import {inject, Getter} from '@loopback/core';
+import {inject, Getter, Setter} from '@loopback/core';
 
 import {AuthenticationStrategy, TokenService, AuthenticationBindings, AuthenticationMetadata} from '@loopback/authentication';
 // import {inject} from '@loopback/context';
 import {HttpErrors, Request} from '@loopback/rest';
-import {UserProfile} from '@loopback/security';
+import {UserProfile, SecurityBindings} from '@loopback/security';
 import {TokenServiceBindings, JwtAuthenticationStrategyBindings, AuthenticationStrategyOptions} from '../keys';
 
 export class JWTAuthenticationStrategy implements AuthenticationStrategy {
@@ -17,12 +17,15 @@ export class JWTAuthenticationStrategy implements AuthenticationStrategy {
     @inject(TokenServiceBindings.TOKEN_SERVICE)
     public tokenService: TokenService,
     @inject.getter(AuthenticationBindings.METADATA)
-    readonly getMetaData: Getter<AuthenticationMetadata>
+    readonly getMetaData: Getter<AuthenticationMetadata>,
+    // @inject.setter(AuthenticationBindings.CURRENT_USER) readonly setCurrentUser: Setter<UserProfile>,
+    @inject.setter(SecurityBindings.USER) readonly setCurrentUser: Setter<UserProfile>,
   ) {}
 
   async authenticate(request: Request): Promise<UserProfile | undefined> {
     const token: string = this.extractCredentials(request);
     const userProfile: UserProfile = await this.tokenService.verifyToken(token);
+    this.setCurrentUser(userProfile);
     return userProfile;
   }
 

@@ -6,14 +6,16 @@ import {HttpErrors} from '@loopback/rest';
 import { TokenServiceBindings } from '@sinny777/microservices-core';
 import KcAdminClient from 'keycloak-admin';
 import {Issuer} from 'openid-client';
+// import * as CONFIG from '../config/config.json';
 const https = require('https');
 
-let kcAdminClient: KcAdminClient;
-let CLIENT_ID: any;
-let CLIENT_SECRET: any
-
-// @bind({scope: BindingScope.TRANSIENT})
+@bind({scope: BindingScope.SINGLETON})
 export class AccountService {
+
+   kcAdminClient: KcAdminClient;
+   CLIENT_ID: any;
+   CLIENT_SECRET: any
+
   constructor(
     @inject(TokenServiceBindings.KEYCLOAK_URL)
     private keycloadURL: string, 
@@ -22,34 +24,40 @@ export class AccountService {
     @inject(AuthenticationBindings.CURRENT_USER)
     private currentUserProfile: UserProfile     
   ) {
+    console.log('IN Constructor of AccountService: >>>>> ');
+    if(!this.kcAdminClient){
+        this.CLIENT_ID = process.env.CLIENT_ID;
+        this.CLIENT_SECRET = process.env.CLIENT_SECRET;
+    
+        // console.log('CLIENT_ID: >> ', this.CLIENT_ID);
+        // console.log('CLIENT_SECRET: >> ', this.CLIENT_SECRET);
+    
+        // const verifySSL = process.env.NODE_ENV === 'production'; 
+        const verifySSL = false;
+        https.globalAgent.options.rejectUnauthorized = verifySSL;
+        this.kcAdminClient = new KcAdminClient({
+            baseUrl: keycloadURL+'/auth',
+            realmName: keycloakRealm,
+            requestConfig: {
+              httpsAgent: new https.Agent({  
+                rejectUnauthorized: verifySSL
+              })
+            }
+        });
+    }
 
-    CLIENT_ID = process.env.CLIENT_ID;
-    CLIENT_SECRET = process.env.CLIENT_SECRET;
-
-    console.log('CLIENT_ID: >> ', CLIENT_ID);
-    console.log('CLIENT_SECRET: >> ', CLIENT_SECRET);
-
-    // const verifySSL = process.env.NODE_ENV === 'production'; 
-    const verifySSL = false;
-    https.globalAgent.options.rejectUnauthorized = verifySSL;
-    kcAdminClient = new KcAdminClient({
-        baseUrl: keycloadURL+'/auth',
-        realmName: keycloakRealm,
-        requestConfig: {
-          httpsAgent: new https.Agent({  
-            rejectUnauthorized: verifySSL
-          })
-        }
-    });
+    // this.initKeycloak().finally(() => {
+    //   console.log("<<<< KEYCLOAK INIT COMPLETED: >>> ");
+    // });
 
   }
 
   async initKeycloak() {
-    // console.log('IN KEYCOAK ADMIN CLIENT INIT : >>>> ');
-    await kcAdminClient.auth({
+    console.log('IN KEYCOAK ADMIN CLIENT INIT : >>>> ');
+    await this.kcAdminClient.auth({
         grantType: 'client_credentials',
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET
+        clientId: this.CLIENT_ID,
+        clientSecret: this.CLIENT_SECRET
       } as any);
     
     const keycloakIssuer = await Issuer.discover(
@@ -57,14 +65,14 @@ export class AccountService {
     );
 
     const client = new keycloakIssuer.Client({
-      client_id: CLIENT_ID, 
-      client_secret: CLIENT_SECRET
+      client_id: this.CLIENT_ID, 
+      client_secret: this.CLIENT_SECRET
     });
     // Use the grant type 'password'
     let tokenSet = await client.grant({
       grant_type: 'client_credentials',     
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET
+      client_id: this.CLIENT_ID,
+      client_secret: this.CLIENT_SECRET
     });
 
     // Periodically using refresh_token grant flow to get new access token here
@@ -72,10 +80,11 @@ export class AccountService {
       const refreshToken: any = tokenSet.refresh_token;
       tokenSet = await client.refresh(refreshToken);
       // console.log('NEW ACCESS TOKEN: >>> ', tokenSet.access_token);
-      kcAdminClient.setAccessToken(tokenSet.access_token as any);
+      this.kcAdminClient.setAccessToken(tokenSet.access_token as any);
     }, 58 * 60 * 1000); // 58 minutes
 
-    console.log('INIT ADMIN KEYCLOAK API COMPLETED: >>>>>> ', kcAdminClient.accessToken);
+    // console.log('INIT ADMIN KEYCLOAK API COMPLETED: >>>>>> ', kcAdminClient.accessToken);
+    console.log('INIT ADMIN KEYCLOAK API COMPLETED: >>>>>> ');
 
   }
 
@@ -88,10 +97,12 @@ export class AccountService {
     }
 
     try {
-      if(!kcAdminClient || !kcAdminClient.accessToken){
+      if(!this.kcAdminClient || !this.kcAdminClient.accessToken){
         await this.initKeycloak();
       }      
-      const groups = await kcAdminClient.users.listGroups({id: this.currentUserProfile.id});      
+      const groups = await this.kcAdminClient.users.listGroups({id: this.currentUserProfile.id});  
+      // const skipClients = CONFIG.skip_clients;
+
       this.currentUserProfile.groups = groups;      
      
     } catch (error) {
@@ -103,15 +114,27 @@ export class AccountService {
     return this.currentUserProfile;
   }
 
-  async getClients(): Promise<any> {
-    console.log('IN AccountService.getClients: >>>> ');
+  async getClients(filter: any): Promise<any> {
+    console.log('IN AccountService.getClients: >>>> ', filter);
     try {
-      if(!kcAdminClient || !kcAdminClient.accessToken){
+      if(!this.kcAdminClient || !this.kcAdminClient.accessToken){
         await this.initKeycloak();
-      }      
-
-     return await kcAdminClient.clients.find();    
-     
+      }   
+      
+      if(filter && filter.length > 0){
+        let filteredClients = [];
+        for (const clientId of filter) {
+          const payload = {"clientId": clientId};
+          let clients = await this.kcAdminClient.clients.find(payload);
+          if(clients && clients.length > 0){
+            const client = {id: clients[0].id, clientId: clients[0].clientId, name: clients[0].name, description: clients[0].description};
+            filteredClients.push(client);
+          }          
+        }
+        return await filteredClients;
+      }else{
+        return await this.kcAdminClient.clients.find();  
+      }
     } catch (error) {
       throw new HttpErrors.Unauthorized(
         `Error getUserInfo: ${error.message}`,

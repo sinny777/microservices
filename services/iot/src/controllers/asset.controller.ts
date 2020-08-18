@@ -61,6 +61,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async count(
     @param.where(Asset) where?: Where<Asset>,
   ): Promise<Count> {
@@ -82,6 +83,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async find(
     @param.filter(Asset) filter?: Filter<Asset>,
   ): Promise<Asset[]> {
@@ -96,6 +98,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async updateAll(
     @requestBody({
       content: {
@@ -122,6 +125,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async findById(
     @param.path.string('id') id: string,
     @param.filter(Asset, {exclude: 'where'}) filter?: FilterExcludingWhere<Asset>
@@ -136,6 +140,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -157,6 +162,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() asset: Asset,
@@ -171,6 +177,7 @@ export class AssetController {
       },
     },
   })
+  @authenticate('jwt')
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.assetRepository.deleteById(id);
   }

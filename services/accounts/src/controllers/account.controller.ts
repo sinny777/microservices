@@ -29,7 +29,11 @@ import { inject, service } from '@loopback/core';
 export class AccountController {
   constructor(
     @service(AccountService)
-    public accountService : AccountService,
+    private accountService : AccountService,
+    // @inject('services.account') private accountService: AccountService,
+    // @inject(AuthenticationBindings.CURRENT_USER)
+    @inject(SecurityBindings.USER)
+    private currentUserProfile: UserProfile,
   ) {}
 
 
@@ -46,13 +50,13 @@ export class AccountController {
   })
   @authenticate('jwt')
   async fetchCurrentUser(
-    @inject(AuthenticationBindings.CURRENT_USER)
-    // @inject(SecurityBindings.USER)
-    currentUserProfile: UserProfile,
+    // @inject(AuthenticationBindings.CURRENT_USER)
+    // // @inject(SecurityBindings.USER)
+    // currentUserProfile: UserProfile,
   ): Promise<UserProfile> {
     // (@jannyHou)FIXME: explore a way to generate OpenAPI schema
     // for symbol property
-    console.log('IN AccountsController.fetchCurrentUser, currentUserProfile: >>>> ', currentUserProfile);
+    console.log('IN AccountsController.fetchCurrentUser, currentUserProfile: >>>> ', this.currentUserProfile);
     // currentUserProfile.id = currentUserProfile[securityId];
     // delete currentUserProfile[securityId];
     return this.accountService.getUserDetails();    
@@ -71,11 +75,21 @@ export class AccountController {
   })
   @authenticate('jwt')
   async findClients(
+    @param.query.object('params') params: object
    ): Promise<any> {
     // (@jannyHou)FIXME: explore a way to generate OpenAPI schema
     // for symbol property
-    console.log('IN AccountsController.findClients: >>>> ');
-    return this.accountService.getClients();    
+    console.log('IN AccountsController.findClients: >>>> ', params);
+    let filter;
+    try {
+        if(params){
+          filter = JSON.parse(JSON.stringify(params)).filter;
+        }
+    } catch (error) {
+      console.error(error);
+    }
+    
+    return this.accountService.getClients(filter);    
   }
 
 }

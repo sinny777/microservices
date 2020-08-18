@@ -12,8 +12,8 @@ import * as path from 'path';
 import * as dotenv from "dotenv";
 import {MySequence} from './sequence';
 
-import { JWTAuthenticationComponent, JwtAuthenticationStrategyBindings } from '@sinny777/microservices-core';
-import {AuthenticationComponent} from '@loopback/authentication';
+import { JWTAuthenticationComponent, JwtAuthenticationStrategyBindings, User } from '@sinny777/microservices-core';
+import {AuthenticationComponent, AuthenticationBindings} from '@loopback/authentication';
 
 import {UserProfile, SecurityBindings} from '@loopback/security';
 
@@ -71,8 +71,9 @@ export class AccountsApplication extends BootMixin(
     // this.component(AuthorizationComponent);
     // registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
 
-    // this.bind('account.service').to(AccountService);
-    // this.bind(SecurityBindings.USER).to(UserProfile);
+    // this.bind('services.account').to(AccountService);
+    this.bind(SecurityBindings.USER).toClass(User);
+    // this.bind(AuthenticationBindings.CURRENT_USER).to(UserProfile);
     this.service(AccountService);
 
     this.projectRoot = __dirname;

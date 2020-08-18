@@ -1,0 +1,86 @@
+[
+    {
+        "id": "444f6ada-9402-434d-bc50-7c2d49d77c92",
+        "createdTimestamp": 1597647916521,
+        "username": "gurvinder",
+        "enabled": true,
+        "totp": false,
+        "emailVerified": true,
+        "firstName": "Gurvinder",
+        "lastName": "Singh",
+        "email": "gurvsin3@in.ibm.com",
+        "disableableCredentialTypes": [],
+        "requiredActions": [],
+        "notBefore": 0,
+        "access": {
+            "manageGroupMembership": true,
+            "view": true,
+            "mapRoles": true,
+            "impersonate": true,
+            "manage": true
+        }
+    },
+    {
+        "id": "2b087e3e-5722-45df-af1e-66c443194cd4",
+        "createdTimestamp": 1597647817993,
+        "username": "super_admin",
+        "enabled": true,
+        "totp": false,
+        "emailVerified": true,
+        "firstName": "Super",
+        "lastName": "Admin",
+        "email": "super_admin@smartthings.com",
+        "disableableCredentialTypes": [],
+        "requiredActions": [],
+        "notBefore": 0,
+        "access": {
+            "manageGroupMembership": true,
+            "view": true,
+            "mapRoles": true,
+            "impersonate": true,
+            "manage": true
+        }
+    },
+    {
+        "id": "6fad83c2-c3f7-417c-9a1f-5e6b99a4274b",
+        "createdTimestamp": 1597648450885,
+        "username": "user_a",
+        "enabled": true,
+        "totp": false,
+        "emailVerified": true,
+        "firstName": "User",
+        "lastName": "A",
+        "email": "user_a@smartthings.com",
+        "disableableCredentialTypes": [],
+        "requiredActions": [],
+        "notBefore": 0,
+        "access": {
+            "manageGroupMembership": true,
+            "view": true,
+            "mapRoles": true,
+            "impersonate": true,
+            "manage": true
+        }
+    },
+    {
+        "id": "d4764c9b-6cfd-44a4-b6ea-b662c67b0193",
+        "createdTimestamp": 1597649621395,
+        "username": "user_m",
+        "enabled": true,
+        "totp": false,
+        "emailVerified": true,
+        "firstName": "User",
+        "lastName": "M",
+        "email": "user_m@smartthings.com",
+        "disableableCredentialTypes": [],
+        "requiredActions": [],
+        "notBefore": 0,
+        "access": {
+            "manageGroupMembership": true,
+            "view": true,
+            "mapRoles": true,
+            "impersonate": true,
+            "manage": true
+        }
+    }
+]

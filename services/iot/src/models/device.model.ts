@@ -17,13 +17,15 @@ export class Device extends UserModifiableEntity {
 
   @property({
     type: 'string',
+    id: true,
     required: false,
   })
   id?: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
+    default: process.env.KEYCLOAK_REALM
   })
   tenantId: string;
 

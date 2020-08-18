@@ -58,7 +58,7 @@
     "@loopback/rest": "^5.1.2",
     "@loopback/rest-explorer": "^2.2.5",
     "@loopback/service-proxy": "^2.3.3",
-    "@sinny777/microservices-core": "^1.0.1",
+    "@sinny777/microservices-core": "^1.0.4",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "keycloak-admin": "^1.13.0",

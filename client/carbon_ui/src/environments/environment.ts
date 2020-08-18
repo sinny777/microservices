@@ -7,7 +7,7 @@
 
 // Add here your keycloak setup infos
 const keycloakConfig: any = {
-	'realm': 'development',
+	'realm': 'ibm',
 	'clientId': 'smartcity-web',
 	'url': 'https://auth.smartthings.com/auth',
 	// 'url': 'https://microservices-auth.mybluemix.net/auth',

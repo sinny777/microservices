@@ -1,5 +1,6 @@
-import {UserModifiableEntity} from './user-modifiable-entity.model';
-import {model, property, hasOne} from '@loopback/repository';
+// import {UserModifiableEntity} from './user-modifiable-entity.model';
+import {model, property} from '@loopback/repository';
+import {UserProfile, securityId} from '@loopback/security';
 // import {v4 as uuid} from 'uuid';
 
 @model({
@@ -24,7 +25,7 @@ import {model, property, hasOne} from '@loopback/repository';
     },
   },
 })
-export class User extends UserModifiableEntity {
+export class User implements UserProfile {
   @property({
     type: 'string',
     id: true,
@@ -66,11 +67,15 @@ export class User extends UserModifiableEntity {
   lastLogin?: string;
 
   constructor(data?: Partial<User>) {
-    super(data);
+    // super(data);
     // if (data != null && typeof data === 'object') {
     //   Object.assign(this, data);
     // }
   }
+  [securityId]: string;
+  
+  [attribute: string]: any;
+  name?: string | undefined;  
 }
 
 export interface UserRelations {
