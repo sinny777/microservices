@@ -24,15 +24,15 @@ export class AccountService {
     @inject(AuthenticationBindings.CURRENT_USER)
     private currentUserProfile: UserProfile     
   ) {
-    console.log('IN Constructor of AccountService: >>>>> ');
+    
     if(!this.kcAdminClient){
         this.CLIENT_ID = process.env.CLIENT_ID;
         this.CLIENT_SECRET = process.env.CLIENT_SECRET;
     
         // console.log('CLIENT_ID: >> ', this.CLIENT_ID);
-        // console.log('CLIENT_SECRET: >> ', this.CLIENT_SECRET);
-    
+        // console.log('CLIENT_SECRET: >> ', this.CLIENT_SECRET);    
         // const verifySSL = process.env.NODE_ENV === 'production'; 
+
         const verifySSL = false;
         https.globalAgent.options.rejectUnauthorized = verifySSL;
         this.kcAdminClient = new KcAdminClient({
@@ -81,7 +81,7 @@ export class AccountService {
       tokenSet = await client.refresh(refreshToken);
       // console.log('NEW ACCESS TOKEN: >>> ', tokenSet.access_token);
       this.kcAdminClient.setAccessToken(tokenSet.access_token as any);
-    }, 58 * 60 * 1000); // 58 minutes
+    }, 30 * 60 * 1000); // 30 minutes
 
     // console.log('INIT ADMIN KEYCLOAK API COMPLETED: >>>>>> ', kcAdminClient.accessToken);
     console.log('INIT ADMIN KEYCLOAK API COMPLETED: >>>>>> ');
@@ -100,10 +100,9 @@ export class AccountService {
       if(!this.kcAdminClient || !this.kcAdminClient.accessToken){
         await this.initKeycloak();
       }      
-      const groups = await this.kcAdminClient.users.listGroups({id: this.currentUserProfile.id});  
+      // const groups = await this.kcAdminClient.users.listGroups({id: this.currentUserProfile.id});  
       // const skipClients = CONFIG.skip_clients;
-
-      this.currentUserProfile.groups = groups;      
+      // this.currentUserProfile.groups = groups;      
      
     } catch (error) {
       console.error(error);
@@ -142,21 +141,5 @@ export class AccountService {
     }    
   }
 
-  // async getClients(): Promise<any> {
-  //   console.log('IN AccountService.getClients: >>>> ');
-  //   try {
-  //     if(!kcAdminClient || !kcAdminClient.accessToken){
-  //       await this.initKeycloak();
-  //     }      
-
-  //    return await kcAdminClient.clients.find();    
-     
-  //   } catch (error) {
-  //     throw new HttpErrors.Unauthorized(
-  //       `Error getUserInfo: ${error.message}`,
-  //     );
-  //   }    
-  // }
-  
 
 }

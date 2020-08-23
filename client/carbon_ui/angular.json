@@ -33,6 +33,29 @@
 						]
                     },
                     "configurations": {
+						"dev": {
+                            "optimization": true,
+                            "outputHashing": "none",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": false,
+                            "extractLicenses": true,
+                            "vendorChunk": true,
+                            "buildOptimizer": false,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "7mb",
+                                    "maximumError": "10mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "16kb",
+                                    "maximumError": "100kb"
+                                }
+                            ]
+                        },
                         "production": {
                             "fileReplacements": [
                                 {
@@ -47,7 +70,7 @@
                             "namedChunks": false,
                             "aot": false,
                             "extractLicenses": true,
-                            "vendorChunk": false,
+                            "vendorChunk": true,
                             "buildOptimizer": false,
                             "budgets": [
                                 {

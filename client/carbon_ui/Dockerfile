@@ -4,8 +4,8 @@
 ## This will build front end container running nginx
 ## Author: Gurvinder Singh (gurvsin3@in.ibm.com)
 ##
-## docker build --build-arg CLIENT_BUILD_ENV=docker -t custom_ui:latest .
-## docker run -it -d -p 80:80 --network my-network --name custom_ui custom_ui:latest
+## docker build --build-arg CLIENT_BUILD_ENV=docker -t carbon_ui:latest .
+## docker run -it -d -p 80:80 --network my-network --name carbon_ui carbon_ui:latest
 ##
 
 FROM node:12-alpine as client-build
