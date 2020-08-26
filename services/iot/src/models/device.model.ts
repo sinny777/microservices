@@ -54,10 +54,29 @@ export class Device extends UserModifiableEntity {
   label: string;
 
   @property({
+    type: 'boolean',
+    required: false,
+    default: false
+  })
+  isGateway: boolean;
+
+  @property({
     type: 'string',
     required: false,
   })
   moreInfo: string;
+
+  @property({
+    type: 'object',
+    required: false,
+  })
+  config: object;
+
+  @property.array(String, {
+    name: 'devices',
+    required: false,
+  })
+  devices: string[];
 
   // Define well-known properties here
 

@@ -1,3 +1,4 @@
+import { EntityInfo } from './entity-info.model';
 import {UserModifiableEntity} from '@sinny777/microservices-core';
 import {model, property} from '@loopback/repository';
 import { EntityRelationType } from '.';
@@ -21,14 +22,14 @@ export class EntityRelation extends UserModifiableEntity {
     required: true,
     index: true
   })
-  from?: object;
+  from?: EntityInfo;
 
   @property({
     type: 'object',
     required: true,
     index: true
   })
-  to?: object;
+  to?: EntityInfo;
 
   @property({
     type: 'string',
