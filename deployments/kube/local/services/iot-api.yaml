@@ -63,6 +63,21 @@ spec:
               secretKeyRef:
                 name: mongodb-secrets
                 key: DB_PASSWORD
+          - name: COGNOS_ENDPOINT
+            valueFrom:
+              secretKeyRef:
+                name: cognos-secrets
+                key: COGNOS_ENDPOINT
+          - name: COGNOS_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: cognos-secrets
+                key: COGNOS_CLIENT_ID
+          - name: COGNOS_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: cognos-secrets
+                key: COGNOS_CLIENT_SECRET
           - name: PORT
             value: "3000"  
         ports:

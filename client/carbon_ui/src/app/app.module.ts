@@ -21,6 +21,9 @@ import { ThemeModule } from './views/theme/theme.module';
 
 // Auth
 import { AuthService } from './core/auth';
+
+import { CognosApiService } from './services/cognos-api.service';
+
 // CRUD
 import {
 	HttpUtilsService,
@@ -69,7 +72,8 @@ export function initAuth(store: Store<AppState>, keycloakService: KeycloakServic
 			multi: true
 		},
 		{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true },
-		{provide: LocationStrategy, useClass: HashLocationStrategy}
+		{provide: LocationStrategy, useClass: HashLocationStrategy},
+		CognosApiService
 	],
 	bootstrap: [AppComponent]
 })

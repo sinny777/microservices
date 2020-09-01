@@ -29,7 +29,8 @@
                         ],
                         "scripts": [
                             "src/assets/js/keycloak/keycloak.min.js",
-                            "src/assets/js/keycloak/keycloak-authz.js"
+							"src/assets/js/keycloak/keycloak-authz.js",
+							"src/assets/js/CognosApi.js"
 						]
                     },
                     "configurations": {

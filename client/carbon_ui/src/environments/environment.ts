@@ -26,6 +26,8 @@ export const environment = {
 	keycloakConfig,
 	ACCOUNTS_API_URL: 'https://accounts.smartthings.com',
 	IOT_API_URL: 'https://iot.smartthings.com',
+	cognos_api_js: 'https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas/CognosApi.js',
+ 	cognos_root_url: 'https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas',
 };
 
 /*

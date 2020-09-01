@@ -14,6 +14,7 @@ import {MySequence} from './sequence';
 
 import { JWTAuthenticationComponent, JwtAuthenticationStrategyBindings } from '@sinny777/microservices-core';
 import {AuthenticationComponent} from '@loopback/authentication';
+import { CognosApiServiceProvider } from './services';
 
 export interface PackageInfo {
   name: string;
@@ -70,6 +71,7 @@ export class IotApplication extends BootMixin(
     this.component(JWTAuthenticationComponent);
     // this.component(AuthorizationComponent);
     // registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
+    this.serviceProvider(CognosApiServiceProvider);
 
     this.projectRoot = __dirname;
     

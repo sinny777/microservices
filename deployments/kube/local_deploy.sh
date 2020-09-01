@@ -1,7 +1,7 @@
 # eval $(minikube docker-env)
 
 # python ../build_services.py -t latest -r sinny777 -P
-python ../build_services.py -t latest
+# python ../build_services.py -t latest
 
 # kubectl create -f local/namespaces/namespace-dev.json
 # kubectl config set-context dev --namespace=smartthings-dev \
@@ -32,7 +32,7 @@ kubectl config use-context dev
 # kubectl apply -f local/auth/keycloak-deployment.yaml
 kubectl apply -f local/app-config.yaml
 kubectl apply -f local/app-secrets.yaml
-kubectl apply -f local/services/mongodb.yaml
+# kubectl apply -f local/services/mongodb.yaml
 kubectl apply -f local/services/accounts-api.yaml
 kubectl apply -f local/services/iot-api.yaml
 kubectl apply -f local/services/web.yaml

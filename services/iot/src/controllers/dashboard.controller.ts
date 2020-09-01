@@ -1,59 +1,28 @@
-import {
-    Count,
-    CountSchema,
-    Filter,
-    repository,
-    Where,
-  } from '@loopback/repository';
+
   import {
-    get,
-    getFilterSchemaFor,
-    getWhereSchemaFor,
-    param,
-    patch,
-    post,
-    put,
-    requestBody,
+    get,    
     api,
     ResponseObject,
+    post,
+    getModelSchemaRef,
+    requestBody,
   } from '@loopback/rest';
   import {AuthenticationBindings, authenticate} from '@loopback/authentication';
   import { inject } from '@loopback/core';
-  import { UserProfile, securityId } from '@loopback/security';
+  import { UserProfile } from '@loopback/security';
+  import { CognosApiServiceI, CreateSessionPayload } from '../services/cognos.service';
+import { CreateCognosSessionRequestBody, CreateCognosSessionSchema } from './specs/dashboard-controller.specs';
   // import { CommonServiceBindings, CommonServiceI } from 'microservices-core/dist/keys';
   // import { User } from 'microservices-core/dist/models';
   // import {authorize} from 'loopback4-authorization';
 
-  /**
- * OpenAPI response for ping()
- */
-const PING_RESPONSE: ResponseObject = {
-    description: 'Ping Response',
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {
-            greeting: {type: 'string'},
-            date: {type: 'string'},
-            url: {type: 'string'},
-            headers: {
-              type: 'object',
-              properties: {
-                'Content-Type': {type: 'string'},
-              },
-              additionalProperties: true,
-            },
-          },
-        },
-      },
-    },
-  };
-  
   @api({basePath: '/api/dashboard', paths: {}})
   export class DashboardController {
+
     constructor(
-      // @inject(CommonServiceBindings.COMMON_SERVICE) public commonService: CommonServiceI      
+      // @inject(CommonServiceBindings.COMMON_SERVICE) public commonService: CommonServiceI    
+     @inject('services.CognosApiService')
+     private cognosApiService: CognosApiServiceI       
     ) {}
   
     @get('/users/me', {
@@ -79,6 +48,26 @@ const PING_RESPONSE: ResponseObject = {
       // delete currentUserProfile[securityId];
       return currentUserProfile;
     }
+
+
+
+    @post('/cognos/session', {
+      responses: {
+        '200': {
+          description: 'Device model instance',
+          content: {'application/json': {schema: CreateCognosSessionSchema}},
+        },
+      },
+    })
+    @authenticate('jwt')
+    async createCognosSession(
+      @requestBody(CreateCognosSessionRequestBody)
+      payload: CreateSessionPayload
+    ): Promise<any> {
+      return this.cognosApiService.createCognosSession(payload.webDomain, payload.expiresIn);      
+    }
+
+
   
   }
   
