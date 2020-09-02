@@ -27,7 +27,8 @@ export const environment = {
 	ACCOUNTS_API_URL: 'https://accounts.smartthings.com',
 	IOT_API_URL: 'https://iot.smartthings.com',
 	cognos_api_js: 'https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas/CognosApi.js',
- 	cognos_root_url: 'https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas',
+	cognos_root_url: 'https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas',
+	cognos_web_domain: 'http://localhost:4200'
 };
 
 /*

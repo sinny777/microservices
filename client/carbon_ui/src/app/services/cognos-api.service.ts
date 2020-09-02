@@ -6,13 +6,18 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Session, SessionKey } from '../models/session';
 import { map, catchError } from 'rxjs/operators';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var CognosApi: any;
+
+const httpHeaders = new HttpHeaders();
+		httpHeaders.set('Accept', 'application/json');
+		httpHeaders.set('Content-Type', 'application/json');
 
 @Injectable()
 export class CognosApiService {
 
-	public api = null;
+	public cognosApi: any = null;
 
 	private dashboardAPI;
 	private session: Session;
@@ -22,32 +27,26 @@ export class CognosApiService {
 	private bike_share_weather_csv_sample_module: string;
 	private bike_share_rides_demograph_csv_sample_module: string;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, public sanitizer: DomSanitizer) {
 	}
 
 	async createNewSession() {
 		this.session = new Session();
 
-		if (this.api != null) {
+		if (this.cognosApi != null) {
 			console.log('there was already an api object');
 		}
 
 		const payload = {
 			'expiresIn': 3600,
-			'webDomain': 'http://localhost:4200'
+			'webDomain': environment.cognos_web_domain
 		};
 
-		let httpHeaders = new HttpHeaders();
-		httpHeaders.set('Accept', 'application/json');
-		httpHeaders.set('Content-Type', 'application/json');
-		console.log(httpHeaders);
 		const response = await this.http.post(environment.IOT_API_URL + '/api/dashboard/cognos/session', payload,
 						{ headers: httpHeaders })
 						.toPromise();
-		console.log(response);
-		// const data = response.json();
+		// console.log(response);
 		const data: any = response;
-		console.log(data);
 		this.session.code = data.sessionCode;
 		this.session.id = data.sessionId;
 		this.session.keys = data.keys.map(k => new SessionKey(k));
@@ -57,33 +56,35 @@ export class CognosApiService {
 
 	// initTimeout: initialization timeout (ms). Default 30000 ms.
 	// initTimeout allows for whatever latency you expect form your browser making the init() call to getting/loading DDE in the iFrame.
-	async createAndInitApiFramework() {
+	async createAndInitApiFramework(divId: string) {
+		const cognosUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.cognos_root_url);
+		console.log('cognos_url: >> ', cognosUrl);
 		console.log('In create and init api framework');
-
 		// Create an instance of the CognosApi
-		this.api = new CognosApi({
+		this.cognosApi = new CognosApi({
 			cognosRootURL: environment.cognos_root_url,
-			sessionCode: 'CD3481eb0eb30d65ea940d',
-			initTimeout: 10000,
-			node: document.getElementById('cognosDashboard')
+			sessionCode: this.session.code,
+			initTimeout: 30000,
+			node: document.getElementById(divId)
 		});
 
-		this.api._node.hidden = false;
+		console.log(this.cognosApi);
+		this.cognosApi._node.hidden = false;
 
 		try {
-			await this.api.initialize();
+			await this.cognosApi.initialize();
 			console.log('API created successfully.');
 		} catch (e) {
 			console.log('Unable to initialize API instance: ' + e.message);
 			throw e;
 		}
 
-		console.log(this.api.dashboard);
-		return this.api.apiId;
+		console.log(this.cognosApi.dashboard);
+		return this.cognosApi.apiId;
 	}
 
 	async createDashboard() {
-		this.dashboardAPI = await this.api.dashboard.createNew();
+		this.dashboardAPI = await this.cognosApi.dashboard.createNew();
 		console.log('Dashboard created successfully.');
 		console.log(this.dashboardAPI);
 		this.dashboardAPI.state = 'Create';
@@ -105,7 +106,7 @@ export class CognosApiService {
 	async openDashboard() {
 		await this.getDashboardSampleSpec();
 		console.log('got dashboard: ' + this.sample_db_spec);
-		this.dashboardAPI = await this.api.dashboard.openDashboard({
+		this.dashboardAPI = await this.cognosApi.dashboard.openDashboard({
 			dashboardSpec: this.sample_db_spec
 		});
 		this.dashboardAPI.state = 'Open'
@@ -254,7 +255,7 @@ export class CognosApiService {
 
 		// log the after
 		console.log('after update:');
-		const newDBSpec = await this.api.updateModuleDefinitions(dbSpec, getNewModulesCallback);
+		const newDBSpec = await this.cognosApi.updateModuleDefinitions(dbSpec, getNewModulesCallback);
 		console.log(newDBSpec.dataSources.sources);
 	}
 
@@ -291,19 +292,19 @@ export class CognosApiService {
 	}
 
 	registerApiCallback() {
-		this.api.on(
+		this.cognosApi.on(
 			CognosApi.EVENTS.REQUEST_ERROR, this.onError);
 		console.log('REQUEST_ERROR event callback registered.');
 	}
 
 	unregisterApiCallback() {
-		this.api.off(
+		this.cognosApi.off(
 			CognosApi.EVENTS.REQUEST_ERROR, this.onError);
 		console.log('REQUEST_ERROR event callback unregistered.');
 	}
 
 	async closeApiFramework() {
-		await this.api.close();
+		await this.cognosApi.close();
 		console.log('API closed successfully.');
 	}
 
