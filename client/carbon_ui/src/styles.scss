@@ -22,3 +22,11 @@ html, body {
 	min-height:100vh;
 	height: auto;
 }
+
+.dashboard{
+	.bx--header ~ .bx--content {
+		margin-top: 0rem;
+	}
+}
+
+

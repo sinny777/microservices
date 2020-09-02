@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Session, SessionKey } from '../models/session';
 import { map, catchError } from 'rxjs/operators';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var CognosApi: any;
 
@@ -27,7 +26,7 @@ export class CognosApiService {
 	private bike_share_weather_csv_sample_module: string;
 	private bike_share_rides_demograph_csv_sample_module: string;
 
-	constructor(private http: HttpClient, public sanitizer: DomSanitizer) {
+	constructor(private http: HttpClient) {
 	}
 
 	async createNewSession() {
@@ -41,7 +40,7 @@ export class CognosApiService {
 			'expiresIn': 3600,
 			'webDomain': environment.cognos_web_domain
 		};
-
+		console.log('PAYLOAD for Cognos Create Session: >> ', payload);
 		const response = await this.http.post(environment.IOT_API_URL + '/api/dashboard/cognos/session', payload,
 						{ headers: httpHeaders })
 						.toPromise();
@@ -57,18 +56,17 @@ export class CognosApiService {
 	// initTimeout: initialization timeout (ms). Default 30000 ms.
 	// initTimeout allows for whatever latency you expect form your browser making the init() call to getting/loading DDE in the iFrame.
 	async createAndInitApiFramework(divId: string) {
-		const cognosUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.cognos_root_url);
-		console.log('cognos_url: >> ', cognosUrl);
+		// const cognosUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.cognos_root_url);
 		console.log('In create and init api framework');
 		// Create an instance of the CognosApi
 		this.cognosApi = new CognosApi({
 			cognosRootURL: environment.cognos_root_url,
 			sessionCode: this.session.code,
-			initTimeout: 30000,
+			initTimeout: 10000,
 			node: document.getElementById(divId)
 		});
 
-		console.log(this.cognosApi);
+		// console.log(this.cognosApi);
 		this.cognosApi._node.hidden = false;
 
 		try {
@@ -98,7 +96,7 @@ export class CognosApiService {
 			return;
 		}
 
-		const response = await this.http.get('/assets/data/' + fileName).toPromise();
+		const response = await this.http.get('/assets/cognos-data/' + fileName).toPromise();
 		this.sample_db_spec = response;
 		return fileName;
 	}
@@ -109,7 +107,8 @@ export class CognosApiService {
 		this.dashboardAPI = await this.cognosApi.dashboard.openDashboard({
 			dashboardSpec: this.sample_db_spec
 		});
-		this.dashboardAPI.state = 'Open'
+		this.dashboardAPI.state = 'Open';
+		this.dashboardAPI.setMode(this.dashboardAPI.MODES.EDIT);
 		console.log('Dashboard opened successfully.');
 		console.log(this.dashboardAPI);
 		return this.dashboardAPI;
@@ -122,21 +121,21 @@ export class CognosApiService {
 
 	async getCSVSampleModule(fileName: string) {
 		if (this.csv_sample_module == null) {
-			this.csv_sample_module = await this.getCSVSampleModuleJson('/assets/data/' + fileName);
+			this.csv_sample_module = await this.getCSVSampleModuleJson('/assets/cognos-data/' + fileName);
 		}
 		return this.csv_sample_module;
 	}
 
 	async getBikeShareWeatherCSVSampleModule(fileName: string) {
 		if (this.bike_share_weather_csv_sample_module == null) {
-			// this.bike_share_weather_csv_sample_module = await this.getCSVSampleModuleJson('/assets/data/' + fileName);
+			// this.bike_share_weather_csv_sample_module = await this.getCSVSampleModuleJson('/assets/cognos-data/' + fileName);
 		}
 		return this.bike_share_weather_csv_sample_module;
 	}
 
 	async getBikeShareRidesDemographCSVSampleModule(fileName: string) {
 		if (this.bike_share_rides_demograph_csv_sample_module == null) {
-			// this.bike_share_rides_demograph_csv_sample_module = await this.getCSVSampleModuleJson('/assets/data/' + fileName);
+			// this.bike_share_rides_demograph_csv_sample_module = await this.getCSVSampleModuleJson('/assets/cognos-data/' + fileName);
 		}
 		return this.bike_share_rides_demograph_csv_sample_module;
 	}

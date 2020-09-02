@@ -1,6 +1,5 @@
 import { CognosApiService } from './../../../services/cognos-api.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-dashboard',
@@ -9,13 +8,9 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-	constructor(private cognosService: CognosApiService, public sanitizer: DomSanitizer) { }
+	constructor(private cognosService: CognosApiService) { }
 
-	urlSafe: SafeResourceUrl;
-
-	ngOnInit(): void {
-		this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/');
-	}
+	ngOnInit(): void {}
 
 	ngAfterViewInit() {
 		this.loadDasboard();
@@ -26,7 +21,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 			await this.cognosService.createNewSession();
 			await this.cognosService.createAndInitApiFramework('cognosDashboard');
 			await this.cognosService.openDashboard();
-			// this.disableDashboardBarButtons = false;
 		} catch (e) {
 			console.log(e);
 		//   this.toasterComp.showToaster(new Toaster((<any>instrumentation).errorMessage, 'error', true));

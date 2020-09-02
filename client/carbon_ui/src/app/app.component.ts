@@ -30,13 +30,14 @@ export class AppComponent implements OnInit {
 		// 		})
 		// 	);
 
-		this.loadCognosApi = new Promise((resolve) => {
-			// this.loadCognosApiScript();
-			console.log('cognos script loaded');
-		 });
+		// this.loadCognosApi = new Promise((resolve) => {
+		// 	this.loadCognosApiScript();
+		// 	console.log('cognos script loaded');
+		//  });
 
 	}
 
+	/*
 	loadCognosApiScript() {
 		this.loadScript(this.cognosUrl);
 	}
@@ -49,5 +50,6 @@ export class AppComponent implements OnInit {
 		node.charset = 'utf-8';
 		document.getElementsByTagName('head')[0].appendChild(node);
 	  }
+	*/
 
 }
