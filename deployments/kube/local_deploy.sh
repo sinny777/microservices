@@ -11,8 +11,8 @@
 
 # kubectl config use-context dev
 
-# kubectl delete -f local/ingress.yaml
-# kubectl delete -f local/services/web.yaml
+kubectl delete -f local/ingress.yaml
+kubectl delete -f local/services/web.yaml
 # kubectl delete -f local/services/accounts-api.yaml
 # kubectl delete -f local/services/iot-api.yaml
 # kubectl delete -f local/app-secrets.yaml
