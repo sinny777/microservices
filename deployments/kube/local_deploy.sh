@@ -1,4 +1,5 @@
 # eval $(minikube docker-env)
+# eval $(crc oc-env)
 
 # python ../build_services.py -t latest -r sinny777 -P
 # python ../build_services.py -t latest
@@ -8,7 +9,7 @@
 #   --cluster=docker-desktop \
 #   --user=docker-desktop
 
-kubectl config use-context dev
+# kubectl config use-context dev
 
 # kubectl delete -f local/ingress.yaml
 # kubectl delete -f local/services/web.yaml
@@ -36,7 +37,7 @@ kubectl config use-context dev
 # kubectl apply -f local/services/accounts-api.yaml
 # kubectl apply -f local/services/iot-api.yaml
 # kubectl apply -f local/services/web.yaml
-kubectl apply -f local/ingress.yaml
+# kubectl apply -f local/ingress.yaml
 
 
 sleep 5

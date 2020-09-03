@@ -56,9 +56,11 @@ spec:
                 key: POSTGRES_PASSWORD
           - name: POSTGRES_DB
             value: "auth_db"
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgresdb
+            - mountPath: "/var/lib/postgresql/data"
+              name: postgresdb      
       volumes:
         - name: postgresdb
           persistentVolumeClaim:

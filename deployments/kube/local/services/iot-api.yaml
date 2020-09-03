@@ -37,8 +37,8 @@ spec:
     spec:
       containers:
       - name: smartthings-iot
-        image: smartthings-iot:latest
-        imagePullPolicy: Never
+        image: sinny777/smartthings-iot:latest
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: app-config

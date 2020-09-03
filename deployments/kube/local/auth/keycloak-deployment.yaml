@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: keycloak
-        image: smartthings-keycloak:latest
+        image: sinny777/smartthings-keycloak:latest
         imagePullPolicy: Always    
         envFrom:
         - secretRef:

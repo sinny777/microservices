@@ -37,8 +37,8 @@ spec:
     spec:
       containers:
       - name: smartthings-account
-        image: smartthings-account:latest
-        imagePullPolicy: Never
+        image: sinny777/smartthings-account:latest
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: app-config

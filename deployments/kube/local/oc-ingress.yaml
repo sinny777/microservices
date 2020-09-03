@@ -1,6 +1,6 @@
 # Copyright 2020 IBM. 
 
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: smartthings-ing
@@ -8,7 +8,7 @@ metadata:
     # ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://smartthings.com"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://apps-crc.testing"
     # nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "HEAD, PUT, GET, POST, OPTIONS, PATCH, DELETE"
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
@@ -17,28 +17,28 @@ metadata:
 spec:
   tls:
   - hosts:
-    - smartthings.com
+    - apps-crc.testing
     secretName: smartthings-tls
   rules:
-  - host: auth.smartthings.com
+  - host: auth.apps-crc.testing
     http:
       paths:
       - backend:
           serviceName: keycloak-svc
           servicePort: 8888
-  - host: accounts.smartthings.com
+  - host: accounts.apps-crc.testing
     http:
       paths:
       - backend:
           serviceName: smartthings-account-svc
           servicePort: 80
-  - host: iot.smartthings.com
+  - host: iot.apps-crc.testing
     http:
       paths:
       - backend:
           serviceName: smartthings-iot-svc
           servicePort: 80
-  - host: www.smartthings.com
+  - host: www.apps-crc.testing
     http:
       paths:
       - backend:
