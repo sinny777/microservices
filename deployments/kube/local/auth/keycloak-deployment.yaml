@@ -9,7 +9,7 @@ metadata:
     app: keycloak
     tier: auth
 spec:
-  type: LoadBalancer
+  # type: LoadBalancer
   ports:
   - port:  8888
     targetPort: 8080

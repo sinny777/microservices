@@ -9,13 +9,13 @@ metadata:
     app: smartthings-web
     tier: iot
 spec:
+  # type: LoadBalancer
   ports:
   - port:  80
     targetPort: 80
   selector:
    app: smartthings-web
-status:
-  loadBalancer: {}
+
 ---
 
 apiVersion: apps/v1
