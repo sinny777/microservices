@@ -37,7 +37,7 @@
 # kubectl apply -f local/services/accounts-api.yaml
 # kubectl apply -f local/services/iot-api.yaml
 # kubectl apply -f local/services/web.yaml
-# kubectl apply -f local/ingress.yaml
+kubectl apply -f local/ingress.yaml
 
 
 sleep 5

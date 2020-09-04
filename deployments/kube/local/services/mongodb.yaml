@@ -1,39 +1,39 @@
 # Copyright 2020 IBM. 
 
-# kind: PersistentVolume
-# apiVersion: v1
-# metadata:
-#   name: mongodb-pv-volume
-#   labels:
-#     type: local
-#     app: mongodb
-# spec:
-#   storageClassName: manual
-#   capacity:
-#     storage: 2Gi
-#   accessModes:
-#     - ReadWriteMany
-#   persistentVolumeReclaimPolicy: Retain
-#   hostPath:
-#     path: "/mnt/data"
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongodb-pv-volume
+  labels:
+    type: local
+    app: mongodb
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/data"
 
-# ---
+---
   
-# kind: PersistentVolumeClaim
-# apiVersion: v1
-# metadata:
-#   name: mongodb-pvc-volume
-#   labels:
-#     app: mongodb
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 2Gi
-#   storageClassName: manual
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongodb-pvc-volume
+  labels:
+    app: mongodb
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: manual
 
-# ---
+---
 
 apiVersion: v1
 kind: Service
@@ -76,19 +76,19 @@ spec:
       - name: mongodb-enterprise
         image: sinny777/mongo-enterprise:4.2
         imagePullPolicy: "IfNotPresent"
-        volumeMounts:
-        - mountPath: /data/db
-          name: mongodb-volume
         env:
         - name: PORT
           value: "27017"        
         ports:
         - containerPort: 27017
+        securityContext:
+          privileged: true 
+        volumeMounts:
+        - mountPath: /data/db
+          name: hostpath-privileged
+      securityContext: {}
       volumes:
-        - name: mongodb-volume
-          hostPath:
-            # directory location on host
-            path: /Users/gurvindersingh/Documents/Development/data/mongodb
-            # this field is optional
-            type: Directory
+        - name: hostpath-privileged
+          persistentVolumeClaim:
+            claimName: mongodb-pvc-volume
       restartPolicy: Always
