@@ -9,7 +9,7 @@
 const keycloakConfig: any = {
 	'realm': 'ibm',
 	'clientId': 'smartcity-web',
-	'url': 'https://auth.smartthings.com/auth',
+	'url': 'https://keycloak-svc-smartthings.apps.cairns.os.fyre.ibm.com/auth',
 	// 'url': 'https://microservices-auth.mybluemix.net/auth',
 	'ssl-required': 'external',
 	'resource': 'smartcity-web',
