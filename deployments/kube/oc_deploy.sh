@@ -52,6 +52,7 @@
 # oc create route edge --service keycloak-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc create route edge --service account-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc create route edge --service iot-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
+# oc create route edge --service ui-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc get route
 
 
