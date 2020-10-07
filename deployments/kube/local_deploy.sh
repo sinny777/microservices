@@ -28,7 +28,7 @@
 
 # kubectl apply -f local/auth/config/auth-secrets.yaml
 # kubectl apply -f local/auth/config/auth-config.yaml
-# kubectl apply -f local/auth/postgres-storage.yaml
+# kubectl apply -f local/auth/postgres-storage.yaml 
 # kubectl apply -f local/auth/postgres-deployment.yaml
 # kubectl apply -f local/auth/keycloak-deployment.yaml
 # kubectl apply -f local/app-config.yaml

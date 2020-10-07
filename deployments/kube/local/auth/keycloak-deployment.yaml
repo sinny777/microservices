@@ -11,10 +11,12 @@ metadata:
 spec:
   # type: LoadBalancer
   ports:
-  - port:  8888
+  - port:  8080
     targetPort: 8080
   selector:
    app: keycloak
+status:
+  loadBalancer: {}
 
 ---
 

@@ -255,4 +255,5 @@ Full license text is available in [LICENSE](LICENSE).
 - [cloud_foundry](https://github.com/cloudfoundry/cli#downloads)
 - [kong - API Gateway](https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6)
 - [NGINX reference](https://www.nginx.com/resources/wiki/start/topics/examples/full/)
+- [IoT Datasets](https://github.com/thieu1995/iot_dataset)
 

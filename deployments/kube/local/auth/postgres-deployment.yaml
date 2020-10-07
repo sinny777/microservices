@@ -12,9 +12,14 @@ spec:
   ports:
   - name: "auth-postgres-db"
     port:  5432
-    targetPort: 5432    
+    targetPort: 5432  
+    nodePort: 0
+    protocol: TCP  
   selector:
     app: auth-postgres-db
+  type: ClusterIP
+status:
+  loadBalancer: {}
 
 ---
 
@@ -41,6 +46,7 @@ spec:
         - name: auth-postgres-db
           image: postgres:10.4
           imagePullPolicy: "IfNotPresent"
+          # command: ["chown postgres /var/lib/postgresql/data/"]
           ports:
             - containerPort: 5432
           env:
@@ -58,9 +64,12 @@ spec:
             value: "auth_db"
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
+          securityContext: 
+            capabilities: {}
+            privileged: true                                
           volumeMounts:
-            - mountPath: "/var/lib/postgresql/data"
-              name: postgresdb      
+            - mountPath: /var/lib/postgresql/data/
+              name: postgresdb                   
       volumes:
         - name: postgresdb
           persistentVolumeClaim:
