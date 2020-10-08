@@ -48,16 +48,16 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/authentication": "^4.2.8",
-    "@loopback/authentication-passport": "^2.1.8",
-    "@loopback/boot": "^2.3.4",
-    "@loopback/context": "^3.9.1",
-    "@loopback/core": "^2.9.0",
-    "@loopback/openapi-v3": "^3.4.4",
-    "@loopback/repository": "^2.8.0",
-    "@loopback/rest": "^5.1.2",
-    "@loopback/rest-explorer": "^2.2.5",
-    "@loopback/service-proxy": "^2.3.3",
+    "@loopback/authentication": "^4.2.10",
+    "@loopback/authentication-passport": "^2.1.10",
+    "@loopback/boot": "^2.4.0",
+    "@loopback/context": "^3.9.3",
+    "@loopback/core": "^2.9.2",
+    "@loopback/openapi-v3": "^3.4.6",
+    "@loopback/repository": "^2.10.0",
+    "@loopback/rest": "^5.2.1",
+    "@loopback/rest-explorer": "^2.2.7",
+    "@loopback/service-proxy": "^2.3.5",
     "@sinny777/microservices-core": "^1.0.4",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
@@ -68,17 +68,17 @@
     "rxjs": "^6.5.5"
   },
   "devDependencies": {
-    "@loopback/build": "^5.4.3",
-    "@loopback/eslint-config": "^8.0.2",
-    "@loopback/testlab": "^3.1.8",
-    "@types/node": "^10.17.24",
+    "@loopback/build": "^6.1.1",
+    "@loopback/eslint-config": "^8.0.4",
+    "@loopback/testlab": "^3.2.1",
+    "@types/node": "^10.17.27",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "eslint": "^7.3.1",
+    "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-eslint-plugin": "^2.3.0",
+    "eslint-plugin-eslint-plugin": "^2.2.1",
     "eslint-plugin-mocha": "^7.0.0",
     "source-map-support": "^0.5.19",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.7"
   }
 }
