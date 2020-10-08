@@ -19,7 +19,7 @@ export async function main(options: ApplicationConfig = {}) {
   options.rest.openApiSpec = { setServersFromRequest: true };
   options.rest.requestBodyParser = {json: {limit: '2mb'}};
   options.rest.cors = {
-      origin: 'https://ui-svc-smartthings.apps.cairns.os.fyre.ibm.com',
+      origin: '*',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       preflightContinue: false,
       optionsSuccessStatus: 204,
@@ -28,10 +28,14 @@ export async function main(options: ApplicationConfig = {}) {
   }
   const app = new AccountsApplication(options);
 
-  // this.use(function(req, res, next) {
-  //   res.header("Access-Control-Allow-Origin", url);
-  //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  //   next();
+  // let ALLOWED_ORIGINS = ["http://localhost:4200", "https://ui-svc-smartthings.apps.cairns.os.fyre.ibm.com"];
+  // app.use((req, res, next) => {
+  //     let origin = req.headers.origin;
+  //     let theOrigin = (ALLOWED_ORIGINS.indexOf(origin) >= 0) ? origin : ALLOWED_ORIGINS[0];
+  //     res.header("Access-Control-Allow-Origin", theOrigin);
+  //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  
+  //     next();
   // });
 
   await app.boot();
