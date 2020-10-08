@@ -19,7 +19,7 @@ export async function main(options: ApplicationConfig = {}) {
   options.rest.openApiSpec = { setServersFromRequest: true };
   options.rest.requestBodyParser = {json: {limit: '2mb'}};
   options.rest.cors = {
-      origin: '*',
+      origin: 'https://ui-svc-smartthings.apps.cairns.os.fyre.ibm.com',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       preflightContinue: false,
       optionsSuccessStatus: 204,

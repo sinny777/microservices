@@ -25,7 +25,7 @@ export class InterceptService implements HttpInterceptor {
 				Authorization: `Bearer ${localStorage.getItem(environment.authTokenKey)}`,
 				'Content-Type': 'application/json'
 			},
-			withCredentials: true
+			// withCredentials: true
 		});
 		// console.log('----request----');
 		// console.log(request);

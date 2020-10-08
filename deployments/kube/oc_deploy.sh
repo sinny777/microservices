@@ -4,7 +4,7 @@
 # python ../build_services.py -t latest -r sinny777 -P
 # python ../build_services.py -t latest
 
-# oc login --token=MudNqLbKRzCTavWt9SIulnaAr0PEua7aDSOdeLZlRcc --server=https://9.30.213.241:6443
+# oc login --token=xiRLlVd5xtoTxREcVhP2pcTd1NQ-0yAVJYpsE6MQHck --server=https://9.30.213.241:6443
 
 # oc policy add-role-to-user registry-viewer gurvinder
 # oc policy add-role-to-user registry-editor gurvinder
