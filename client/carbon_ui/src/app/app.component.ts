@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-
+		console.log('IN AppComponent init method: >>>>');
 		// this.store
 		// 	.pipe(
 		// 		select(isLoggedIn),

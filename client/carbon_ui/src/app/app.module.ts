@@ -35,6 +35,7 @@ import { LoginSuccess } from './core/auth/_actions/auth.actions';
 export function initAuth(store: Store<AppState>, keycloakService: KeycloakService) {
 	return () => new Promise(async resolve => {
 		const authenticated = await keycloakService.init();
+		console.log('CHECK AUTHENTICATED :>>>> ', authenticated);
 		if (authenticated) {
 			store.dispatch(new LoginSuccess({ authToken: keycloakService.getToken() }));
 		}

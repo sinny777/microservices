@@ -21,14 +21,14 @@ export async function main(options: ApplicationConfig = {}) {
   options.rest.port = PORT;  
   options.rest.openApiSpec = { setServersFromRequest: true };
   options.rest.requestBodyParser = {json: {limit: '2mb'}};
-  // options.rest.cors = {
-  //     origin: '*',
-  //     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //     preflightContinue: false,
-  //     optionsSuccessStatus: 204,
-  //     maxAge: 86400,
-  //     credentials: true     
-  // }
+  options.rest.cors = {
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
+      maxAge: 86400,
+      credentials: true     
+  }
  
   // console.log(options);
   const app = new IotApplication(options);

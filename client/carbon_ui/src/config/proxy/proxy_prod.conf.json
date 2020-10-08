@@ -1,6 +1,6 @@
 {
     "/accounts-endpoint": {
-        "target": "https://accounts.smartthings.com",
+        "target": "https://account-svc-smartthings.apps.cairns.os.fyre.ibm.com",
 		"secure": false,
 		"logLevel": "debug",
 		"changeOrigin": "true",
@@ -9,7 +9,7 @@
 		}
 	},
 	"/iot-endpoint": {
-        "target": "https://iot.smartthings.com",
+        "target": "https://iot-svc-smartthings.apps.cairns.os.fyre.ibm.com",
 		"secure": false,
 		"logLevel": "debug",
 		"changeOrigin": "true",

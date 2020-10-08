@@ -24,6 +24,7 @@ export class KeycloakService {
 	async init(): Promise<any> {
 		if (!this.keycloak.authenticated) {
 			const returnURL = window.location.origin + '/silent-check-sso.html';
+			// console.log('IN KeycloakService.init: >>>>> NOT AUTHENTICATED YET..., returnURL: ', returnURL);
 			return await this.keycloak.init({ onLoad: 'check-sso', checkLoginIframe: false, silentCheckSsoRedirectUri: returnURL });
 			// this.keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
 		} else {

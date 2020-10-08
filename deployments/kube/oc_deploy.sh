@@ -17,6 +17,9 @@
 
 # oc project smartthings
 
+# oc adm policy add-scc-to-user anyuid system:serviceaccount:smartthings:default
+
+# oc delete route ui-svc
 # oc delete route iot-svc
 # oc delete route account-svc
 # oc delete route keycloak-svc

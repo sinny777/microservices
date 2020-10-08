@@ -9,14 +9,14 @@
 const keycloakConfig: any = {
 	'realm': 'ibm',
 	'clientId': 'smartcity-web',
+	'auth-server-url': 'https://keycloak-svc-smartthings.apps.cairns.os.fyre.ibm.com/auth',
 	'url': 'https://keycloak-svc-smartthings.apps.cairns.os.fyre.ibm.com/auth',
 	// 'url': 'https://microservices-auth.mybluemix.net/auth',
 	'ssl-required': 'external',
 	'resource': 'smartcity-web',
 	'public-client': true,
 	'verify-token-audience': true,
-	'use-resource-role-mappings': true,
-	'enable-cors': true
+	'use-resource-role-mappings': true
 }
 
 export const environment = {
