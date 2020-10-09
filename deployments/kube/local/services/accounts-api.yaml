@@ -40,7 +40,7 @@ spec:
       containers:
       - name: smartthings-account
         image: sinny777/smartthings-account:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: app-config

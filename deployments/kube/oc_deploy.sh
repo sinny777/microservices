@@ -53,6 +53,7 @@
 # oc expose service smartthings-account-svc 
 # oc expose service smartthings-iot-svc 
 # oc create route edge --service keycloak-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
+# oc create route edge --service mongodb-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc create route edge --service account-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc create route edge --service iot-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt
 # oc create route edge --service ui-svc --key=local/keys/smartthings.key --cert=local/keys/smartthings.crt

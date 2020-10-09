@@ -42,11 +42,9 @@ metadata:
     app: mongodb-enterprise
     tier: iot
 spec:
-  type: NodePort
   ports:
   - port:  27017
     targetPort: 27017
-    nodePort: 32017
   selector:
    app: mongodb-enterprise
 status:
