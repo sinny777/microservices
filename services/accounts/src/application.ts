@@ -1,4 +1,4 @@
-import { AccountService } from './services/account.service';
+import { KeycloakService, AccountService } from './services';
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, BindingKey, Binding} from '@loopback/core';
 import {
@@ -74,6 +74,7 @@ export class AccountsApplication extends BootMixin(
     // this.bind('services.account').to(AccountService);
     this.bind(SecurityBindings.USER).toClass(User);
     // this.bind(AuthenticationBindings.CURRENT_USER).to(UserProfile);
+    this.service(KeycloakService);
     this.service(AccountService);
 
     this.projectRoot = __dirname;

@@ -56,7 +56,7 @@ export class AccountController {
   ): Promise<UserProfile> {
     // (@jannyHou)FIXME: explore a way to generate OpenAPI schema
     // for symbol property
-    console.log('IN AccountsController.fetchCurrentUser, currentUserProfile: >>>> ', this.currentUserProfile);
+    // console.log('IN AccountsController.fetchCurrentUser, currentUserProfile: >>>> ', this.currentUserProfile);
     // currentUserProfile.id = currentUserProfile[securityId];
     // delete currentUserProfile[securityId];
     return this.accountService.getUserDetails();    
@@ -89,7 +89,7 @@ export class AccountController {
       console.error(error);
     }
     
-    return this.accountService.getClients(filter);    
+    return this.accountService.getCustomers(filter);    
   }
 
 }
