@@ -4,7 +4,7 @@
 # python ../build_services.py -t latest -r sinny777 -P
 # python ../build_services.py -t latest
 
-# oc login --token=xiRLlVd5xtoTxREcVhP2pcTd1NQ-0yAVJYpsE6MQHck --server=https://9.30.213.241:6443
+# oc login --token=XUvkiFIqQ9fNTmMzeWIAmcGKEHBBlW5aafldbFPFArw --server=https://9.30.213.241:6443
 
 # oc policy add-role-to-user registry-viewer gurvinder
 # oc policy add-role-to-user registry-editor gurvinder
@@ -24,18 +24,19 @@
 # oc delete route account-svc
 # oc delete route keycloak-svc
 # oc delete -f local/services/web.yaml
+# oc delete -f local/app-config.yaml
+# oc delete -f local/app-secrets.yaml
 # oc delete -f local/services/accounts-api.yaml
 # oc delete -f local/services/iot-api.yaml
-# oc delete -f local/app-secrets.yaml
-# oc delete -f local/app-config.yaml
-# oc delete -f local/services/mongodb.yaml
+# oc delete -f local/services/mongodb/mongodb.yaml
+# oc delete -f local/services/mongodb/mongo-storage.yaml
 # oc delete -f local/auth/keycloak-deployment.yaml
 # oc delete -f local/auth/postgres-deployment.yaml
 # oc delete -f local/auth/postgres-storage.yaml
 # oc delete -f local/auth/config/auth-config.yaml
 # oc delete -f local/auth/config/auth-secrets.yaml
 
-
+# sleep 3
 
 # oc apply -f local/auth/config/auth-secrets.yaml
 # oc apply -f local/auth/config/auth-config.yaml
@@ -44,7 +45,8 @@
 # oc apply -f local/auth/keycloak-deployment.yaml
 # oc apply -f local/app-config.yaml
 # oc apply -f local/app-secrets.yaml
-# oc apply -f local/services/mongodb.yaml
+# oc apply -f local/services/mongodb/mongo-storage.yaml
+# oc apply -f local/services/mongodb/mongodb.yaml
 # oc apply -f local/services/accounts-api.yaml
 # oc apply -f local/services/iot-api.yaml
 # oc apply -f local/services/web.yaml
@@ -63,3 +65,4 @@
 sleep 5
 
 # oc describe pods
+

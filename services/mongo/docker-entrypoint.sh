@@ -192,6 +192,9 @@ _dbPath() {
 if [ "$originalArgOne" = 'mongod' ]; then
 	file_env 'MONGO_INITDB_ROOT_USERNAME'
 	file_env 'MONGO_INITDB_ROOT_PASSWORD'
+	# file_env 'DB_USERNAME'
+	# file_env 'DB_PASSWORD'
+	# file_env 'DB_NAME'
 	# pre-check a few factors to see if it's even worth bothering with initdb
 	shouldPerformInitdb=
 	if [ "$MONGO_INITDB_ROOT_USERNAME" ] && [ "$MONGO_INITDB_ROOT_PASSWORD" ]; then
@@ -322,6 +325,17 @@ if [ "$originalArgOne" = 'mongod' ]; then
 				})
 			EOJS
 		fi
+
+		# if [ "$DB_USERNAME" ] && [ "$DB_PASSWORD" ]; then
+		# 		"${mongo[@]}" "$MONGO_INITDB_DATABASE" <<-EOJS
+		# 			db = db.getSiblingDB('$DB_NAME'); 
+		# 			db.createUser({ 
+		# 				user: $(_js_escape "$DB_USERNAME"),
+		# 				pwd: $(_js_escape "$DB_PASSWORD"),
+		# 				roles: [{ role: 'readWrite', db: $(_js_escape "$DB_NAME") }] 
+		# 			});
+		# 		EOJS
+        # fi
 
 		export MONGO_INITDB_DATABASE="${MONGO_INITDB_DATABASE:-test}"
 

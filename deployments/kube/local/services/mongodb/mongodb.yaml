@@ -1,0 +1,108 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-svc
+  labels:
+    app: mongodb-enterprise
+    tier: iot
+spec:
+  ports:
+  - port:  27017
+    targetPort: 27017
+  selector:
+   app: mongodb-enterprise
+status:
+  loadBalancer: {}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-enterprise
+  labels:
+    app: mongodb-enterprise
+    tier: iot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mongodb-enterprise
+  template:
+    metadata:
+      labels:
+        app: mongodb-enterprise
+        set: mongodb-enterprise
+    spec:
+      # initContainers:
+      #  - name: copy
+      #    image: busybox:1.28
+      #    command: ["/bin/sh","-c","cp ./mongo-init.sh /data/db/mongo-init.sh"]
+      #    volumeMounts:
+      #    - name: mongodb-vol
+      #      mountPath: /data/db/
+      containers:
+      - name: mongodb-enterprise
+        image: sinny777/mongo-enterprise:4.2
+        imagePullPolicy: "Always"
+        # command: ["/bin/sh", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh"]
+        # command: ["/bin/sh", "-c", "mongo --eval \"db.auth('$MONGO_INITDB_ROOT_USERNAME', '$MONGO_INITDB_ROOT_PASSWORD'); db = db.getSiblingDB('$DB_NAME'); db.createUser({ user: '$DB_USERNAME', pwd: '$DB_PASSWORD', roles: [{ role: 'readWrite', db: '$DB_NAME' }] });\""]
+        env:
+        - name: PORT
+          value: "27017"
+        - name: MONGO_INITDB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: MONGO_INITDB_DATABASE
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: MONGO_INITDB_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: MONGO_INITDB_ROOT_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: DB_NAME 
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: DB_USERNAME 
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secrets
+              key: DB_PASSWORD      
+        ports:
+          - containerPort: 27017
+        securityContext: 
+            capabilities: {}
+            privileged: true
+        # volumes:
+        #   - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+        volumeMounts:
+          - mountPath: /data/db
+            name: mongodb-vol
+            subPath: mongodb 
+        # lifecycle:
+        #   postStart:
+        #     exec:
+        #       command: 
+        #       - /bin/sh
+        #       - -c
+        #       - "/docker-entrypoint-initdb.d/mongo-init.sh"
+      volumes:
+        - name: mongodb-vol
+          persistentVolumeClaim:
+            claimName: mongodb-pvc-volume
+      restartPolicy: Always

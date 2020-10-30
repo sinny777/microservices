@@ -105,6 +105,7 @@ RUN mkdir -p /data/db /data/configdb \
 VOLUME /data/db /data/configdb
 
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY mongo-init.sh /docker-entrypoint-initdb.d/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 27017

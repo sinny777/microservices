@@ -25,7 +25,7 @@ export class AuthEffects {
 			let loginOptions = {};
 			if (this.returnUrl && this.returnUrl.indexOf('error') !== -1) {
 				loginOptions = {
-					redirectUri: window.location.origin + '/home'
+					redirectUri: window.location.origin + '/'
 				};
 			}
 			this.auth.login(loginOptions);
@@ -48,11 +48,11 @@ export class AuthEffects {
 		tap(() => {
 			localStorage.removeItem(environment.authTokenKey);
 			const logoutOptions = {
-				redirectUri: window.location.origin + '/home'
+				redirectUri: window.location.origin + '/'
 			};
 			this.returnUrl = logoutOptions.redirectUri;
 			this.auth.logout(logoutOptions);
-			this.router.navigate(['/home'], { queryParams: { returnUrl: logoutOptions.redirectUri } });
+			this.router.navigate(['/'], { queryParams: { returnUrl: logoutOptions.redirectUri } });
 		})
 	);
 

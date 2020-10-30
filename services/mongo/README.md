@@ -21,7 +21,8 @@ docker build --build-arg MONGO_PACKAGE=mongodb-enterprise --build-arg MONGO_REPO
 
 ```
 
-docker run --name mymongo -itd $DOCKER_USERNAME/mongo-enterprise:$MONGODB_VERSION
+docker run --name mymongo -itd -e MONGO_INITDB_DATABASE=admin -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=1SatnamW -e DB_NAME=smartthings -e DB_USERNAME=sinny777 -e DB_PASSWORD=1SatnamW $DOCKER_USERNAME/mongo-enterprise:$MONGODB_VERSION
+
 docker exec -it mymongo /usr/bin/mongo --eval "db.version()"
 ```
 
