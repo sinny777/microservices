@@ -4,7 +4,7 @@
 # python ../build_services.py -t latest -r sinny777 -P
 # python ../build_services.py -t latest
 
-# oc login --token=XUvkiFIqQ9fNTmMzeWIAmcGKEHBBlW5aafldbFPFArw --server=https://9.30.213.241:6443
+# oc login --token=SImvHLojPs3_mdMttvDrtzBSGTE1SFbxS6myLluwEXA --server=https://9.30.213.241:6443
 
 # oc policy add-role-to-user registry-viewer gurvinder
 # oc policy add-role-to-user registry-editor gurvinder
@@ -19,6 +19,7 @@
 
 # oc adm policy add-scc-to-user anyuid system:serviceaccount:smartthings:default
 
+# oc delete route mongodb-svc
 # oc delete route ui-svc
 # oc delete route iot-svc
 # oc delete route account-svc

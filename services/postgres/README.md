@@ -1,0 +1,1 @@
+psql 'host=dbaas901.hyperp-dbaas.cloud.ibm.com port=29506 sslmode=verify-full sslrootcert=$CAFilePath user=$Username'

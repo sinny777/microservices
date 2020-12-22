@@ -8,7 +8,7 @@ metadata:
     # ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://www.smartthings.com"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://www.smartthings.com"
     # nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "HEAD, PUT, GET, POST, OPTIONS, PATCH, DELETE"
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"

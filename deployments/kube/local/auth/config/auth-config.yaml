@@ -21,6 +21,7 @@ data:
   #############################
 
   DEBUG: "*" # Debug string to apply to applications
-  POSTGRES_HOST: postgres-svc
+  # POSTGRES_HOST: postgres-svc
+  POSTGRES_HOST: "hanno.db.elephantsql.com"
   POSTGRES_PORT: "5432"
   

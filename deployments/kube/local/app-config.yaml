@@ -34,10 +34,10 @@ data:
 
 ##############  LOCAL CONFIGURATIONS #############
   DEBUG: "*" # Debug string to apply to applications
-  KEYCLOAK_PUBLIC_KEY: -----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoJiMwfwiNh3EkwbVHLIY\n39LMa2BHPyjbmVLsEnzcuvk+o+RzK7C3I4sBfn2f0Cm4afaF8IgP+qPy5YBnl0SG\nazeQ2LqPzrI3kHTIhFamlAI9TgjW5E+Fz9Nhtj21b87dGF86LOL55snhFNYilmvj\nHqtxQCNfj8N9UCGklBh3QpQc1Bs/Ri0WIQfRRZeHOFh2J87bYkeetsweZ1HQOZzj\nS/Lbz+LLvZ2U4tvP00omtDF5EPNL2gMbxa6HEoDrcqk3wiM3WiRQmKQu9xTOe6Kb\nq4HsjCdqYaVsJIp9DRZuqcaQ0kvPXwqruUkWHuahoJPZ6y+iTVl3drYLjMwtWEIh\nsQIDAQAB\n-----END PUBLIC KEY-----\n
+  KEYCLOAK_PUBLIC_KEY: -----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAolTAAiK+C1vu2eAfRhZO\no6QUnqLi3Vh6Dgoy8oLpVbiwZYqlpH/f4HFevKZ2Alk5k7RaGrqkPoLXsRGQHrFD\n61/ZIfzIN4A3WgaTLzgjSqnos1oMJXT0kr0BHd8i5k6w4y3KQIidhxE/7KhqZhEw\nLI6j3fVG9crMnNAj7adkAZY8oYm96IcwmuP8okfKYXLbjimxUDrGWZVHh5O9cfFJ\nqw6s5aSp7eE9K3fBOnoattm3G1yLCDf40G0oaqxaid0lQDRCF4Mem2bSfO5QCACy\np85KELIbJMG9+n7NZogu/s4Y0Y5O8Ci9J8uLKEJX/FTwGFcFsEHzwgUv7QCC/l0F\nEwIDAQAB\n-----END PUBLIC KEY-----\n
   KEYCLOAK_URL: http://keycloak-svc:8080
   KEYCLOAK_REALM: ibm
-  TOKEN_ISSUER: https://keycloak-svc-smartthings.apps.cairns.os.fyre.ibm.com/auth/realms/ibm
+  TOKEN_ISSUER: https://microservices-auth.mybluemix.net/auth/realms/ibm
   TOKEN_AUDIENCE: account
   TOKEN_ALGORITHM: RS256
   TOKEN_EXPIRES_IN: "3600"
