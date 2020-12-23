@@ -24,6 +24,8 @@ export class AssetsDataSource extends juggler.DataSource {
       'retryTimeout': 1000
     };
 
+    console.log(dsConfig);
+
     super(dsConfig);
     
   }

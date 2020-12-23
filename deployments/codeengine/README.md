@@ -21,11 +21,12 @@ ibmcloud ce buildrun submit --name build-smartthings-account --build smartthings
 
 ibmcloud ce secret create --name app-secrets --from-env-file secrets/app-secrets.env
 ibmcloud ce secret get --name app-secrets
+ibmcloud ce secret delete --name app-secrets
 
 ibmcloud ce app create --name smartthings-accounts --image docker.io/sinny777/smartthings-account:latest 
-
-
 ibmcloud ce app update --name smartthings-accounts --env-from-secret app-secrets
+
+ibmcloud ce app create --name smartthings-iot --image docker.io/sinny777/smartthings-iot:latest --env-from-secret app-secrets
 
 
 ```
