@@ -10,6 +10,9 @@ export class CustomersDataSource extends juggler.DataSource {
       dsConfig: object = config,
   ) {
 
+    // const SSL_CA: String = String(process.env.DB_SSL_CA).replace(/\\n/g, '\n');
+    // console.log(SSL_CA)
+
     dsConfig = {
       name: 'customers',
       connector: process.env.DB_CONNECTOR,
@@ -21,8 +24,15 @@ export class CustomersDataSource extends juggler.DataSource {
       database: process.env.DB_NAME,
       'plugin': 'retry',
       'retryAttempts': 3,
-      'retryTimeout': 1000
+      'retryTimeout': 1000,
+      "ssl": true,
+      "auto_reconnect": true,
+      // "sslValidate": true,
+      // "checkServerIdentity": true,
+      // "sslCA": fs.readFileSync('./keys/mongo_cert.pem')
     };
+
+    // console.log(dsConfig);
 
     super(dsConfig);
     

@@ -29,4 +29,7 @@ ibmcloud ce app update --name smartthings-accounts --env-from-secret app-secrets
 ibmcloud ce app create --name smartthings-iot --image docker.io/sinny777/smartthings-iot:latest --env-from-secret app-secrets
 
 
+ ibmcloud ce app logs --app smartthings-iot
+
+
 ```

@@ -1,6 +1,7 @@
 import {inject} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 import * as config from './default.datasource.json';
+import fs = require('fs');
 
 export class AssetsDataSource extends juggler.DataSource {
   static dataSourceName = 'assets';
@@ -9,6 +10,9 @@ export class AssetsDataSource extends juggler.DataSource {
     @inject('datasources.config.assets', {optional: true})
       dsConfig: object = config,
   ) {
+
+    // const SSL_CA: String = String(process.env.DB_SSL_CA).replace(/\\n/g, '\n');
+    // console.log(SSL_CA)
 
     dsConfig = {
       name: 'assets',
@@ -21,10 +25,15 @@ export class AssetsDataSource extends juggler.DataSource {
       database: process.env.DB_NAME,
       'plugin': 'retry',
       'retryAttempts': 3,
-      'retryTimeout': 1000
+      'retryTimeout': 1000,
+      "ssl": true,
+      "auto_reconnect": true,
+      // "sslValidate": true,
+      // "checkServerIdentity": true,
+      // "sslCA": fs.readFileSync('./keys/mongo_cert.pem')
     };
 
-    console.log(dsConfig);
+    // console.log(dsConfig);
 
     super(dsConfig);
     
