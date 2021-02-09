@@ -5,7 +5,7 @@
 Install Reference: https://www.youtube.com/watch?v=zegvkCancuw
 https://code-ready.github.io/crc/
 
-
+oc --help | more
 
 ## Configure Access to system:admin User
 Copy the kubeconfig created by the OpenShift Container Platform installation to your user’s $HOME/.kube/config location:
@@ -14,7 +14,7 @@ $ cp $HOME/cluster-$GUID/auth/kubeconfig $HOME/.kube/config
 
 Confirm that your kubeconfig admin user corresponds to the system:admin cluster account:
 
-$ oc --user=admin whoami
+$ oc --user=kubeadmin whoami
 system:admin
 
 ## Configure Local Password Identity Provider
@@ -30,14 +30,14 @@ $ touch htpasswd
 
 Use htpasswd to set the password for the alice, bob, and claire users to p4ssw0rd:
 
-$ htpasswd -Bb htpasswd alice p4ssw0rd
-$ htpasswd -Bb htpasswd bob p4ssw0rd
-$ htpasswd -Bb htpasswd claire p4ssw0rd
+$ htpasswd -Bb htpasswd gurvinder P@ssw0rd
+$ htpasswd -Bb htpasswd developer P@ssw0rd
 
 Create the htpasswd secret from the htpasswd file in the openshift-config namespace:
 
-$ oc --user=admin create secret generic htpasswd \
-    --from-file=htpasswd -n openshift-config
+$ oc create secret generic htpasswd --from-file=htpasswd -n openshift-config
+
+$ oc create secret generic htpass-secret --from-file=htpasswd -n openshift-config
 
 ### 2.2. Configure OAuth Identity Provider for HTPasswd and Test
 
@@ -58,7 +58,7 @@ $ oc --user=admin create secret generic htpasswd \
 
 - 2: Replace the cluster OAuth configuration with the HTPasswd version in the oauth-config.yaml file:
 
-$ oc --user=admin replace -f oauth-config.yaml
+$ oc replace -f oauth-config.yaml
 oauth.config.openshift.io/cluster replaced
 
 - 3: Retrieve the web console URL, open a browser window, paste the web console URL, and test the login with the Local Password identity provider, using alice as the user and p4ssw0rd as the password:
@@ -72,7 +72,7 @@ $ oc whoami --show-console
 - 5: Retrieve the API URL and test the login using the command line, specifying bob as the user and p4ssw0rd as the password:
 
 $ API_URL=$(oc whoami --show-server)
-$ oc login -u bob -p p4ssw0rd $API_URL
+$ oc login -u gurvinder -p P@ssw0rd $API_URL
 Login successful.
 
 You dont have any projects. You can try to create a new project, by running
@@ -87,11 +87,13 @@ $ oc --user=admin get users
 
 ### Disable kubeadmin Account
 
+$ oc adm policy add-cluster-role-to-user cluster-admin gurvinder
+
 Because you have direct access as the system:admin account using the kubeconfig installer file, you do not need the kubeadmin account to be active in the cluster. In this section, you disable the kubeadmin account by removing the password secret.
 
     Delete the kubeadmin secret from the kube-system namespace:
 
-    $ oc --user=admin delete secret kubeadmin -n kube-system
+    $ oc delete secret kubeadmin -n kube-system
     secret "kubeadmin" deleted
 
     Confirm that the kubeadmin user is no longer accessible:

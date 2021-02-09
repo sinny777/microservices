@@ -47,7 +47,7 @@ spec:
       containers:
       - name: mongodb-enterprise
         image: sinny777/mongo-enterprise:4.2
-        imagePullPolicy: "Always"
+        imagePullPolicy: "IfNotPresent"
         # command: ["/bin/sh", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh"]
         # command: ["/bin/sh", "-c", "mongo --eval \"db.auth('$MONGO_INITDB_ROOT_USERNAME', '$MONGO_INITDB_ROOT_PASSWORD'); db = db.getSiblingDB('$DB_NAME'); db.createUser({ user: '$DB_USERNAME', pwd: '$DB_PASSWORD', roles: [{ role: 'readWrite', db: '$DB_NAME' }] });\""]
         env:
@@ -87,13 +87,13 @@ spec:
           - containerPort: 27017
         securityContext: 
             capabilities: {}
-            privileged: true
+            # privileged: true
         # volumes:
         #   - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
         volumeMounts:
-          - mountPath: /data/db
+          - mountPath: /data/db:z
             name: mongodb-vol
-            subPath: mongodb 
+            # subPath: mongodb 
         # lifecycle:
         #   postStart:
         #     exec:

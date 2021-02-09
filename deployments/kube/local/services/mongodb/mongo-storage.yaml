@@ -7,13 +7,13 @@ metadata:
     type: local
     app: mongodb
 spec:
-  storageClassName: manual
+  # storageClassName: manual
   capacity:
     storage: 20Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/tmp"
+    path: "/mnt/data"
 
 ---
   
@@ -24,7 +24,7 @@ metadata:
   labels:
     app: mongodb
 spec:
-  storageClassName: manual
+  # storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:

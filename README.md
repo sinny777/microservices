@@ -228,6 +228,8 @@ docker run -d --name postgres --net keycloak-network -p 5432:5432 -e POSTGRES_DB
 
 docker run --name keycloak --net keycloak-network -p 8080:8080 -p 9990:9990 -e DB_USER=keycloak -e DB_PASSWORD=password -e DB_VENDOR=postgres -e DB_ADDR=postgres jboss/keycloak
 
+docker run --name keycloak -p 8080:8080 -p 9990:9990 --env-file auth-secrets.env sinny777/smartthings-keycloak:latest
+
  - Create Admin user 
 
 docker exec <CONTAINER> /opt/jboss/keycloak/bin/add-user-keycloak.sh -u <USERNAME> -p <PASSWORD>

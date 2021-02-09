@@ -90,6 +90,16 @@ if [ -z "$BIND_OPTS" ]; then
 fi
 SYS_PROPS+=" $BIND_OPTS"
 
+if [ "$JAVA_TOOLS_OPTS" ]; then
+    SYS_PROPS+=" $JAVA_TOOLS_OPTS"
+fi
+
+if [ "$JAVA_OPTS" ]; then
+    SYS_PROPS+=" $JAVA_OPTS"
+fi
+
+
+
 #################
 # Configuration #
 #################

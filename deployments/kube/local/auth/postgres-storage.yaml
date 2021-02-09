@@ -15,14 +15,14 @@
 
 # ---
 
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: manual
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+# kind: StorageClass
+# apiVersion: storage.k8s.io/v1
+# metadata:
+#   name: manual
+# provisioner: kubernetes.io/no-provisioner
+# volumeBindingMode: WaitForFirstConsumer
 
----
+# ---
 
 kind: PersistentVolume
 apiVersion: v1
@@ -32,13 +32,15 @@ metadata:
     type: local
     app: postgres
 spec:
-  storageClassName: manual
+  # storageClassName: manual
   capacity:
     storage: 2Gi
   accessModes:
     - ReadWriteMany
   hostPath:
     path: "/mnt/data"
+  persistentVolumeReclaimPolicy: Retain
+  # volumeMode: Block
 
 ---
 
@@ -49,12 +51,13 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: manual
+  # storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
+
 
 
 

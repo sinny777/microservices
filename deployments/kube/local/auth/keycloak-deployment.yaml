@@ -45,18 +45,6 @@ spec:
         - secretRef:
             name: keycloak-secrets
         env:
-        - name: DB_ADDR
-          valueFrom:
-            configMapKeyRef:
-              name: auth-config
-              key: POSTGRES_HOST       
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: auth-config
-              key: POSTGRES_PORT  
-        - name: DB_DATABASE
-          value: "postgres"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"       
         ports:

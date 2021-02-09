@@ -2,6 +2,25 @@
 # Copyright 2020 IBM.
 
 apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secrets
+type: Opaque
+data:
+  # POSTGRES ON IBM
+  # POSTGRES_USER: YWRtaW4=
+  # POSTGRES_DB: IzFTYXRuYW1XYWhlZ3VydUpp
+  # POSTGRES ON ELEPHANTSQL
+  # POSTGRES_USER: bmJvanVlZm8=
+  # POSTGRES_DB: dHJJNUs1YU1FcllOcjk0ejc5NlFTN2QtQ2taQWprY0E=
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRESQL_PASSWORD: MVNhdG5hbVc=
+  POSTGRESQL_ADMIN_PASSWORD: MVNhdG5hbVc=
+  POSTGRESQL_DATABASE: cG9zdGdyZXM=
+
+---
+
+apiVersion: v1
 kind: Service
 metadata:
   name: postgres-svc
@@ -45,31 +64,33 @@ spec:
       containers:
         - name: auth-postgres-db
           image: postgres:10.4
+          # image: registry.access.redhat.com/rhscl/postgresql-94-rhel7
           imagePullPolicy: "IfNotPresent"
-          # command: ["chown postgres /var/lib/postgresql/data/"]
           ports:
             - containerPort: 5432
+          envFrom:
+          - secretRef:
+              name: postgres-secrets
           env:
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secrets
-                key: POSTGRES_USER
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secrets
-                key: POSTGRES_PASSWORD
-          - name: POSTGRES_DB
-            value: "auth_db"
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data:z
+              name: postgresdb                         
           securityContext: 
             capabilities: {}
-            privileged: true                                
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data/
-              name: postgresdb                   
+            # privileged: true
+            # runAsUser: 1000
+      # initContainers:
+      #   - name: permissionsfix
+      #     image: alpine:latest
+      #     command: ["/bin/sh", "-c"]
+      #     args:
+      #       - chown 1000:1000 /mnt/data; 
+      #     volumeMounts:
+      #     - name: postgresdb
+      #       mountPath: /mnt/data           
+      securityContext: {}
       volumes:
         - name: postgresdb
           persistentVolumeClaim:

@@ -4,13 +4,27 @@
 # python ../build_services.py -t latest -r sinny777 -P
 # python ../build_services.py -t latest
 
-# oc login --token=SImvHLojPs3_mdMttvDrtzBSGTE1SFbxS6myLluwEXA --server=https://9.30.213.241:6443
+# oc login --token=g56IlwMyI8nUhdtRiJ8ybpA9CsORN9RWPTEhVTGIb6Q --server=https://9.30.94.80:6443
+# oc login --token=kSaAJq_Xyovlfz-GPV1fvp53urM9-cQof5AnyGFPIo0 --server=https://9.30.94.80:6443
+# oc login --token=vdklYbF9D71OEYhoOqkNzjn98OgCAupwihL37ZKxEUs --server=https://c108-e.eu-gb.containers.cloud.ibm.com:31414
+
+# oc login --token=OwtQXoJBfBiPqGGiyM5o2xELAcladyNl29N6CVS_HZ8 --server=https://api.ap45.prod.nextcle.com:6443
+
+# oc create secret docker-registry docker-secret --docker-server=docker.io --docker-username=sinny777 --docker-password=DOCKER_PWD --docker-email=sinny777@gmail.com
+# oc secrets link default docker-secret --for=pull
+
+
+# oc adm policy add-scc-to-user privileged gurvinder
+# oc adm policy add-scc-to-group privileged system:serviceaccount:smartthinngs:deployer
+
+# oc auth can-i create pv --as developer
+
 
 # oc policy add-role-to-user registry-viewer gurvinder
 # oc policy add-role-to-user registry-editor gurvinder
 
 # oc config set-context dev --namespace=smartthings \
-#   --cluster=9.30.213.241:6443 \
+#   --cluster=9.30.94.80:6443 \
 #   --user=gurvinder
 
 # oc config use-context dev
@@ -18,6 +32,9 @@
 # oc project smartthings
 
 # oc adm policy add-scc-to-user anyuid system:serviceaccount:smartthings:default
+
+
+# oc new-app -e POSTGRESQL_USER=admin,POSTGRESQL_ADMIN_PASSWORD=1SatnamW,POSTGRESQL_PASSWORD=1SatnamW,POSTGRESQL_DATABASE=accounts registry.access.redhat.com/rhscl/postgresql-94-rhel7
 
 # oc delete route mongodb-svc
 # oc delete route ui-svc
